@@ -6494,7 +6494,17 @@ def _position_merge_junction(
     merging at the junction; passing 1 falls back to the baseline margin.
     """
     max_pred_x = max(p.x for p in predecessors)
-    junction.x = max_pred_x + _required_junction_margin(n)
+    margin = _required_junction_margin(n)
+    # Normal forward fan-in: merge just past the right-most predecessor on its
+    # way into a target to the right.  But when the target sits well to the LEFT
+    # of the predecessors (a collector like MultiQC fed from across the map),
+    # merging at max_pred_x forces the whole merged bundle to backtrack the full
+    # width into the entry.  Merge local to the target instead, so only the
+    # individual feeders make the long approach and the merge->entry hop is short.
+    if entry_port.x < max_pred_x - margin:
+        junction.x = entry_port.x - margin
+    else:
+        junction.x = max_pred_x + margin
     junction.y = entry_port.y
 
 
