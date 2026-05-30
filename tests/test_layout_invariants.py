@@ -2780,17 +2780,10 @@ def _icon_x_extent(graph: MetroGraph, station, section) -> tuple[float, float]:
     return cx - icon_half_w, cx + icon_half_w
 
 
-# sarek's ``reporting`` file icons (``report_out``/``vcf_out``) sit on the
-# row the MultiQC fan-in merge bundle sweeps across.  The merge trunk's
-# full-width horizontal into the left entry crosses an icon; clearing it
-# needs the deferred MultiQC merge-bundle around-routing (#432).  Pre-existing
-# on the integration branch.
-_XFAIL_ICON_OVERLAP: dict[str, str] = {
-    "sarek.mmd": (
-        "#432: MultiQC fan-in merge bundle sweeps the reporting row and "
-        "crosses a file icon; merge-bundle around-routing deferred"
-    ),
-}
+# sarek's MultiQC fan-in now descends the inter-column corridor into the
+# left-entry ``reporting`` section instead of sweeping the reporting row's
+# full width, so the merge bundle no longer crosses the file icons (#432).
+_XFAIL_ICON_OVERLAP: dict[str, str] = {}
 
 
 @pytest.mark.parametrize(

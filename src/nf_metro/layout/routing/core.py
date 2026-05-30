@@ -23,6 +23,7 @@ from nf_metro.layout.constants import (
     EDGE_TO_BUNDLE_CLEARANCE,
     FOLD_MARGIN,
     ICON_TERMINUS_FORK_LEAD,
+    INTER_ROW_HEADER_CLEARANCE,
     JUNCTION_MARGIN,
     MERGE_ROUTE_MARGIN,
     MIN_STATION_FLAT_LENGTH,
@@ -36,6 +37,7 @@ from nf_metro.layout.labels import label_text_width
 from nf_metro.layout.routing.common import (
     Direction,
     RoutedPath,
+    _center_inter_row_channel,
     bundle_width,
     bypass_bottom_y,
     clear_channel_of_section_edge,
@@ -1944,15 +1946,26 @@ def _route_inter_row_gap_corridor(
     ep_row = _resolve_section_row(ctx.graph, entry_port)
 
     # Inter-row gap Y just below the source row (column-restricted so a
-    # tall row-span in another column doesn't push the channel down).
+    # tall row-span in another column doesn't push the channel down).  Use
+    # the header-aware band so the leftward traverse clears the next row's
+    # section-header badge, not just the bbox edge.
     gap_top = row_bottom_edge(ctx.graph, src_row, col=src_col)
     gap_bottom = row_top_edge(ctx.graph, src_row + 1, col=src_col, default=gap_top)
     if gap_bottom > gap_top:
-        gy_base = (gap_top + gap_bottom) / 2
+        gy_base = _center_inter_row_channel(gap_top, gap_bottom)
     else:
         gy_base = gap_top + EDGE_TO_BUNDLE_CLEARANCE
     # Outer line sits at LARGER y in this leftward run (CW D->L corner).
     gy = gy_base + delta
+    # Keep every staggered line inside the clearance band: at least
+    # EDGE_TO_BUNDLE_CLEARANCE below the source-row bottom and clear of the
+    # next row's header badge.  In a tight gap the band is narrower than the
+    # bundle, so the per-line stagger collapses rather than grazing an edge.
+    if gap_bottom > gap_top:
+        gy = min(
+            max(gy, gap_top + EDGE_TO_BUNDLE_CLEARANCE),
+            gap_bottom - INTER_ROW_HEADER_CLEARANCE,
+        )
 
     # Inter-column descent channel left of the target column.
     vx = _corridor_descent_x(ctx, ep_col, ep_row, delta)
