@@ -1686,6 +1686,16 @@ def _route_left_entry_wrap(
     base_gap = ctx.curve_radius + ctx.offset_step
     extra_clearance = max(0.0, SECTION_ROUTE_CLEARANCE - (base_gap - max_delta))
     vx = tx - base_gap - extra_clearance + delta
+    # When this wrap shares a junction fan with a corridor feeder descending
+    # the same target column (e.g. sarek's __junction_9 spine + QC feed),
+    # anchor the descent channel to the column's LEFT edge so the spine and
+    # the corridor overlay as one bundle instead of smearing (#437).
+    if fan is not None and _fan_has_corridor_sibling(edge.source, ctx):
+        tgt_col = _resolve_section_col(ctx.graph, tgt)
+        if tgt_col is not None:
+            shared_vx = _fan_left_entry_descent_x(ctx, tgt_col, n_for_outer, delta)
+            if shared_vx is not None:
+                vx = shared_vx
 
     # Apply src/tgt station offsets explicitly so the renderer's later
     # _apply_line_offsets pass doesn't double-apply.  Without this, the
@@ -1857,6 +1867,52 @@ def _corridor_descent_x(
     return (gap_left + gap_right) / 2 + delta
 
 
+def _fan_left_entry_descent_x(
+    ctx: _RoutingCtx, tgt_col: int, n_outer: int, delta: float
+) -> float | None:
+    """Shared descent-channel X for a junction fan's LEFT-entry targets.
+
+    When one junction fans the same lines to two LEFT-entry sections
+    stacked in the same column - one reached by :func:`_route_left_entry_wrap`
+    (the spine), the other by :func:`_route_inter_row_gap_corridor` (the QC
+    feed) - both bundles must descend the SAME vertical channel so they
+    overlay as one clean bundle rather than smearing a few px apart (#437).
+
+    Anchor the channel to the column's LEFT edge (the leftmost section left
+    edge across all rows of *tgt_col*) so both handlers, whose individual
+    targets sit at slightly different x, agree on one channel.  The
+    per-line ``delta`` stagger is preserved.  Returns ``None`` when the
+    column has no measurable left edge.
+    """
+    col_left = col_left_edge(ctx.graph, tgt_col, default=0.0)
+    if col_left <= 0.0:
+        return None
+    base_gap = ctx.curve_radius + ctx.offset_step
+    max_delta = (n_outer - 1) * ctx.offset_step / 2
+    extra_clearance = max(0.0, SECTION_ROUTE_CLEARANCE - (base_gap - max_delta))
+    return col_left - base_gap - extra_clearance + delta
+
+
+def _fan_has_corridor_sibling(junction_id: str, ctx: _RoutingCtx) -> bool:
+    """True if *junction_id* fans an edge routed via the inter-row-gap corridor.
+
+    Used so a sibling :func:`_route_left_entry_wrap` spine aligns its descent
+    channel with the corridor feeder's (#437).  A corridor feeder is a
+    downward cross-row edge into a LEFT-entry section (merge junction or
+    direct port) for which :func:`_corridor_is_viable` holds.
+    """
+    graph = ctx.graph
+    for edge in graph.edges_from(junction_id):
+        tgt = graph.stations.get(edge.target)
+        if tgt is None:
+            continue
+        ep_id = ctx.merge.entry_port_for.get(edge.target)
+        ep = graph.stations.get(ep_id) if ep_id else tgt
+        if ep is not None and _corridor_is_viable(ctx, graph.stations[junction_id], ep):
+            return True
+    return False
+
+
 def _corridor_is_viable(ctx: _RoutingCtx, src: Station, entry_port: Station) -> bool:
     """Whether the inter-row-gap + inter-column-channel corridor exists.
 
@@ -1928,15 +1984,25 @@ def _route_inter_row_gap_corridor(
     sx, sy = src.x, src.y
     ex, ey = entry_port.x, entry_port.y
 
+    # When this corridor feeder shares a junction fan with a sibling wrap
+    # (e.g. sarek's __junction_9 spine into Annotation), consume the unified
+    # fan position so the source-side first corner and the inter-row gap
+    # stagger MATCH the wrap exactly.  Without this the corridor picks its
+    # own per-bundle (i, n) and the two same-line bundles smear a few px
+    # apart instead of overlaying (#437).
+    ekey = (edge.source, edge.target, edge.line_id)
+    fan = ctx.junction_fan_info.get(ekey)
+    pos_i, pos_n = fan if fan is not None else (i, n)
+
     delta, _r1, _r2 = l_shape_radii(
-        i,
-        n,
+        pos_i,
+        pos_n,
         vertical=Direction.D,
         offset_step=ctx.offset_step,
         base_radius=ctx.curve_radius,
     )
-    off_for_radius = (n - 1 - i) * ctx.offset_step
-    max_off_for_radius = (n - 1) * ctx.offset_step
+    off_for_radius = (pos_n - 1 - pos_i) * ctx.offset_step
+    max_off_for_radius = (pos_n - 1) * ctx.offset_step
     r_outer = corner_radius(
         off_for_radius,
         max_off_for_radius,
@@ -1961,7 +2027,15 @@ def _route_inter_row_gap_corridor(
     # section-header badge, not just the bbox edge.
     gap_top = row_bottom_edge(ctx.graph, src_row, col=src_col)
     gap_bottom = row_top_edge(ctx.graph, src_row + 1, col=src_col, default=gap_top)
-    if gap_bottom > gap_top:
+    if fan is not None:
+        # Share the sibling wrap's inter-row band: it centres the leftward
+        # traverse in the gap below the SOURCE row using the global (non
+        # column-restricted) row edges, so the two bundles' H legs coincide
+        # rather than smearing 3px apart (#437).
+        wrap_top = row_bottom_edge(ctx.graph, src_row, default=gap_top)
+        wrap_bottom = row_top_edge(ctx.graph, src_row + 1, default=wrap_top)
+        gy_base = _center_inter_row_channel(wrap_top, wrap_bottom)
+    elif gap_bottom > gap_top:
         gy_base = _center_inter_row_channel(gap_top, gap_bottom)
     else:
         gy_base = gap_top + EDGE_TO_BUNDLE_CLEARANCE
@@ -1971,22 +2045,36 @@ def _route_inter_row_gap_corridor(
     # EDGE_TO_BUNDLE_CLEARANCE below the source-row bottom and clear of the
     # next row's header badge.  In a tight gap the band is narrower than the
     # bundle, so the per-line stagger collapses rather than grazing an edge.
-    if gap_bottom > gap_top:
+    # Skipped for fan feeders, which share the wrap sibling's (unclamped)
+    # band so the two bundles' H legs coincide (#437).
+    if fan is None and gap_bottom > gap_top:
         gy = min(
             max(gy, gap_top + EDGE_TO_BUNDLE_CLEARANCE),
             gap_bottom - INTER_ROW_HEADER_CLEARANCE,
         )
 
-    # Inter-column descent channel left of the target column.
-    vx = _corridor_descent_x(ctx, ep_col, ep_row, delta)
+    # Inter-column descent channel left of the target column.  For a fan
+    # feeder, anchor it to the target COLUMN's left edge (shared with the
+    # sibling wrap) so the two bundles descend the same channel; otherwise
+    # use the inter-column gap midpoint.
+    vx = None
+    if fan is not None and ep_col is not None:
+        vx = _fan_left_entry_descent_x(ctx, ep_col, pos_n, delta)
+    if vx is None:
+        vx = _corridor_descent_x(ctx, ep_col, ep_row, delta)
 
     # H lead-in right of the source, clear of the source section's edge.
+    # When the source is a sectionless junction, fall back to its own X as
+    # the reference edge (mirrors :func:`_route_left_entry_wrap`) so a fan
+    # feeder gets the SAME source-side clearance as its sibling wrap (#437).
     src_section = ctx.graph.sections.get(src.section_id) if src.section_id else None
-    corner_x = sx + ctx.curve_radius + (n - 1) * ctx.offset_step / 2 + delta
+    corner_x = sx + ctx.curve_radius + (pos_n - 1) * ctx.offset_step / 2 + delta
     if src_section and src_section.bbox_w > 0:
         section_right = src_section.bbox_x + src_section.bbox_w
-        current_gap = sx + ctx.curve_radius - section_right
-        corner_x += max(0.0, SECTION_ROUTE_CLEARANCE - current_gap)
+    else:
+        section_right = sx
+    current_gap = sx + ctx.curve_radius - section_right
+    corner_x += max(0.0, SECTION_ROUTE_CLEARANCE - current_gap)
 
     src_off = _get_offset(ctx, edge.source, edge.line_id)
     tgt_off = _get_offset(ctx, edge.target, edge.line_id)

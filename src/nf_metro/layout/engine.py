@@ -653,6 +653,69 @@ def _guard_inter_section_route_no_backtrack(
                 )
 
 
+def _guard_fan_bundles_coincide_or_separate(
+    graph: MetroGraph,
+    phase: str,
+    *,
+    routes: list | None = None,
+) -> None:
+    """After routing: two routes carrying the SAME line out of a unified-fan
+    junction must coincide on their source-side vertical channel or separate
+    clearly - never smear a few px apart (#437).
+
+    A unified-fan junction (one the router assigns shared
+    ``junction_fan_info`` positions) fans the same line to multiple targets
+    that are MEANT to pivot through one channel.  When two such routes' first
+    vertical legs sit between ``OFFSET_STEP`` (the legitimate per-bundle
+    stagger) and ``SECTION_Y_GAP`` (a clean column split) apart, they render
+    as a smeared partial overlap rather than one bundle or two separated
+    bundles.
+    """
+    from nf_metro.layout.routing import compute_station_offsets, route_edges
+    from nf_metro.layout.routing.core import _build_routing_context
+
+    offsets = compute_station_offsets(graph)
+    if routes is None:
+        routes = route_edges(graph, station_offsets=offsets)
+    ctx = _build_routing_context(graph, DIAGONAL_RUN, CURVE_RADIUS, offsets)
+    fan_sources = {key[0] for key in ctx.junction_fan_info}
+    if not fan_sources:
+        return
+
+    def _first_vertical_leg_x(points) -> float | None:
+        for (x0, y0), (x1, y1) in zip(points, points[1:]):
+            if abs(x1 - x0) < 1.0 and abs(y1 - y0) > 1.0:
+                return x1
+        return None
+
+    by_src_line: dict[tuple[str, str], list[float]] = {}
+    for rp in routes:
+        if not rp.is_inter_section or rp.edge.source not in fan_sources:
+            continue
+        vx = _first_vertical_leg_x(rp.points)
+        if vx is None:
+            continue
+        by_src_line.setdefault((rp.edge.source, rp.line_id), []).append(vx)
+
+    # Coincide within the per-bundle stagger plus a 1px rounding epsilon;
+    # GUARD_TOLERANCE (5px) would swallow the 6px smear this guards against.
+    coincide_tol = OFFSET_STEP + 1.0
+    for (src, line), xs in by_src_line.items():
+        if len(xs) < 2:
+            continue
+        ordered = sorted(xs)
+        for lo, hi in zip(ordered, ordered[1:]):
+            gap = hi - lo
+            if coincide_tol < gap < SECTION_Y_GAP:
+                raise PhaseInvariantError(
+                    f"{phase}: junction {src!r} line {line!r} fans two routes "
+                    f"whose first vertical channels are {gap:.1f}px apart "
+                    f"(x={lo:.1f} vs {hi:.1f}) - neither coincident "
+                    f"(<= {coincide_tol:.1f}) nor clearly separated "
+                    f"(>= {SECTION_Y_GAP:.1f}); a smeared partial overlap"
+                )
+
+
 def _canvas_width(graph: MetroGraph) -> float:
     """Horizontal extent of all positioned sections (rightmost - leftmost)."""
     rights = [s.bbox_x + s.bbox_w for s in graph.sections.values() if s.bbox_w > 0]
@@ -2317,6 +2380,7 @@ def _compute_section_layout(
             _guard_serpentine_no_backtrack(graph, phase, routes=routes)
             _guard_inter_row_run_clearance(graph, phase, routes=routes)
             _guard_inter_section_descent_edge_clearance(graph, phase, routes=routes)
+            _guard_fan_bundles_coincide_or_separate(graph, phase, routes=routes)
 
 
 def _renumber_sections_by_grid(graph: MetroGraph) -> None:

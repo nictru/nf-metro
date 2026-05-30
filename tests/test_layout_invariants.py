@@ -964,6 +964,80 @@ def test_merge_feeder_does_not_loop_below_target(fixture):
         )
 
 
+def _first_vertical_leg_x(points) -> float | None:
+    """X of the first leg of *points* that runs (near-)vertically.
+
+    The source-side vertical channel ("V1") of an inter-section route.
+    Returns ``None`` when no vertical leg exists.
+    """
+    for (x0, y0), (x1, y1) in zip(points, points[1:]):
+        if abs(x1 - x0) < 1.0 and abs(y1 - y0) > 1.0:
+            return x1
+    return None
+
+
+@pytest.mark.parametrize(
+    "fixture",
+    sorted({*_FIXTURES_MULTI_SECTION, "sarek.mmd"}),
+)
+def test_junction_same_line_fans_coincide_or_separate(fixture):
+    """Two routes carrying the SAME line out of a UNIFIED-FAN junction must
+    either coincide on their source-side vertical channel or separate
+    clearly - never smear by a few px (#437).
+
+    sarek's ``__junction_9`` (Post-processing's right exit) fans the same
+    three lines to two destinations: the spine into Annotation (a LEFT-entry
+    wrap) and the QC feed down the inter-column corridor to MultiQC.  The
+    engine assigns both a shared :func:`_compute_junction_fan_info` position
+    so they're MEANT to pivot through one channel; when their first vertical
+    channels sit 6-18px apart they read as a single smeared band rather than
+    one clean overlay.  This invariant forbids that intermediate spacing:
+    for each unified-fan junction and each line fanning to >=2 inter-section
+    targets, the first vertical legs must coincide (<= ``OFFSET_STEP`` apart,
+    i.e. within the per-bundle stagger) or be cleanly separated (>= a
+    section gap apart, the intended split when targets land in different
+    columns).
+
+    Scoped to junctions the engine treats as a unified fan (present in
+    ``junction_fan_info``); pure L-shape/bypass fans to genuinely distinct
+    columns are a separate concern.
+    """
+    from nf_metro.layout.constants import CURVE_RADIUS, DIAGONAL_RUN, OFFSET_STEP
+    from nf_metro.layout.routing.core import _build_routing_context
+
+    graph = _layout(fixture)
+    offsets = compute_station_offsets(graph)
+    routes = route_edges(graph, station_offsets=offsets)
+    ctx = _build_routing_context(graph, DIAGONAL_RUN, CURVE_RADIUS, offsets)
+    fan_sources = {key[0] for key in ctx.junction_fan_info}
+
+    # Group inter-section routes by (junction source, line).
+    by_src_line: dict[tuple[str, str], list] = defaultdict(list)
+    for rp in routes:
+        if not rp.is_inter_section or rp.edge.source not in fan_sources:
+            continue
+        vx = _first_vertical_leg_x(rp.points)
+        if vx is None:
+            continue
+        by_src_line[(rp.edge.source, rp.line_id)].append((rp, vx))
+
+    coincide_tol = OFFSET_STEP + _Y_TOL
+    separate_min = SECTION_Y_GAP
+    for (src, line), entries in by_src_line.items():
+        if len(entries) < 2:
+            continue
+        xs = sorted(vx for _rp, vx in entries)
+        for lo, hi in zip(xs, xs[1:]):
+            gap = hi - lo
+            assert gap <= coincide_tol or gap >= separate_min, (
+                f"{fixture}: junction {src} line {line} fans two routes "
+                f"whose first vertical channels are {gap:.1f}px apart "
+                f"(x={lo:.1f} vs {hi:.1f}) - neither coincident "
+                f"(<= {coincide_tol:.1f}) nor clearly separated "
+                f"(>= {separate_min:.1f}); a smeared partial overlap"
+            )
+
+
 @pytest.mark.parametrize("fixture", sorted({*_FIXTURES_MULTI_SECTION_PLUS_SAREK_STACK}))
 def test_inter_section_route_no_full_width_dogleg_clean(fixture):
     """No merge feeder takes a full-width out-and-back dog-leg (#432).
