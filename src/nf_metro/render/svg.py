@@ -353,12 +353,13 @@ def render_svg(
     logo_x = 0.0
     logo_y = 0.0
     if logo_br:
-        # Bottom-right, sitting inside the content's lower-right corner to
-        # fill empty space. Lift above the legend if it shares that corner.
-        logo_x = max_x - logo_w
-        logo_y = max_y - logo_h
-        if show_legend and legend_y < logo_y + logo_h and legend_x + legend_w > logo_x:
-            logo_y = legend_y - logo_h - LOGO_GAP
+        if show_legend:
+            # Sit immediately to the left of the legend, bottom-aligned with it.
+            logo_x = legend_x - logo_w - LOGO_GAP
+            logo_y = legend_y + legend_h - logo_h
+        else:
+            logo_x = max_x - logo_w
+            logo_y = max_y - logo_h
     elif show_logo and not show_legend:
         logo_x = padding
         logo_y = LOGO_Y_STANDALONE
