@@ -1037,21 +1037,21 @@ def detect_serpentine_runs(
     length < 2 are omitted.  Used to serpentine the effective flow
     direction of stacked same-direction sections (issue #421).
     """
-    # Group single-cell sections by grid column, keyed by row.
+    # Group single-cell sections by grid column, keyed by row.  A column with
+    # two sections claiming one (col, row) cell is malformed and is skipped.
     col_rows: dict[int, dict[int, str]] = defaultdict(dict)
+    collided_cols: set[int] = set()
     for sec_id in graph.sections:
         col, row, row_span, col_span = _effective_grid_pos(graph, sec_id)
         if col < 0 or row < 0 or row_span != 1 or col_span != 1:
             continue
-        # Two sections sharing a (col, row) cell is malformed; skip the column.
         if row in col_rows[col]:
-            col_rows[col][row] = ""  # poison marker
-        else:
-            col_rows[col][row] = sec_id
+            collided_cols.add(col)
+        col_rows[col][row] = sec_id
 
     runs: list[list[str]] = []
     for col, rows in col_rows.items():
-        if any(v == "" for v in rows.values()):
+        if col in collided_cols:
             continue
         ordered_rows = sorted(rows)
         in_column = set(rows.values())
