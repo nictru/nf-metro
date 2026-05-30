@@ -157,10 +157,6 @@ def _fixtures_with(predicate) -> list[str]:
 _FIXTURES_WITH_OFF_TRACK = _fixtures_with(lambda t: "off_track:" in t)
 _FIXTURES_MULTI_SECTION = _fixtures_with(lambda t: t.count("subgraph") >= 2)
 
-# Fixtures for the full-width dog-leg invariant (#425): every multi-section
-# gallery fixture plus the sarek serpentine-stacked regression, whose narrow
-# ``reporting`` column nests under the wide ``preprocessing`` row-span and so
-# exposes the nested-column degenerate routing geometry.
 # Multi-section gallery fixtures plus the sarek serpentine-stacked
 # regression.  The regression's narrow ``reporting`` column nests under the
 # wide ``preprocessing`` row-span (exposing the nested-column dog-leg

@@ -389,13 +389,11 @@ def _wrap_bundle_row_minimums(graph: MetroGraph) -> dict[tuple[int, int], float]
         # ``inter_row_channel_y``) that must clear the next-row header.
         if port.side not in (PortSide.LEFT, PortSide.RIGHT, PortSide.TOP):
             continue
+        # Only the target's top edge (its grid_row) bounds the gap, so a
+        # multi-row-span target still reserves it; its span is irrelevant.
+        # The source must be single-row: its bottom edge is the gap's upper
+        # bound, and a multi-row source routes via reversal handling.
         tgt_sec = graph.sections.get(port.section_id)
-        # Only the target's TOP edge (its ``grid_row``) bounds the gap the
-        # run lands in, so a multi-row-span target (rowspan grid placement,
-        # #422) still reserves the gap -- only its existence matters here,
-        # not its span.  The source must be a single-row flow section: its
-        # bottom edge is the gap's upper bound, and a multi-row source would
-        # route via reversal handling instead.
         if tgt_sec is None:
             continue
         src = graph.stations.get(edge.source)
