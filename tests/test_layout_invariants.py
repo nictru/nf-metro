@@ -161,9 +161,18 @@ _FIXTURES_MULTI_SECTION = _fixtures_with(lambda t: t.count("subgraph") >= 2)
 # gallery fixture plus the sarek serpentine-stacked regression, whose narrow
 # ``reporting`` column nests under the wide ``preprocessing`` row-span and so
 # exposes the nested-column degenerate routing geometry.
-_FIXTURES_DOGLEG = sorted(
+# Multi-section gallery fixtures plus the sarek serpentine-stacked
+# regression.  The regression's narrow ``reporting`` column nests under the
+# wide ``preprocessing`` row-span (exposing the nested-column dog-leg
+# geometry, #425) and its ``variant_calling`` row-span (rows 1-3) separates
+# an inter-row wrap's source/target rows by a multi-row placement (#422); the
+# multi-section gallery fixtures cover the adjacent-row, non-rowspan wrap
+# (via ``topologies/stacked_lr_serpentine.mmd``).
+_FIXTURES_MULTI_SECTION_PLUS_SAREK_STACK = sorted(
     {*_FIXTURES_MULTI_SECTION, "regressions/sarek_serpentine_stacked.mmd"}
 )
+_FIXTURES_DOGLEG = _FIXTURES_MULTI_SECTION_PLUS_SAREK_STACK
+_FIXTURES_INTER_ROW_CLEARANCE = _FIXTURES_MULTI_SECTION_PLUS_SAREK_STACK
 
 
 def _fixtures_with_bypass() -> list[str]:
@@ -946,7 +955,7 @@ def _section_bbox(sec) -> tuple[float, float, float, float]:
     return sec.bbox_x, sec.bbox_x + sec.bbox_w, sec.bbox_y, sec.bbox_y + sec.bbox_h
 
 
-@pytest.mark.parametrize("fixture", _FIXTURES_MULTI_SECTION)
+@pytest.mark.parametrize("fixture", _FIXTURES_INTER_ROW_CLEARANCE)
 def test_inter_row_run_clears_source_section(fixture):
     """A horizontal leg of an inter-*row* route must not graze its source
     section's bbox edge.

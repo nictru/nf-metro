@@ -367,8 +367,10 @@ def _wrap_bundle_row_minimums(graph: MetroGraph) -> dict[tuple[int, int], float]
     ``(upper_row, lower_row)`` pair, the required bbox-to-bbox gap so the
     placement pass can widen too-tight rows.
 
-    Fold/serpentine sections (multi-row span) route via reversal handling,
-    not this channel, and are excluded.
+    A multi-row-span *source* routes via reversal handling, not this
+    channel, and is excluded; a multi-row-span *target* (rowspan grid
+    placement) is fine -- only its top edge bounds the gap, so the
+    adjacent ``(src_row, tgt_row)`` reservation still applies (#422).
     """
 
     def _is_flow_section(sec) -> bool:
@@ -388,7 +390,13 @@ def _wrap_bundle_row_minimums(graph: MetroGraph) -> dict[tuple[int, int], float]
         if port.side not in (PortSide.LEFT, PortSide.RIGHT, PortSide.TOP):
             continue
         tgt_sec = graph.sections.get(port.section_id)
-        if not _is_flow_section(tgt_sec):
+        # Only the target's TOP edge (its ``grid_row``) bounds the gap the
+        # run lands in, so a multi-row-span target (rowspan grid placement,
+        # #422) still reserves the gap -- only its existence matters here,
+        # not its span.  The source must be a single-row flow section: its
+        # bottom edge is the gap's upper bound, and a multi-row source would
+        # route via reversal handling instead.
+        if tgt_sec is None:
             continue
         src = graph.stations.get(edge.source)
         if src is None:
