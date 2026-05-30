@@ -903,20 +903,98 @@ def test_inter_section_route_no_x_backtrack(fixture):
                 )
 
 
-# sarek's MultiQC fan-in feeds a left-entry ``reporting`` section in row 3
-# from sources spread across row 0 (preprocessing, far right) and row 1
-# (post_vc).  Reaching the left entry from the far-right source is an
-# intrinsic full-width sweep; routing that long-range multi-row merge bundle
-# around the diagram is deferred (#432, MultiQC fan-in).  The carriage-return
-# spine and the per-port boundary invariant both hold; only this single
-# dog-leg leg is still oversized.
-_XFAIL_DOGLEG: dict[str, str] = {
-    f: (
-        "#432: long-range MultiQC fan-in feeder sweeps full width into the "
-        "left-entry reporting section; merge-bundle around-routing deferred"
+# ---------------------------------------------------------------------------
+# Merge feeders descend the inter-column corridor, not the canvas bottom
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    "fixture",
+    sorted({*_FIXTURES_MULTI_SECTION, "sarek.mmd"}),
+)
+def test_merge_feeder_does_not_loop_below_target(fixture):
+    """A merge-junction feeder reaching a target row *below* its source must
+    not dip far below the target section's bottom edge to reach it (#432).
+
+    The sarek MultiQC fan-in feeds the left-entry ``reporting`` section
+    (row 3) from QC sources that exit on the right in rows 0 and 1.  The
+    naive around-below route drops the feeder to the very bottom of the
+    canvas (below the tall ``variant_calling`` row-span), runs leftward
+    there, then climbs back up into the entry - two big loops sweeping the
+    canvas bottom.  A clear inter-column corridor exists between the source
+    and target columns: drop into the inter-row gap below the source row,
+    traverse left in that gap to the inter-column channel, then descend
+    that channel straight to the entry.  This invariant pins the corridor:
+    a downward cross-row feeder must stay within a bounded margin of the
+    target section's bottom rather than looping below everything beneath
+    it.
+
+    Scoped to *downward cross-row* feeders.  A same-row fan-in merge
+    legitimately U-routes through the inter-row gap *below* the row and
+    climbs back into a same-row target (e.g. ``03b_fan_in_merge``,
+    ``genomeassembly``); that gap-dip is the intended geometry, not a
+    canvas-bottom loop.
+    """
+    graph = _layout(fixture)
+    offsets = compute_station_offsets(graph)
+    routes = route_edges(graph, station_offsets=offsets)
+    for rp in routes:
+        if not (
+            rp.edge.source.startswith("__junction")
+            and rp.edge.target.startswith("__merge")
+        ):
+            continue
+        src_sec = resolve_section(graph, graph.stations[rp.edge.source])
+        tgt_sec = resolve_section(graph, graph.stations[rp.edge.target])
+        if src_sec is None or tgt_sec is None:
+            continue
+        # Only downward cross-row feeders take the corridor; same-row
+        # fan-ins legitimately U-route through the gap below the row.
+        if tgt_sec.grid_row <= src_sec.grid_row:
+            continue
+        tgt_bottom = tgt_sec.bbox_y + tgt_sec.bbox_h
+        max_y = max(p[1] for p in rp.points)
+        # The route may sweep a little below the entry port (its descent
+        # curve) but must not loop below the target section's whole box.
+        assert max_y <= tgt_bottom + SECTION_Y_GAP + _Y_TOL, (
+            f"{fixture}: merge feeder {rp.edge.source}->{rp.edge.target} "
+            f"({rp.line_id}) dips to y={max_y:.1f}, far below the target "
+            f"section bottom {tgt_bottom:.1f} - it loops below the canvas "
+            f"instead of descending the inter-column corridor"
+        )
+
+
+@pytest.mark.parametrize("fixture", sorted({*_FIXTURES_MULTI_SECTION_PLUS_SAREK_STACK}))
+def test_inter_section_route_no_full_width_dogleg_clean(fixture):
+    """No merge feeder takes a full-width out-and-back dog-leg (#432).
+
+    The corridor route's long leftward traverse in the inter-row gap is a
+    monotonic approach toward the target, not a backtrack, so the refined
+    full-width guard passes on sarek now.
+    """
+    from nf_metro.layout.engine import (
+        _canvas_width,
+        inter_section_route_backtrack_legs,
     )
-    for f in ("regressions/sarek_serpentine_stacked.mmd", "sarek.mmd")
-}
+
+    graph = _layout(fixture)
+    routes = route_edges(graph)
+    canvas_width = _canvas_width(graph)
+    assert canvas_width > 0
+    limit = 0.4 * canvas_width
+    for rp, x1, x2 in inter_section_route_backtrack_legs(graph, routes):
+        span = abs(x2 - x1)
+        assert span <= limit + _Y_TOL, (
+            f"{fixture}: {rp.line_id} {rp.edge.source}->{rp.edge.target} "
+            f"backtracks {span:.1f}px in one leg (x={x1:.1f}->{x2:.1f}), "
+            f"exceeding 40% of canvas width {canvas_width:.1f}"
+        )
+
+
+# sarek's MultiQC fan-in now descends the shared inter-column corridor into
+# the left-entry ``reporting`` section, so the feeders are X-monotonic toward
+# the target and no longer trip the full-width dog-leg guard.
+_XFAIL_DOGLEG: dict[str, str] = {}
 
 
 @pytest.mark.parametrize(

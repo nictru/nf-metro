@@ -94,17 +94,30 @@ def col_left_edge(
     return min((s.bbox_x for s in secs), default=default) if secs else default
 
 
-def row_bottom_edge(graph: MetroGraph, row: int, default: float = 0.0) -> float:
-    """Bottommost Y extent of sections in *row*."""
+def row_bottom_edge(
+    graph: MetroGraph, row: int, default: float = 0.0, col: int | None = None
+) -> float:
+    """Bottommost Y extent of sections in *row* (optionally a single *col*).
+
+    When *col* is given, restrict to sections in that grid column so an
+    inter-row diversion travelling within one column isn't pushed down by a
+    tall row-span section stacked in a different column of the same row.
+    """
     secs = _sections_in_row(graph, row)
+    if col is not None:
+        secs = [s for s in secs if s.grid_col == col]
     if not secs:
         return default
     return max((s.bbox_y + s.bbox_h for s in secs), default=default)
 
 
-def row_top_edge(graph: MetroGraph, row: int, default: float = 0.0) -> float:
-    """Topmost Y extent of sections in *row*."""
+def row_top_edge(
+    graph: MetroGraph, row: int, default: float = 0.0, col: int | None = None
+) -> float:
+    """Topmost Y extent of sections in *row* (optionally a single *col*)."""
     secs = _sections_in_row(graph, row)
+    if col is not None:
+        secs = [s for s in secs if s.grid_col == col]
     return min((s.bbox_y for s in secs), default=default) if secs else default
 
 

@@ -48,6 +48,8 @@ from nf_metro.layout.routing.common import (
     inter_column_channel_x,
     inter_row_channel_y,
     resolve_section,
+    row_bottom_edge,
+    row_top_edge,
     symmetric_bundle_midpoint,
     vertical_direction,
 )
@@ -644,6 +646,8 @@ def _route_inter_section(
         wrap_hy = inter_row_channel_y(graph, src, tgt, sy, ty, dy, ctx.curve_radius)
         exclude = {src.section_id} if src.section_id else set()
         if _h_segment_crosses_other_section(graph, sx, tx, wrap_hy, exclude):
+            if _corridor_is_viable(ctx, src, tgt):
+                return _route_inter_row_gap_corridor(edge, src, tgt, tgt, i, n, ctx)
             return _route_around_section_below(edge, src, tgt, tgt, i, n, ctx)
         return _route_left_entry_wrap(edge, src, tgt, i, n, ctx)
 
@@ -692,6 +696,14 @@ def _route_inter_section(
             if ep_port and ep_port.side == PortSide.LEFT:
                 exclude = {src.section_id} if src.section_id else set()
                 if _h_segment_crosses_other_section(graph, sx, ep.x, ep.y, exclude):
+                    # When a clear inter-row / inter-column corridor exists
+                    # (downward cross-row feeder, e.g. sarek's MultiQC
+                    # fan-in), descend it instead of looping below the
+                    # canvas (#432).
+                    if _corridor_is_viable(ctx, src, ep):
+                        return _route_inter_row_gap_corridor(
+                            edge, src, tgt, ep, i, n, ctx
+                        )
                     return _route_around_section_below(edge, src, tgt, ep, i, n, ctx)
             # RIGHT entry nested inside an oversized source section: a
             # single-channel L-shape would descend far right and sweep
@@ -1818,6 +1830,160 @@ def _has_bypass_sibling_to_same_entry(
             continue
         return True
     return False
+
+
+def _corridor_descent_x(
+    ctx: _RoutingCtx, ep_col: int, ep_row: int, delta: float
+) -> float | None:
+    """X of the inter-column channel just LEFT of the target column.
+
+    The corridor descends the clear gap between ``ep_col - 1`` and
+    ``ep_col`` measured at the *target* row (so a wide row-span section in
+    a different row - e.g. sarek's full-width ``preprocessing`` in row 0 -
+    does not collapse the gap).  Returns ``None`` when there is no column
+    to the left (degenerate; caller falls back to the around-below loop).
+    """
+    if ep_col <= 0:
+        return None
+    gap_left, gap_right = column_gap_edges(ctx.graph, ep_col - 1, ep_col, row=ep_row)
+    if gap_right <= gap_left:
+        return None
+    return (gap_left + gap_right) / 2 - delta
+
+
+def _corridor_is_viable(ctx: _RoutingCtx, src: Station, entry_port: Station) -> bool:
+    """Whether the inter-row-gap + inter-column-channel corridor exists.
+
+    Used to route a downward cross-row merge feeder (sarek's MultiQC
+    fan-in) through the clear corridor instead of the canvas-bottom loop
+    (:func:`_route_around_section_below`).  Requires:
+
+    * a LEFT entry port (the corridor descends just left of the target);
+    * the target section sits in a row strictly *below* the source's row
+      (a downward cross-row feeder; same-row fan-ins U-route in the gap
+      below the row and must keep the legacy handler);
+    * an inter-row gap below the source row exists in the source's column;
+    * a clear inter-column channel exists left of the target column.
+    """
+    if entry_port is None:
+        return False
+    ep_port = ctx.graph.ports.get(entry_port.id)
+    if ep_port is None or ep_port.side != PortSide.LEFT:
+        return False
+    src_row = _resolve_section_row(ctx.graph, src)
+    ep_row = _resolve_section_row(ctx.graph, entry_port)
+    src_col = _resolve_section_col(ctx.graph, src)
+    ep_col = _resolve_section_col(ctx.graph, entry_port)
+    if None in (src_row, ep_row, src_col, ep_col):
+        return False
+    if ep_row <= src_row:
+        return False
+    if _corridor_descent_x(ctx, ep_col, ep_row, 0.0) is None:
+        return False
+    # An inter-row gap must open below the source row within its column.
+    gap_top = row_bottom_edge(ctx.graph, src_row, col=src_col)
+    gap_bottom = row_top_edge(ctx.graph, src_row + 1, col=src_col)
+    return gap_bottom - gap_top > EDGE_TO_BUNDLE_CLEARANCE
+
+
+def _route_inter_row_gap_corridor(
+    edge: Edge,
+    src: Station,
+    tgt: Station,
+    entry_port: Station,
+    i: int,
+    n: int,
+    ctx: _RoutingCtx,
+) -> RoutedPath:
+    """Route a downward cross-row LEFT-entry merge feeder via the clear
+    inter-row / inter-column corridor instead of the canvas-bottom loop.
+
+    The sarek MultiQC fan-in feeds the left-entry ``reporting`` section
+    (row 3) from QC sources exiting on the right in rows 0 and 1.  Rather
+    than dropping to the canvas bottom (below the tall ``variant_calling``
+    row-span) and climbing back up (:func:`_route_around_section_below`),
+    descend through the corridor that genuinely exists::
+
+        (lx, sy)        -> H lead-in right of source
+        (corner_x, sy)  ; turn down
+        (corner_x, gy)  -> V down to the inter-row gap below the source row
+        (vx, gy)        -> H left in that gap to the inter-column channel
+        (vx, ey)        -> V down the channel to the entry Y
+        (ex, ey)        -> H right into the LEFT entry port
+
+    All feeders converge in the same inter-column channel (``vx``) just
+    left of the target column, so they travel down together as one bundle
+    meeting the carriage-return spine, rather than two separate loops.
+
+    Corners: R->D (CW), D->L (CW), L->D (CCW), D->R (CW).  The bundle is
+    staggered by ``delta`` (the L-shape offset) on each leg so parallel
+    lines keep concentric corners and a constant gap.
+    """
+    sx, sy = src.x, src.y
+    ex, ey = entry_port.x, entry_port.y
+
+    delta, _r1, _r2 = l_shape_radii(
+        i,
+        n,
+        vertical=Direction.D,
+        offset_step=ctx.offset_step,
+        base_radius=ctx.curve_radius,
+    )
+    off_for_radius = (n - 1 - i) * ctx.offset_step
+    max_off_for_radius = (n - 1) * ctx.offset_step
+    r_outer = corner_radius(
+        off_for_radius,
+        max_off_for_radius,
+        outside=True,
+        base_radius=ctx.curve_radius,
+    )
+
+    src_row = _resolve_section_row(ctx.graph, src)
+    src_col = _resolve_section_col(ctx.graph, src)
+    ep_col = _resolve_section_col(ctx.graph, entry_port)
+    ep_row = _resolve_section_row(ctx.graph, entry_port)
+
+    # Inter-row gap Y just below the source row (column-restricted so a
+    # tall row-span in another column doesn't push the channel down).
+    gap_top = row_bottom_edge(ctx.graph, src_row, col=src_col)
+    gap_bottom = row_top_edge(ctx.graph, src_row + 1, col=src_col, default=gap_top)
+    if gap_bottom > gap_top:
+        gy_base = (gap_top + gap_bottom) / 2
+    else:
+        gy_base = gap_top + EDGE_TO_BUNDLE_CLEARANCE
+    # Outer line sits at LARGER y in this leftward run (CW D->L corner).
+    gy = gy_base + delta
+
+    # Inter-column descent channel left of the target column.
+    vx = _corridor_descent_x(ctx, ep_col, ep_row, delta)
+
+    # H lead-in right of the source, clear of the source section's edge.
+    src_section = ctx.graph.sections.get(src.section_id) if src.section_id else None
+    corner_x = sx + ctx.curve_radius + (n - 1) * ctx.offset_step / 2 + delta
+    if src_section and src_section.bbox_w > 0:
+        section_right = src_section.bbox_x + src_section.bbox_w
+        current_gap = sx + ctx.curve_radius - section_right
+        corner_x += max(0.0, SECTION_ROUTE_CLEARANCE - current_gap)
+
+    src_off = _get_offset(ctx, edge.source, edge.line_id)
+    tgt_off = _get_offset(ctx, edge.target, edge.line_id)
+
+    return RoutedPath(
+        edge=edge,
+        line_id=edge.line_id,
+        points=[
+            (sx, sy + src_off),
+            (corner_x, sy + src_off),
+            (corner_x, gy),
+            (vx, gy),
+            (vx, ey + tgt_off),
+            (ex, ey + tgt_off),
+        ],
+        is_inter_section=True,
+        normalize_exempt=True,
+        curve_radii=[r_outer, r_outer, r_outer, r_outer],
+        offsets_applied=True,
+    )
 
 
 def _route_around_section_below(

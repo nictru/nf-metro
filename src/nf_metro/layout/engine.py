@@ -663,15 +663,23 @@ def _canvas_width(graph: MetroGraph) -> float:
 
 
 def inter_section_route_backtrack_legs(graph: MetroGraph, routes: list):
-    """Yield ``(rp, x1, x2)`` for each horizontal leg that reverses against
-    its route's exit-direction flow.
+    """Yield ``(rp, x1, x2)`` for each horizontal leg that moves *away* from
+    the route's own endpoint X - a genuine out-and-back dog-leg.
 
-    "Flow" mirrors :func:`_guard_inter_section_route_no_backtrack`: a
-    forward route between two distinct LR columns whose exit port faces the
-    target column flows toward that column (rightward when the target column
-    is higher).  A leg that moves the opposite way is a backtrack.  Routes
-    that exit away from their target legitimately wrap and are skipped, as
-    are TB folds and same-column routes.  Unlike the strict guard, exempt
+    A backtrack is reverse-direction travel: the line heads away from where
+    it is going, then has to come back.  This is measured against the
+    route's actual endpoint X (its last waypoint), not the grid-column
+    order.  Grid columns can disagree with X order when a narrow target
+    column nests inside a wide row-span sibling (sarek's ``reporting`` under
+    the full-width ``preprocessing`` row): there the target column is
+    "higher" yet sits to the *left*, so a single long leftward traverse is a
+    monotonic approach toward the target - not a dog-leg - and is not
+    yielded.  A true #425 dog-leg (right past the target, then back left)
+    still moves away from the endpoint on its outward leg and is yielded.
+
+    Routes that exit a port facing away from their endpoint legitimately
+    wrap and are skipped, as are TB folds and same-column routes.  Unlike
+    the strict :func:`_guard_inter_section_route_no_backtrack`, exempt
     (``normalize_exempt``) wrap routes are *included* so a multi-corner
     around-section dog-leg is still measured.
     """
@@ -698,15 +706,23 @@ def inter_section_route_backtrack_legs(graph: MetroGraph, routes: list):
             continue
         if src_sec.grid_col == tgt_sec.grid_col:
             continue
-        rightward = tgt_sec.grid_col > src_sec.grid_col
-        side = _exit_side(rp)
-        if rightward and side != PortSide.RIGHT:
-            continue
-        if not rightward and side != PortSide.LEFT:
-            continue
         xs = [p[0] for p in rp.points]
+        if len(xs) < 2:
+            continue
+        # Direction toward the route's own endpoint: a leg moving the other
+        # way (away from where the route ends) is the dog-leg's outward leg.
+        toward_endpoint_is_right = xs[-1] > xs[0]
+        side = _exit_side(rp)
+        # An exit port facing away from the endpoint legitimately wraps; its
+        # outward stub is not a dog-leg.  (Grid-column-based skip preserved
+        # for the wrap case: the exit faces the target column it serves.)
+        rightward_cols = tgt_sec.grid_col > src_sec.grid_col
+        if rightward_cols and side != PortSide.RIGHT:
+            continue
+        if not rightward_cols and side != PortSide.LEFT:
+            continue
         for x1, x2 in zip(xs, xs[1:]):
-            backtracks = (x2 < x1) if rightward else (x2 > x1)
+            backtracks = (x2 < x1) if toward_endpoint_is_right else (x2 > x1)
             if backtracks:
                 yield rp, x1, x2
 
