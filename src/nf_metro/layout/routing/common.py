@@ -378,6 +378,67 @@ def inter_column_channel_x(
         return sx - max_r - offset_step
 
 
+def clear_channel_of_section_edge(
+    graph: MetroGraph,
+    mid_x: float,
+    half_width: float,
+    y_lo: float,
+    y_hi: float,
+    endpoint_port_xs: list[float],
+    edge_clearance: float = EDGE_TO_BUNDLE_CLEARANCE,
+    port_tol: float = 1.0,
+) -> float:
+    """Nudge a vertical channel out of an *incidental* section-edge graze.
+
+    A descent channel of an inter-section route legitimately sits on a
+    section edge when that edge carries a port at one of the route's
+    endpoints (a port-to-port drop).  When the channel instead lands
+    within *edge_clearance* of a section's bbox edge on the interior
+    side, with no endpoint port at that x, the graze is incidental and
+    the lines visibly cross the section border (#423).
+
+    *mid_x* is the channel's midline; the bundle's nearest line to a
+    section edge sits at most *half_width* from *mid_x*.  *y_lo*/*y_hi*
+    bound the vertical run so only sections it actually passes are
+    considered.  Returns *mid_x* shifted just enough that the nearest
+    line clears every incidentally-grazed edge by *edge_clearance*,
+    pushing OUTWARD (away from the section interior).  Channels that
+    coincide with an endpoint port (within *port_tol*) are left
+    untouched.
+    """
+    adjusted = mid_x
+    for sec in graph.sections.values():
+        if sec.bbox_w <= 0:
+            continue
+        if y_hi < sec.bbox_y or y_lo > sec.bbox_y + sec.bbox_h:
+            continue  # channel does not span this section's Y range
+        left = sec.bbox_x
+        right = left + sec.bbox_w
+        if any(abs(adjusted - px) <= port_tol for px in endpoint_port_xs):
+            continue  # legitimate port-to-port drop on this edge
+        # Bundle span (outermost lines either side of the midline).
+        bundle_lo = adjusted - half_width
+        bundle_hi = adjusted + half_width
+        # A graze means the bundle's nearest line toward an edge does not
+        # clear that edge by ``edge_clearance``.  Distance of the nearest
+        # line to the right edge (positive = outside, to the right) and to
+        # the left edge (positive = outside, to the left).
+        clear_of_right = bundle_lo - right
+        clear_of_left = left - bundle_hi
+        # Only act when the bundle is near or inside this section's span;
+        # a bundle comfortably outside both edges is fine.
+        if clear_of_right >= edge_clearance or clear_of_left >= edge_clearance:
+            continue
+        # Push OUTWARD via the nearer edge: if the midline is closer to the
+        # right edge, push right until the leftmost line clears it; else
+        # push left until the rightmost line clears the left edge.
+        if right - adjusted <= adjusted - left:
+            adjusted += edge_clearance - clear_of_right
+        else:
+            adjusted -= edge_clearance - clear_of_left
+    return adjusted
+
+
 def line_source_y_at_port(
     port_id: str,
     graph: MetroGraph,

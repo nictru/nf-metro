@@ -37,6 +37,7 @@ from nf_metro.layout.routing.common import (
     RoutedPath,
     bundle_width,
     bypass_bottom_y,
+    clear_channel_of_section_edge,
     col_left_edge,
     col_right_edge,
     column_gap_edges,
@@ -1150,6 +1151,16 @@ def _route_bypass(
     )
 
 
+def _endpoint_port_xs(graph: MetroGraph, edge: Edge) -> list[float]:
+    """X of any port stations at *edge*'s endpoints (for edge-graze checks)."""
+    xs: list[float] = []
+    for sid in (edge.source, edge.target):
+        st = graph.stations.get(sid)
+        if st is not None and st.is_port:
+            xs.append(st.x)
+    return xs
+
+
 def _route_l_shape(
     edge: Edge, src: Station, tgt: Station, i: int, n: int, ctx: _RoutingCtx
 ) -> RoutedPath:
@@ -1186,6 +1197,19 @@ def _route_l_shape(
         mid_x = sx + horizontal.sign * (
             ctx.curve_radius + (un - 1) * ctx.offset_step / 2
         )
+        # The fan pivots the channel through ``sx +/- curve_radius``,
+        # which hugs the source section's edge.  When that edge is also a
+        # section bbox border the descent grazes it incidentally (#423):
+        # push the channel outward so the nearest line clears the edge.
+        half_width = (un - 1) * ctx.offset_step / 2
+        mid_x = clear_channel_of_section_edge(
+            ctx.graph,
+            mid_x,
+            half_width,
+            min(sy, ty),
+            max(sy, ty),
+            _endpoint_port_xs(ctx.graph, edge),
+        )
         # Second corner: from sub-bundle (only L-shape siblings turn here)
         _, _, r_second = l_shape_radii(
             i,
@@ -1205,6 +1229,18 @@ def _route_l_shape(
         max_r = ctx.curve_radius + (n - 1) * ctx.offset_step
         mid_x = inter_column_channel_x(
             ctx.graph, src, tgt, sx, tx, dx, max_r, ctx.offset_step
+        )
+        # The near-source fallback hugs the source section's edge; push
+        # the channel outward when that edge is a section bbox border the
+        # route doesn't enter (#423).
+        half_width = (n - 1) * ctx.offset_step / 2
+        mid_x = clear_channel_of_section_edge(
+            ctx.graph,
+            mid_x,
+            half_width,
+            min(sy, ty),
+            max(sy, ty),
+            _endpoint_port_xs(ctx.graph, edge),
         )
 
     vx = mid_x + delta

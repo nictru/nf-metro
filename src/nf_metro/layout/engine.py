@@ -769,6 +769,67 @@ def _guard_inter_row_run_clearance(
                 )
 
 
+def _guard_inter_section_descent_edge_clearance(
+    graph: MetroGraph,
+    phase: str,
+    *,
+    routes: list | None = None,
+) -> None:
+    """After routing: a vertical descent channel of an inter-section route
+    must not *incidentally* graze a section bbox edge.
+
+    A descent legitimately sits on a section edge when its X coincides
+    with a port at one of the route's endpoints (a port-to-port drop).
+    When the channel instead lands within ``EDGE_TO_BUNDLE_CLEARANCE`` of
+    a section edge, on the interior side, with no endpoint port at that
+    X, the lines visibly cross the border (#423).  The channel-x selection
+    in :func:`_route_l_shape` pushes such channels outward; this guard
+    fails loudly if a future change lets one creep back against an edge.
+    """
+    if routes is None:
+        from nf_metro.layout.routing import route_edges
+
+        routes = route_edges(graph)
+
+    tol = GUARD_TOLERANCE
+    for rp in routes:
+        if not rp.is_inter_section:
+            continue
+        port_xs = [
+            st.x
+            for sid in (rp.edge.source, rp.edge.target)
+            if (st := graph.stations.get(sid)) is not None and st.is_port
+        ]
+        pts = rp.points
+        for (x0, y0), (x1, y1) in zip(pts, pts[1:]):
+            if abs(x1 - x0) > tol:
+                continue  # vertical segments only
+            vx = (x0 + x1) / 2
+            if any(abs(vx - px) <= 1.0 for px in port_xs):
+                continue  # legitimate port-to-port drop
+            ylo, yhi = sorted((y0, y1))
+            for sec in graph.sections.values():
+                if sec.bbox_w <= 0:
+                    continue
+                if yhi < sec.bbox_y or ylo > sec.bbox_y + sec.bbox_h:
+                    continue
+                left = sec.bbox_x
+                right = left + sec.bbox_w
+                from_left = vx - left
+                from_right = right - vx
+                grazes = (-tol <= from_left < EDGE_TO_BUNDLE_CLEARANCE - tol) or (
+                    -tol <= from_right < EDGE_TO_BUNDLE_CLEARANCE - tol
+                )
+                if grazes:
+                    edge_x = left if from_left < from_right else right
+                    raise PhaseInvariantError(
+                        f"{phase}: descent of {rp.edge.source!r}->"
+                        f"{rp.edge.target!r} line {rp.line_id!r} at x={vx:.1f} "
+                        f"grazes section {sec.id!r} edge x={edge_x:.1f} "
+                        f"(< {EDGE_TO_BUNDLE_CLEARANCE})"
+                    )
+
+
 def _guard_bundle_order_preserved(
     graph: MetroGraph,
     phase: str,
@@ -2016,6 +2077,7 @@ def _compute_section_layout(
             _guard_inter_section_route_no_backtrack(graph, phase, routes=routes)
             _guard_serpentine_no_backtrack(graph, phase, routes=routes)
             _guard_inter_row_run_clearance(graph, phase, routes=routes)
+            _guard_inter_section_descent_edge_clearance(graph, phase, routes=routes)
 
 
 def _renumber_sections_by_grid(graph: MetroGraph) -> None:
