@@ -14,6 +14,7 @@ from collections import Counter, defaultdict
 from nf_metro.layout.constants import (
     BYPASS_CLEARANCE,
     CANVAS_GRID_SHIFT_THRESHOLD,
+    COORD_TOLERANCE,
     CURVE_RADIUS,
     DESCENDER_CLEARANCE,
     DIAGONAL_RUN,
@@ -786,6 +787,8 @@ def _guard_inter_section_descent_edge_clearance(
     in :func:`_route_l_shape` pushes such channels outward; this guard
     fails loudly if a future change lets one creep back against an edge.
     """
+    from nf_metro.layout.routing.common import endpoint_port_xs
+
     if routes is None:
         from nf_metro.layout.routing import route_edges
 
@@ -795,17 +798,13 @@ def _guard_inter_section_descent_edge_clearance(
     for rp in routes:
         if not rp.is_inter_section:
             continue
-        port_xs = [
-            st.x
-            for sid in (rp.edge.source, rp.edge.target)
-            if (st := graph.stations.get(sid)) is not None and st.is_port
-        ]
+        port_xs = endpoint_port_xs(graph, rp.edge)
         pts = rp.points
         for (x0, y0), (x1, y1) in zip(pts, pts[1:]):
             if abs(x1 - x0) > tol:
                 continue  # vertical segments only
             vx = (x0 + x1) / 2
-            if any(abs(vx - px) <= 1.0 for px in port_xs):
+            if any(abs(vx - px) <= COORD_TOLERANCE for px in port_xs):
                 continue  # legitimate port-to-port drop
             ylo, yhi = sorted((y0, y1))
             for sec in graph.sections.values():

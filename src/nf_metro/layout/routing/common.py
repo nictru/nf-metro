@@ -378,6 +378,16 @@ def inter_column_channel_x(
         return sx - max_r - offset_step
 
 
+def endpoint_port_xs(graph: MetroGraph, edge: Edge) -> list[float]:
+    """X of any port stations at *edge*'s endpoints (for edge-graze checks)."""
+    xs: list[float] = []
+    for sid in (edge.source, edge.target):
+        st = graph.stations.get(sid)
+        if st is not None and st.is_port:
+            xs.append(st.x)
+    return xs
+
+
 def clear_channel_of_section_edge(
     graph: MetroGraph,
     mid_x: float,
@@ -386,7 +396,7 @@ def clear_channel_of_section_edge(
     y_hi: float,
     endpoint_port_xs: list[float],
     edge_clearance: float = EDGE_TO_BUNDLE_CLEARANCE,
-    port_tol: float = 1.0,
+    port_tol: float = COORD_TOLERANCE,
 ) -> float:
     """Nudge a vertical channel out of an *incidental* section-edge graze.
 

@@ -42,6 +42,7 @@ from nf_metro.layout.routing.common import (
     col_right_edge,
     column_gap_edges,
     compute_bundle_info,
+    endpoint_port_xs,
     horizontal_direction,
     inter_column_channel_x,
     inter_row_channel_y,
@@ -1151,16 +1152,6 @@ def _route_bypass(
     )
 
 
-def _endpoint_port_xs(graph: MetroGraph, edge: Edge) -> list[float]:
-    """X of any port stations at *edge*'s endpoints (for edge-graze checks)."""
-    xs: list[float] = []
-    for sid in (edge.source, edge.target):
-        st = graph.stations.get(sid)
-        if st is not None and st.is_port:
-            xs.append(st.x)
-    return xs
-
-
 def _route_l_shape(
     edge: Edge, src: Station, tgt: Station, i: int, n: int, ctx: _RoutingCtx
 ) -> RoutedPath:
@@ -1208,7 +1199,7 @@ def _route_l_shape(
             half_width,
             min(sy, ty),
             max(sy, ty),
-            _endpoint_port_xs(ctx.graph, edge),
+            endpoint_port_xs(ctx.graph, edge),
         )
         # Second corner: from sub-bundle (only L-shape siblings turn here)
         _, _, r_second = l_shape_radii(
@@ -1240,7 +1231,7 @@ def _route_l_shape(
             half_width,
             min(sy, ty),
             max(sy, ty),
-            _endpoint_port_xs(ctx.graph, edge),
+            endpoint_port_xs(ctx.graph, edge),
         )
 
     vx = mid_x + delta
