@@ -8,6 +8,7 @@ RoutedPath waypoints + curve_radii into well-formed SVG paths with:
 - Concentric bundle lines maintaining distinct radii through curves
 """
 
+import math
 import re
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -544,7 +545,6 @@ def _arc_center(prev, curr, nxt, r):
     two incident segment directions from the vertex (i.e. along the inward
     normals).  ``center = curr + r*(unit(prev-curr) + unit(nxt-curr))``.
     """
-    import math
 
     def unit(a, b):
         dx, dy = b[0] - a[0], b[1] - a[1]
@@ -556,7 +556,7 @@ def _arc_center(prev, curr, nxt, r):
     return (curr[0] + r * (u1[0] + u2[0]), curr[1] + r * (u1[1] + u2[1]))
 
 
-def _corridor_descent_x(pts) -> float | None:
+def _corridor_descent_channel_x(pts) -> float | None:
     """X of a routed path's inter-column descent channel, or None.
 
     The MultiQC-corridor feeders (#432) traverse the inter-row gap LEFTWARD
@@ -605,7 +605,7 @@ class TestConcentricArcCenters:
             if not r.is_inter_section or not r.curve_radii:
                 continue
             pts = apply_route_offsets(r, offsets)
-            vx = _corridor_descent_x(pts)
+            vx = _corridor_descent_channel_x(pts)
             if vx is None:
                 continue
             bundles[(r.edge.source, round(vx / 10))].append(r)
