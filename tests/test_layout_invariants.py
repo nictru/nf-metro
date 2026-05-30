@@ -157,6 +157,14 @@ def _fixtures_with(predicate) -> list[str]:
 _FIXTURES_WITH_OFF_TRACK = _fixtures_with(lambda t: "off_track:" in t)
 _FIXTURES_MULTI_SECTION = _fixtures_with(lambda t: t.count("subgraph") >= 2)
 
+# Fixtures for the full-width dog-leg invariant (#425): every multi-section
+# gallery fixture plus the sarek serpentine-stacked regression, whose narrow
+# ``reporting`` column nests under the wide ``preprocessing`` row-span and so
+# exposes the nested-column degenerate routing geometry.
+_FIXTURES_DOGLEG = sorted(
+    {*_FIXTURES_MULTI_SECTION, "regressions/sarek_serpentine_stacked.mmd"}
+)
+
 
 def _fixtures_with_bypass() -> list[str]:
     """Return fixtures whose layout produces at least one ``__bypass_``
@@ -888,6 +896,39 @@ def test_inter_section_route_no_x_backtrack(fixture):
                     f"{fixture}: {rp.line_id} {rp.edge.source}->{rp.edge.target} "
                     f"backtracks right x={x1:.1f}->{x2:.1f} on a leftward route"
                 )
+
+
+@pytest.mark.parametrize("fixture", _FIXTURES_DOGLEG)
+def test_inter_section_route_no_full_width_dogleg(fixture):
+    """A forward inter-section route may reverse in X to reach a target
+    column nested inside an oversized sibling, but no single backtrack leg
+    may sweep more than 40% of the canvas width (#425).
+
+    The strict X-monotonic guard above forbids *any* reversal on a forward
+    LR route and skips wrapping (``normalize_exempt``) routes.  When a
+    narrow target column nests inside an oversized sibling (sarek's
+    ``reporting`` under the wide ``preprocessing`` row-span), reaching it
+    requires a legitimate reversal, so such routes are exempt.  This still
+    bounds those reversals: a right-then-left dog-leg sweeping the whole
+    diagram is forbidden even when exempt.
+    """
+    from nf_metro.layout.engine import (
+        _canvas_width,
+        inter_section_route_backtrack_legs,
+    )
+
+    graph = _layout(fixture)
+    routes = route_edges(graph)
+    canvas_width = _canvas_width(graph)
+    assert canvas_width > 0
+    limit = 0.4 * canvas_width
+    for rp, x1, x2 in inter_section_route_backtrack_legs(graph, routes):
+        span = abs(x2 - x1)
+        assert span <= limit + _Y_TOL, (
+            f"{fixture}: {rp.line_id} {rp.edge.source}->{rp.edge.target} "
+            f"backtracks {span:.1f}px in one leg (x={x1:.1f}->{x2:.1f}), "
+            f"exceeding 40% of canvas width {canvas_width:.1f}"
+        )
 
 
 # ---------------------------------------------------------------------------

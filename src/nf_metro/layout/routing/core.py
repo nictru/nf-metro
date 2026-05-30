@@ -20,6 +20,7 @@ from nf_metro.layout.constants import (
     CROSS_ROW_THRESHOLD,
     CURVE_RADIUS,
     DIAGONAL_RUN,
+    EDGE_TO_BUNDLE_CLEARANCE,
     FOLD_MARGIN,
     ICON_TERMINUS_FORK_LEAD,
     JUNCTION_MARGIN,
@@ -692,6 +693,14 @@ def _route_inter_section(
                 exclude = {src.section_id} if src.section_id else set()
                 if _h_segment_crosses_other_section(graph, sx, ep.x, ep.y, exclude):
                     return _route_around_section_below(edge, src, tgt, ep, i, n, ctx)
+            # RIGHT entry nested inside an oversized source section: a
+            # single-channel L-shape would descend far right and sweep
+            # back across the whole diagram (#425).  Step down past the
+            # source then into a channel near the target instead.
+            if edge.source in ctx.junction_ids and _should_step_descent(
+                graph, src, ep, ep_port
+            ):
+                return _route_stepped_descent(edge, src, ep, i, n, ctx)
             return _route_l_shape(edge, src, ep, i, n, ctx)
 
     # Standard L-shape
@@ -1150,6 +1159,155 @@ def _route_bypass(
         curve_radii=[r1, r2, r3, r4],
         offsets_applied=True,
     )
+
+
+def _nested_target_clear_channel_x(
+    graph: MetroGraph,
+    ep: Station,
+    y_lo: float,
+    y_hi: float,
+    clearance: float,
+) -> float | None:
+    """X of a clear vertical channel just right of the target column's stack.
+
+    For a route whose entry port *ep* sits in a narrow column nested inside
+    an oversized source section, the only single-channel descent that
+    clears the source is far to the right (producing the #425 dog-leg).
+    A stepped descent instead drops to just below the source, steps left
+    into the channel returned here - the rightmost edge of any section in
+    the target's column that the descent's vertical run (*y_lo*..*y_hi*)
+    would otherwise cross, plus *clearance* - then drops to the entry Y.
+
+    Returns ``None`` when the target column has no resolvable sections.
+    """
+    ep_sec = graph.sections.get(ep.section_id) if ep.section_id else None
+    if ep_sec is None:
+        return None
+    tgt_col = ep_sec.grid_col
+    rights = [
+        s.bbox_x + s.bbox_w
+        for s in graph.sections.values()
+        if s.bbox_w > 0
+        and s.grid_col == tgt_col
+        and not (y_hi < s.bbox_y or y_lo > s.bbox_y + s.bbox_h)
+    ]
+    if not rights:
+        return None
+    return max(rights) + clearance
+
+
+def _route_stepped_descent(
+    edge: Edge,
+    src: Station,
+    ep: Station,
+    i: int,
+    n: int,
+    ctx: _RoutingCtx,
+) -> RoutedPath:
+    """Stepped descent to an entry port nested inside an oversized source.
+
+    Replaces the far-right dog-leg (#425) for a junction-sourced merge
+    route whose single-channel L-shape would be shoved to the far edge of
+    an oversized source section.  Routes a 6-corner step::
+
+        (sx, sy) -> (corner_x, sy)      ; H lead-in right out of the source
+        (corner_x, sy) -> (corner_x, step_y) ; V down past the source bottom
+        (corner_x, step_y) -> (chan_x, step_y) ; H left into the target channel
+        (chan_x, step_y) -> (chan_x, ey) ; V down to the entry Y
+        (chan_x, ey) -> (ex, ey)        ; H into the entry port
+
+    ``corner_x`` clears the source section's right edge; ``step_y`` sits
+    just below the source bottom; ``chan_x`` is the clear channel right of
+    the target column's stack.  Both leftward legs stay well under half the
+    canvas width, eliminating the full-width sweep.
+    """
+    graph = ctx.graph
+    sx, sy = src.x, src.y
+    ex, ey = ep.x, ep.y
+    src_off = _get_offset(ctx, edge.source, edge.line_id)
+    tgt_off = _get_offset(ctx, edge.target, edge.line_id)
+    r = ctx.curve_radius
+
+    src_sec = graph.sections.get(src.section_id) if src.section_id else None
+    # Trace through the junction to the feeding exit port's section.
+    if src_sec is None:
+        src_sec = resolve_section(graph, src)
+    src_right = (src_sec.bbox_x + src_sec.bbox_w) if src_sec else sx
+    src_bottom = (src_sec.bbox_y + src_sec.bbox_h) if src_sec else sy
+
+    # Spread parallel lines: outer lines sit further out / lower.
+    spread = (n - 1 - i) * ctx.offset_step
+    corner_x = src_right + SECTION_ROUTE_CLEARANCE + spread
+    corner_x = max(corner_x, sx + r)
+    step_y = src_bottom + EDGE_TO_BUNDLE_CLEARANCE + spread
+
+    chan_x = _nested_target_clear_channel_x(
+        graph, ep, step_y, ey + tgt_off, SECTION_ROUTE_CLEARANCE
+    )
+    if chan_x is None:
+        chan_x = ex + SECTION_ROUTE_CLEARANCE
+    chan_x += spread
+
+    return RoutedPath(
+        edge=edge,
+        line_id=edge.line_id,
+        points=[
+            (sx, sy + src_off),
+            (corner_x, sy + src_off),
+            (corner_x, step_y),
+            (chan_x, step_y),
+            (chan_x, ey + tgt_off),
+            (ex, ey + tgt_off),
+        ],
+        is_inter_section=True,
+        normalize_exempt=True,
+        curve_radii=[r, r, r, r],
+        offsets_applied=True,
+    )
+
+
+def _should_step_descent(
+    graph: MetroGraph,
+    src: Station,
+    ep: Station,
+    ep_port,
+) -> bool:
+    """Detect the nested-column degenerate geometry that needs a stepped
+    descent (#425).
+
+    Fires only when a junction-sourced merge route to a RIGHT entry port
+    would otherwise drop in a single far-right channel because the target
+    column is geometrically nested inside an oversized source section: the
+    source section's right edge sits well to the right of the entry port,
+    so a single-channel L-shape must descend far right and sweep all the
+    way back left.  The stepped descent replaces that with two short legs.
+    """
+    if ep_port is None or ep_port.side != PortSide.RIGHT:
+        return False
+    src_sec = graph.sections.get(src.section_id) if src.section_id else None
+    if src_sec is None:
+        src_sec = resolve_section(graph, src)
+    ep_sec = graph.sections.get(ep.section_id) if ep.section_id else None
+    if src_sec is None or ep_sec is None or src_sec.bbox_w <= 0:
+        return False
+    # Target column must be to the RIGHT in grid terms (forward route)...
+    if ep_sec.grid_col <= src_sec.grid_col:
+        return False
+    src_right = src_sec.bbox_x + src_sec.bbox_w
+    # ...yet the entry port sits well LEFT of the source's right edge, so a
+    # single-channel descent would be shoved far right of the target (the
+    # nested-column degeneracy).  Require a clear target-side channel to
+    # step into; if none resolves, fall back to the standard L-shape.
+    if src_right <= ep.x + SECTION_ROUTE_CLEARANCE:
+        return False
+    chan_x = _nested_target_clear_channel_x(
+        graph, ep, src_sec.bbox_y + src_sec.bbox_h, ep.y, SECTION_ROUTE_CLEARANCE
+    )
+    if chan_x is None:
+        return False
+    # The channel must genuinely improve on the far-right descent: it has
+    # to land left of the source's right edge (otherwise we gain nothing).
+    return chan_x < src_right - SECTION_ROUTE_CLEARANCE
 
 
 def _route_l_shape(

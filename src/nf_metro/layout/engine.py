@@ -653,6 +653,106 @@ def _guard_inter_section_route_no_backtrack(
                 )
 
 
+def _canvas_width(graph: MetroGraph) -> float:
+    """Horizontal extent of all positioned sections (rightmost - leftmost)."""
+    rights = [s.bbox_x + s.bbox_w for s in graph.sections.values() if s.bbox_w > 0]
+    lefts = [s.bbox_x for s in graph.sections.values() if s.bbox_w > 0]
+    if not rights or not lefts:
+        return 0.0
+    return max(rights) - min(lefts)
+
+
+def inter_section_route_backtrack_legs(graph: MetroGraph, routes: list):
+    """Yield ``(rp, x1, x2)`` for each horizontal leg that reverses against
+    its route's exit-direction flow.
+
+    "Flow" mirrors :func:`_guard_inter_section_route_no_backtrack`: a
+    forward route between two distinct LR columns whose exit port faces the
+    target column flows toward that column (rightward when the target column
+    is higher).  A leg that moves the opposite way is a backtrack.  Routes
+    that exit away from their target legitimately wrap and are skipped, as
+    are TB folds and same-column routes.  Unlike the strict guard, exempt
+    (``normalize_exempt``) wrap routes are *included* so a multi-corner
+    around-section dog-leg is still measured.
+    """
+    from nf_metro.layout.routing.common import resolve_section
+
+    def _exit_side(rp):
+        port = graph.ports.get(rp.edge.source)
+        if port is not None:
+            return port.side
+        for e in graph.edges_to(rp.edge.source):
+            port = graph.ports.get(e.source)
+            if port is not None:
+                return port.side
+        return None
+
+    for rp in routes:
+        if not rp.is_inter_section:
+            continue
+        src_sec = resolve_section(graph, graph.stations[rp.edge.source])
+        tgt_sec = resolve_section(graph, graph.stations[rp.edge.target])
+        if src_sec is None or tgt_sec is None:
+            continue
+        if src_sec.direction != "LR" or tgt_sec.direction != "LR":
+            continue
+        if src_sec.grid_col == tgt_sec.grid_col:
+            continue
+        rightward = tgt_sec.grid_col > src_sec.grid_col
+        side = _exit_side(rp)
+        if rightward and side != PortSide.RIGHT:
+            continue
+        if not rightward and side != PortSide.LEFT:
+            continue
+        xs = [p[0] for p in rp.points]
+        for x1, x2 in zip(xs, xs[1:]):
+            backtracks = (x2 < x1) if rightward else (x2 > x1)
+            if backtracks:
+                yield rp, x1, x2
+
+
+def _guard_inter_section_route_no_full_width_backtrack(
+    graph: MetroGraph,
+    phase: str,
+    *,
+    routes: list | None = None,
+    fraction: float = 0.4,
+) -> None:
+    """After routing: a forward inter-section route may reverse in X (when a
+    narrow target column nests inside an oversized sibling) but no single
+    backtrack leg may exceed *fraction* of the canvas width.
+
+    The strict :func:`_guard_inter_section_route_no_backtrack` forbids *any*
+    reversal on a forward LR route, assuming grid-column order matches X
+    order.  When a column is geometrically nested inside an oversized
+    sibling (e.g. sarek's narrow ``reporting`` column under the wide
+    ``preprocessing`` row-span), reaching it requires a legitimate X
+    reversal, so such routes are made ``normalize_exempt`` and the strict
+    guard skips them.  This guard still bounds those reversals: a
+    right-then-left dog-leg sweeping the whole diagram (#425) is forbidden
+    even when exempt.
+    """
+    if routes is None:
+        from nf_metro.layout.routing import route_edges
+
+        routes = route_edges(graph)
+
+    canvas_width = _canvas_width(graph)
+    if canvas_width <= 0:
+        return
+    limit = fraction * canvas_width
+
+    for rp, x1, x2 in inter_section_route_backtrack_legs(graph, routes):
+        span = abs(x2 - x1)
+        if span > limit + GUARD_TOLERANCE:
+            raise PhaseInvariantError(
+                f"{phase}: route {rp.edge.source!r}->{rp.edge.target!r} "
+                f"line {rp.line_id!r} backtracks {span:.1f}px in one leg "
+                f"(x={x1:.1f}->{x2:.1f}), exceeding {fraction:.0%} of canvas "
+                f"width {canvas_width:.1f} - a full-width dog-leg"
+            )
+
+
 def _guard_serpentine_no_backtrack(
     graph: MetroGraph,
     phase: str,
@@ -2074,6 +2174,9 @@ def _compute_section_layout(
             _guard_bundle_order_preserved(graph, phase, offsets=offsets, routes=routes)
             _guard_fanout_tail_join(graph, phase, offsets=offsets, routes=routes)
             _guard_inter_section_route_no_backtrack(graph, phase, routes=routes)
+            _guard_inter_section_route_no_full_width_backtrack(
+                graph, phase, routes=routes
+            )
             _guard_serpentine_no_backtrack(graph, phase, routes=routes)
             _guard_inter_row_run_clearance(graph, phase, routes=routes)
             _guard_inter_section_descent_edge_clearance(graph, phase, routes=routes)
