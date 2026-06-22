@@ -66,7 +66,6 @@ test("advanced options are collapsed by default and toggle open", async () => {
 });
 
 test("directional toggle adds chevron markers", async () => {
-  await openAdvanced();
   await expect(page.locator('#preview [class*="metro-direction"]')).toHaveCount(0);
   await page.locator("#opt-directional").check();
   expect(
@@ -103,7 +102,6 @@ test("theme dropdown syncs from the source style directive", async () => {
 });
 
 test("debug toggle adds the debug overlay", async () => {
-  await openAdvanced();
   // A sectioned map has ports/waypoints for the overlay to draw.
   await page.evaluate(() =>
     window.__nfMetro.setValue(

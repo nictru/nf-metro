@@ -46,6 +46,9 @@
           </select>
         </label>
         <label class="check"><input type="checkbox" id="opt-animate" /> Animate</label>
+        <label class="check"><input type="checkbox" id="opt-directional" /> Chevrons</label>
+        <label class="check"><input type="checkbox" id="opt-debug" /> Debug</label>
+        <label class="check"><input type="checkbox" id="opt-center-ports" /> Centre ports</label>
         <span class="sep"></span>
         <span class="group-label">Export</span>
         <button id="btn-svg">SVG</button>
@@ -56,9 +59,6 @@
       <details id="advanced" class="advanced">
         <summary>Advanced options</summary>
         <div class="pane-toolbar advanced-controls">
-          <label class="check"><input type="checkbox" id="opt-directional" /> Chevrons</label>
-          <label class="check"><input type="checkbox" id="opt-debug" /> Debug</label>
-          <span class="sep"></span>
           <span class="group-label">Layout</span>
           <label>Line spread
             <select id="opt-line-spread">
@@ -82,7 +82,6 @@
               <option value="span">span</option>
             </select>
           </label>
-          <label class="check"><input type="checkbox" id="opt-center-ports" /> Centre ports</label>
           <label class="check"><input type="checkbox" id="opt-compact-offsets" /> Compact offsets</label>
           <label>Font scale
             <input type="number" id="opt-font-scale" min="0.1" step="0.1" placeholder="1.0" />
