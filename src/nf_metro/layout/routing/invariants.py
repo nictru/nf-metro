@@ -58,6 +58,7 @@ from nf_metro.layout.routing.common import (
     peeloff_target_slots,
     resolve_section,
     tail_on_slot,
+    tb_right_entry_sections,
     trunk_segments_cross,
     vertical_direction,
 )
@@ -920,11 +921,25 @@ def check_exit_inherits_entry_bundle_order(
     order; the exit port must keep the shared lines in the same relative
     vertical order, so a line travelling straight through keeps its slot.
     TB sections are exempt: their exit reverses offsets for concentric arcs.
+
+    Order is compared on each port's *drawn* lateral: a TOP/BOTTOM (perpendicular)
+    port fans its bundle to screen-left under the 90-degree crossing rotation, so
+    its drawn order is the reverse of offset value; a LEFT/RIGHT port draws in
+    value order.
     """
 
+    def _drawn_sign(port_id: str) -> float:
+        port = graph.ports.get(port_id)
+        if port is not None and port.side in (PortSide.TOP, PortSide.BOTTOM):
+            return -1.0
+        return 1.0
+
     def _order(port_id: str, lines: set[str]) -> tuple[str, ...]:
+        sign = _drawn_sign(port_id)
         return tuple(
-            sorted(lines, key=lambda lid: (offsets.get((port_id, lid), 0.0), lid))
+            sorted(
+                lines, key=lambda lid: (sign * offsets.get((port_id, lid), 0.0), lid)
+            )
         )
 
     violations: list[ExitBundleOrderViolation] = []
@@ -2327,6 +2342,7 @@ def check_perp_entry_boundary_consistent(
     line are exempt: those feeders genuinely converge, so a single crossing X is
     not defined.
     """
+    right_entry = tb_right_entry_sections(graph)
     approaches: dict[tuple[str, str], list[RoutedPath]] = defaultdict(list)
     departures: dict[tuple[str, str], RoutedPath] = {}
     for r in routes:
@@ -2346,6 +2362,12 @@ def check_perp_entry_boundary_consistent(
             feeders = approaches.get((pid, line_id), [])
             departure = departures.get((pid, line_id))
             if len(feeders) != 1 or departure is None:
+                continue
+            # A right-entry TB feeder keeps its pre-rotation column order, so its
+            # drop's lateral does not match the rotated departure across this
+            # boundary.
+            feeder_src = graph.stations.get(feeders[0].edge.source)
+            if feeder_src is not None and feeder_src.section_id in right_entry:
                 continue
             ax = _boundary_crossing_x(feeders[0].points, pst.y, approach=True)
             dx = _boundary_crossing_x(departure.points, pst.y, approach=False)

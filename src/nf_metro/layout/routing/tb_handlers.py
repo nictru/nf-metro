@@ -12,6 +12,8 @@ from nf_metro.layout.constants import (
 )
 from nf_metro.layout.geometry import (
     diagonal_centreline,
+    lane_delta,
+    lane_delta_to_normal_offset,
     single_corner_centreline,
 )
 from nf_metro.layout.routing.bundle import (
@@ -26,12 +28,9 @@ from nf_metro.layout.routing.common import (
 )
 from nf_metro.layout.routing.context import (
     _get_offset,
-    _max_offset_at,
+    _lane_frame,
     _RoutingCtx,
     _tb_x_offset,
-)
-from nf_metro.layout.routing.corners import (
-    reversed_offset,
 )
 from nf_metro.layout.routing.perp import (
     _perp_entry_crossing_x,
@@ -300,7 +299,12 @@ def _route_tb_lr_entry(
 
     The mirror of :func:`_route_tb_lr_exit`: a horizontal leg out of the port
     fanned by the port's Y offset, then a vertical drop into the station fanned
-    by the station's X offset (reversed for a LEFT entry).
+    by the station's rotated lane delta (``station.x - offset``), so the drop
+    lands on the same side as the station's intra-section column.
+
+    A RIGHT-entry section is reached by a U-turn over its top whose reversal
+    machinery expects the raw column order, so a RIGHT entry keeps that order on
+    the drop rather than the rotated lane delta.
     """
     graph = ctx.graph
     src_port = graph.ports.get(edge.source)
@@ -317,17 +321,16 @@ def _route_tb_lr_entry(
     entry_right = src_port.side == PortSide.RIGHT
     hd = _sign(tgt.x - src.x)
     vd = _sign(tgt.y - src.y)
-    max_tgt_off = _max_offset_at(ctx, edge.target)
-
-    def vert_x_off(line_id: str) -> float:
-        off = _get_offset(ctx, edge.target, line_id)
-        return off if entry_right else reversed_offset(off, max_tgt_off)
 
     def source_offset(line_id: str) -> float:
         return hd * _get_offset(ctx, edge.source, line_id)
 
     def target_offset(line_id: str) -> float:
-        return -vd * vert_x_off(line_id)
+        off = _get_offset(ctx, edge.target, line_id)
+        if entry_right:
+            return -vd * off
+        frame = _lane_frame(ctx, edge.target, src.section_id)
+        return lane_delta_to_normal_offset(lane_delta(frame, off), (0.0, vd))
 
     return _route_single_corner(
         edge,
@@ -352,6 +355,11 @@ def _perp_drop_x(edge: Edge, src_x: float, dx: float, ctx: _RoutingCtx) -> float
     approach crosses the boundary, so it drops straight through.  Shared by the
     calling edge (to pick the route shape) and its bundle-mates (to anchor the
     corner), so every line in the bundle reads the same channel.
+
+    The drop is a downward vertical crossing, which fans its lanes to screen-left
+    (``port.x - offset``) under the 90-degree rotation -- the same rule as the TB
+    column it continues, so a line carried down from a TB BOTTOM exit stays on one
+    X across the boundary whatever the target section's own flow axis.
     """
     src_off = _get_offset(ctx, edge.source, edge.line_id)
     drop_delta = _perp_entry_drop_delta(edge, dx, ctx)
@@ -365,7 +373,7 @@ def _perp_drop_x(edge: Edge, src_x: float, dx: float, ctx: _RoutingCtx) -> float
         crossing_x = _perp_entry_crossing_x(ctx, edge.source, edge.line_id, src_x)
         if crossing_x is not None:
             return crossing_x
-    return src_x + src_off + drop_delta
+    return src_x - src_off + drop_delta
 
 
 def _route_perp_entry(
@@ -442,7 +450,9 @@ def _route_perp_entry_l_shape(
         return -td * (_perp_drop_x(edge_by_line[line_id], sx, dx, ctx) - sx)
 
     def target_offset(line_id: str) -> float:
-        return hd * _get_offset(ctx, edge.target, line_id)
+        frame = _lane_frame(ctx, edge.target, tgt.section_id)
+        delta = lane_delta(frame, _get_offset(ctx, edge.target, line_id))
+        return lane_delta_to_normal_offset(delta, (hd, 0.0))
 
     return _route_single_corner(
         edge,
@@ -518,13 +528,13 @@ def _route_perp_entry_from_corridor(
     hd = _sign(tx - sx)
 
     def source_offset(line_id: str) -> float:
-        lateral = _perp_riser_lateral(
-            ctx, edge.source, line_id, feeder_side, tgt.section_id
-        )
+        lateral = _perp_riser_lateral(ctx, edge.source, line_id, feeder_side)
         return td * lateral
 
     def target_offset(line_id: str) -> float:
-        return hd * _get_offset(ctx, edge.target, line_id)
+        frame = _lane_frame(ctx, edge.target, tgt.section_id)
+        delta = lane_delta(frame, _get_offset(ctx, edge.target, line_id))
+        return lane_delta_to_normal_offset(delta, (hd, 0.0))
 
     return _route_single_corner(
         edge,

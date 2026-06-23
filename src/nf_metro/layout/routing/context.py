@@ -13,14 +13,15 @@ from nf_metro.layout.constants import (
     JUNCTION_MARGIN,
     OFFSET_STEP,
 )
+from nf_metro.layout.geometry import (
+    AxisFrame,
+    lane_delta,
+)
 from nf_metro.layout.routing.common import (
     bypass_bottom_y,
     compute_bundle_info,
     merge_trunk_force_cross_row,
     resolve_section,
-)
-from nf_metro.layout.routing.corners import (
-    reversed_offset,
 )
 from nf_metro.parser.model import (
     Edge,
@@ -393,17 +394,44 @@ def _max_offset_at(ctx: _RoutingCtx, station_id: str) -> float:
     return max(all_offs) if all_offs else 0.0
 
 
+def _lane_frame(ctx: _RoutingCtx, station_id: str, section_id: str | None) -> AxisFrame:
+    """The flow-orientation :class:`AxisFrame` for a station's section.
+
+    The lane accessors (:func:`lane_delta`, :func:`station_lane_coord`) read only
+    the secondary axis and its sign, both fixed by flow direction, so the frame
+    is built spacing-free.  Resolves the section by id, falling back to the
+    station's own section when the caller has no id to hand.
+    """
+    sec = ctx.graph.sections.get(section_id) if section_id else None
+    if sec is None:
+        st = ctx.graph.stations.get(station_id)
+        sec = resolve_section(ctx.graph, st) if st is not None else None
+    direction = sec.direction if sec is not None else "LR"
+    return AxisFrame.for_direction(direction, 0.0, 0.0)
+
+
 def _tb_x_offset(
     ctx: _RoutingCtx, station_id: str, line_id: str, section_id: str | None
 ) -> float:
-    """Compute the TB-aware X offset for a station.
+    """Per-line X delta drawing a line through a vertical-flow station.
 
-    RIGHT-entry sections use non-reversed offsets; others use reversed.
+    A TB section is the LR model rotated 90 degrees clockwise: LR fans its lane
+    bundle screen-down (``secondary + offset``), and that rotation carries
+    screen-down to screen-left, so the line draws at ``station.x - offset``.  The
+    lane sign lives at this draw accessor; the stored offset stays positive.
+
+    Negating the stored offset (rather than reflecting it against a per-station
+    bundle max) keeps the delta constant along a collinear run, so a feeder or
+    continuation sharing a merge's column drops straight by construction.
+
+    A RIGHT-entry section is reached by a U-turn over its top whose reversal
+    machinery expects the raw column order, so its lines keep that order here
+    rather than the rotated lane delta.
     """
-    off = _get_offset(ctx, station_id, line_id)
     if section_id in ctx.tb_right_entry:
-        return off
-    return reversed_offset(off, _max_offset_at(ctx, station_id))
+        return _get_offset(ctx, station_id, line_id)
+    frame = _lane_frame(ctx, station_id, section_id)
+    return lane_delta(frame, _get_offset(ctx, station_id, line_id))
 
 
 def _resolve_section_col(graph: MetroGraph, station: Station) -> int | None:

@@ -13,11 +13,13 @@ read and verified together.
 
 TOP vs BOTTOM sign convention
 -----------------------------
-The per-line lateral order flips between rising and dropping.  A TOP riser
-keeps the raw per-line offset (``_get_offset``); a BOTTOM riser reverses it
-(``_tb_x_offset``).  ``_perp_riser_lateral`` is the single source of that rule,
-so both the up-and-over exit corridor and the matching entry drop pick up the
-identical lateral for a given line and side.
+The up-and-over corridor is a U-turn whose rise and drop legs have opposite
+right-normals, so the per-line lateral order reflects between them.  A TOP riser
+keeps the raw per-line offset (``_get_offset``); a BOTTOM riser reflects it
+against the station's bundle max (``reversed_offset``).  This is corridor
+geometry, independent of either section's flow rotation.  ``_perp_riser_lateral``
+is the single source of that rule, so both the up-and-over exit corridor and the
+matching entry drop pick up the identical lateral for a given line and side.
 
 ``_perp_entry_crossing_x`` expresses the matching X for the *aligned* case: the
 single X at which a bundled inter-section feeder and its intra-section drop both
@@ -29,9 +31,10 @@ from __future__ import annotations
 
 from nf_metro.layout.routing.context import (
     _get_offset,
+    _max_offset_at,
     _RoutingCtx,
-    _tb_x_offset,
 )
+from nf_metro.layout.routing.corners import reversed_offset
 from nf_metro.parser.model import (
     PortSide,
 )
@@ -68,15 +71,19 @@ def _perp_riser_lateral(
     station_id: str,
     line_id: str,
     side: PortSide,
-    section_id: str | None,
 ) -> float:
     """Per-line lateral X continuing a perpendicular riser's convention.
 
-    A TOP riser keeps the raw per-line offset; a BOTTOM riser reverses it
-    (the lateral order flips between rising and dropping).  Both the
-    up-and-over exit corridor and the matching entry drop seat their bundle
-    with this lateral so the two legs stay parallel across the shared port.
+    The up-and-over corridor is a U-turn: its rise and drop legs have opposite
+    right-normals, so the per-line lateral order reflects between them.  A TOP
+    riser keeps the raw offset; a BOTTOM riser reflects it against the station's
+    bundle max.  This is the corridor's own geometry, independent of either
+    section's flow rotation, so the exit corridor and the matching entry drop
+    pick up the identical lateral for a given line and side and stay parallel
+    across the shared port.
     """
     if side == PortSide.TOP:
         return _get_offset(ctx, station_id, line_id)
-    return _tb_x_offset(ctx, station_id, line_id, section_id)
+    return reversed_offset(
+        _get_offset(ctx, station_id, line_id), _max_offset_at(ctx, station_id)
+    )

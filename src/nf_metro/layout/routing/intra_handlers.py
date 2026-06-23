@@ -244,7 +244,7 @@ def _route_perp_exit_bundle(
         # The vertical leave seats each line on the exit trunk's per-line X; the
         # right-hand normal reverses a BOTTOM (descending) leg, so the lateral is
         # negated there to cancel it back.
-        d = _perp_riser_lateral(ctx, edge.target, line_id, side, src.section_id)
+        d = _perp_riser_lateral(ctx, edge.target, line_id, side)
         return d if is_top else -d
 
     routes = build_tapered_bundle(

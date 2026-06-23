@@ -1941,9 +1941,7 @@ def _route_perp_exit_over(
         reverses it on a BOTTOM one; the right-hand normal on the centreline's
         vertical legs reverses the BOTTOM sign back, so it is negated here.
         """
-        d = _perp_riser_lateral(
-            ctx, edge.source, line_id, src_port.side, src.section_id
-        )
+        d = _perp_riser_lateral(ctx, edge.source, line_id, src_port.side)
         return d if is_top else -d
 
     src_offs = {lid: source_lateral(lid) for lid in line_ids}

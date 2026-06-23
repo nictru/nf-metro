@@ -1417,17 +1417,13 @@ def _propagate_to_junctions(ctx: _OffsetCtx) -> None:
 
 
 def _entry_top_from_tb_bottom_exits(ctx: _OffsetCtx) -> None:
-    """Match TOP entry ports to the reversed offsets of feeding TB BOTTOM exits."""
-    graph = ctx.graph
-    tb_right_entry: set[str] = set()
-    for port_obj in graph.ports.values():
-        if (
-            port_obj.is_entry
-            and port_obj.side == PortSide.RIGHT
-            and port_obj.section_id in ctx.tb_sections
-        ):
-            tb_right_entry.add(port_obj.section_id)
+    """Match TOP entry ports to the offsets of feeding TB BOTTOM exits.
 
+    A BOTTOM exit drops its bundle vertically into the TOP entry below it.  Both
+    draw at ``port.x - offset`` under the rotation, so the straight per-line drop
+    holds when the entry inherits each line's exit offset directly.
+    """
+    graph = ctx.graph
     for port_id, port_obj in graph.ports.items():
         if not port_obj.is_entry or port_obj.side != PortSide.TOP:
             continue
@@ -1444,20 +1440,10 @@ def _entry_top_from_tb_bottom_exits(ctx: _OffsetCtx) -> None:
             ):
                 continue
             exit_port_id = edge.source
-            all_exit_offs = [
-                ctx.offsets.get((exit_port_id, lid), 0.0)
-                for lid in graph.station_lines(exit_port_id)
-            ]
-            max_exit_off = max(all_exit_offs) if all_exit_offs else 0.0
-            if src.section_id in tb_right_entry:
-                for lid in graph.station_lines(port_id):
-                    ctx.offsets[(port_id, lid)] = ctx.offsets.get(
-                        (exit_port_id, lid), 0.0
-                    )
-            else:
-                for lid in graph.station_lines(port_id):
-                    exit_off = ctx.offsets.get((exit_port_id, lid), 0.0)
-                    ctx.offsets[(port_id, lid)] = max_exit_off - exit_off
+            for lid in graph.station_lines(port_id):
+                exit_off = ctx.offsets.get((exit_port_id, lid))
+                if exit_off is not None:
+                    ctx.offsets[(port_id, lid)] = exit_off
             break
 
 
@@ -2272,7 +2258,6 @@ def compute_station_offsets(
     _assert_sections_anchored_on_trunk(ctx)
     _reorder_exit_only_lines(ctx)
     _reorder_fanout_divergence(ctx)
-    _slot_trunk_continuation_lines(ctx)
     _apply_compact_section_consistency(ctx)
     _compact_station_gaps(ctx)
     _compute_exit_port_offsets(ctx)
@@ -2286,8 +2271,6 @@ def compute_station_offsets(
     _reverse_tb_right_entry_offsets(ctx)
     _reverse_around_below_left_entry_offsets(ctx)
     _reverse_near_vertical_junction_right_entry_offsets(ctx)
-    _slot_convergence_continuation_lines(ctx)
-    _slot_passthrough_continuation_lines(ctx)
     return ctx.offsets
 
 

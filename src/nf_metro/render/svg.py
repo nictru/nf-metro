@@ -21,7 +21,7 @@ from nf_metro.layout.constants import (
     OFFTRACK_TERMINUS_NUB_CLEARANCE,
     SAME_COORD_TOLERANCE,
 )
-from nf_metro.layout.geometry import segment_intersects_bbox
+from nf_metro.layout.geometry import AxisFrame, lane_delta, segment_intersects_bbox
 from nf_metro.layout.labels import (
     LabelPlacement,
     _label_bbox,
@@ -39,7 +39,6 @@ from nf_metro.layout.routing.common import tb_right_entry_sections
 from nf_metro.layout.routing.corners import (
     curve_tangents,
     resolve_curve_radii,
-    reversed_offset,
 )
 from nf_metro.layout.routing.invariants import assert_render_curve_invariants
 from nf_metro.manifest import node_data_attrs
@@ -1314,13 +1313,16 @@ def _drawn_bundle_span(
 ) -> tuple[float, float]:
     """Min/max of a station's per-line offsets *as drawn*.
 
-    A TB section draws each line at its offset reversed against the station's
-    bundle max (matching :func:`_tb_x_offset`), except a RIGHT-entry TB section
-    whose stored offsets are already in draw order; every other axis draws the
-    stored offset directly.  Spanning the marker over the drawn offsets keeps it
-    centred on the lines that actually pass through the station -- the exact
-    transpose of the LR case, which never reverses -- so a one-line or
-    off-trunk-subset station does not leave its glyph beside its own track.
+    An LR/RL section draws a line at ``secondary + offset``; a TB section is the
+    LR model rotated 90 degrees and draws at ``secondary - offset`` (matching
+    :func:`~nf_metro.layout.routing.context._tb_x_offset`), the lane sign of the
+    section's :class:`~nf_metro.layout.geometry.AxisFrame`.  Spanning the marker
+    over the drawn offsets keeps its glyph centred on the lines that pass through
+    the station, so a one-line or off-trunk-subset station does not leave its
+    marker beside its own track.
+
+    A RIGHT-entry TB section draws its raw column order (its U-turn-over-top feed
+    expects that order), so its marker spans the raw offsets directly.
     """
     raw = [
         station_offsets.get((station.id, lid), 0.0)
@@ -1329,11 +1331,13 @@ def _drawn_bundle_span(
     if not raw:
         return 0.0, 0.0
     sec = graph.sections.get(station.section_id) if station.section_id else None
-    if sec is not None and sec.direction == "TB" and sec.id not in tb_right_entry:
-        bundle_max = max(raw)
-        drawn = [reversed_offset(off, bundle_max) for off in raw]
-    else:
+    if sec is not None and sec.id in tb_right_entry:
         drawn = raw
+    else:
+        frame = AxisFrame.for_direction(
+            sec.direction if sec is not None else "LR", 0.0, 0.0
+        )
+        drawn = [lane_delta(frame, off) for off in raw]
     return min(drawn), max(drawn)
 
 
