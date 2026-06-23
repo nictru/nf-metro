@@ -44,6 +44,24 @@ from nf_metro.parser.model import (
 )
 
 
+def _lane_turn_in_offset(
+    ctx: _RoutingCtx,
+    target_id: str,
+    section_id: str | None,
+    line_id: str,
+    travel: tuple[float, float],
+) -> float:
+    """Builder offset seating *line_id* on its target station's rotated lane.
+
+    A line turning onto the station along *travel* lands on the station's lane
+    delta (``station.x - offset`` under the 90-degree rotation), restated in the
+    bundle builder's right-normal convention for that leg.
+    """
+    frame = _lane_frame(ctx, target_id, section_id)
+    delta = lane_delta(frame, _get_offset(ctx, target_id, line_id))
+    return lane_delta_to_normal_offset(delta, travel)
+
+
 def _route_tb_internal(
     edge: Edge, src: Station, tgt: Station, ctx: _RoutingCtx
 ) -> RoutedPath | None:
@@ -326,11 +344,11 @@ def _route_tb_lr_entry(
         return hd * _get_offset(ctx, edge.source, line_id)
 
     def target_offset(line_id: str) -> float:
-        off = _get_offset(ctx, edge.target, line_id)
         if entry_right:
-            return -vd * off
-        frame = _lane_frame(ctx, edge.target, src.section_id)
-        return lane_delta_to_normal_offset(lane_delta(frame, off), (0.0, vd))
+            return -vd * _get_offset(ctx, edge.target, line_id)
+        return _lane_turn_in_offset(
+            ctx, edge.target, src.section_id, line_id, (0.0, vd)
+        )
 
     return _route_single_corner(
         edge,
@@ -450,9 +468,9 @@ def _route_perp_entry_l_shape(
         return -td * (_perp_drop_x(edge_by_line[line_id], sx, dx, ctx) - sx)
 
     def target_offset(line_id: str) -> float:
-        frame = _lane_frame(ctx, edge.target, tgt.section_id)
-        delta = lane_delta(frame, _get_offset(ctx, edge.target, line_id))
-        return lane_delta_to_normal_offset(delta, (hd, 0.0))
+        return _lane_turn_in_offset(
+            ctx, edge.target, tgt.section_id, line_id, (hd, 0.0)
+        )
 
     return _route_single_corner(
         edge,
@@ -532,9 +550,9 @@ def _route_perp_entry_from_corridor(
         return td * lateral
 
     def target_offset(line_id: str) -> float:
-        frame = _lane_frame(ctx, edge.target, tgt.section_id)
-        delta = lane_delta(frame, _get_offset(ctx, edge.target, line_id))
-        return lane_delta_to_normal_offset(delta, (hd, 0.0))
+        return _lane_turn_in_offset(
+            ctx, edge.target, tgt.section_id, line_id, (hd, 0.0)
+        )
 
     return _route_single_corner(
         edge,

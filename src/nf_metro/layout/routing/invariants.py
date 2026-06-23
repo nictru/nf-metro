@@ -2363,9 +2363,9 @@ def check_perp_entry_boundary_consistent(
             departure = departures.get((pid, line_id))
             if len(feeders) != 1 or departure is None:
                 continue
-            # A right-entry TB feeder keeps its pre-rotation column order, so its
-            # drop's lateral does not match the rotated departure across this
-            # boundary.
+            # A right-entry TB section's column runs in the reflected order its
+            # U-turn-over-top feed needs, so a right-entry feeder's drop lateral
+            # is not expected to align with the rotated departure at this seam.
             feeder_src = graph.stations.get(feeders[0].edge.source)
             if feeder_src is not None and feeder_src.section_id in right_entry:
                 continue
