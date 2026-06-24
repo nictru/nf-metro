@@ -26,12 +26,8 @@ from nf_metro.layout.routing.common import (
 )
 from nf_metro.layout.routing.context import (
     _get_offset,
-    _max_offset_at,
     _RoutingCtx,
     _tb_x_offset,
-)
-from nf_metro.layout.routing.corners import (
-    reversed_offset,
 )
 from nf_metro.layout.routing.perp import (
     _perp_entry_crossing_x,
@@ -300,7 +296,8 @@ def _route_tb_lr_entry(
 
     The mirror of :func:`_route_tb_lr_exit`: a horizontal leg out of the port
     fanned by the port's Y offset, then a vertical drop into the station fanned
-    by the station's X offset (reversed for a LEFT entry).
+    by the station's in-section column X offset (via :func:`_tb_x_offset`, the
+    90-degree rotation image ``station.x - offset``).
     """
     graph = ctx.graph
     src_port = graph.ports.get(edge.source)
@@ -314,17 +311,13 @@ def _route_tb_lr_entry(
         return None
 
     _members, line_ids, _edge_by_line = gather_member_edges(graph, edge)
-    entry_right = src_port.side == PortSide.RIGHT
-    hd = _sign(tgt.x - src.x)
     vd = _sign(tgt.y - src.y)
-    max_tgt_off = _max_offset_at(ctx, edge.target)
 
     def vert_x_off(line_id: str) -> float:
-        off = _get_offset(ctx, edge.target, line_id)
-        return off if entry_right else reversed_offset(off, max_tgt_off)
+        return _tb_x_offset(ctx, edge.target, line_id, src.section_id)
 
     def source_offset(line_id: str) -> float:
-        return hd * _get_offset(ctx, edge.source, line_id)
+        return _get_offset(ctx, edge.source, line_id)
 
     def target_offset(line_id: str) -> float:
         return -vd * vert_x_off(line_id)
@@ -365,7 +358,7 @@ def _perp_drop_x(edge: Edge, src_x: float, dx: float, ctx: _RoutingCtx) -> float
         crossing_x = _perp_entry_crossing_x(ctx, edge.source, edge.line_id, src_x)
         if crossing_x is not None:
             return crossing_x
-    return src_x + src_off + drop_delta
+    return src_x - src_off + drop_delta
 
 
 def _route_perp_entry(
@@ -442,7 +435,7 @@ def _route_perp_entry_l_shape(
         return -td * (_perp_drop_x(edge_by_line[line_id], sx, dx, ctx) - sx)
 
     def target_offset(line_id: str) -> float:
-        return hd * _get_offset(ctx, edge.target, line_id)
+        return -hd * _get_offset(ctx, edge.target, line_id)
 
     return _route_single_corner(
         edge,

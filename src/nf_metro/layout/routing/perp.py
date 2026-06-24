@@ -29,9 +29,10 @@ from __future__ import annotations
 
 from nf_metro.layout.routing.context import (
     _get_offset,
+    _max_offset_at,
     _RoutingCtx,
-    _tb_x_offset,
 )
+from nf_metro.layout.routing.corners import reversed_offset
 from nf_metro.parser.model import (
     PortSide,
 )
@@ -73,10 +74,16 @@ def _perp_riser_lateral(
     """Per-line lateral X continuing a perpendicular riser's convention.
 
     A TOP riser keeps the raw per-line offset; a BOTTOM riser reverses it
-    (the lateral order flips between rising and dropping).  Both the
-    up-and-over exit corridor and the matching entry drop seat their bundle
-    with this lateral so the two legs stay parallel across the shared port.
+    against the station's bundle max (a right-entry section keeps it raw, like
+    its un-reversed internal column).  The lateral order flips between rising and
+    dropping because the up-and-over exit corridor and the matching entry drop
+    turn opposite ways across the boundary; this reversal is the corner's own
+    handedness, independent of the intra-section draw's lane sign, so it stays a
+    reflection rather than the negated lane delta.  Seating both legs with this
+    shared lateral keeps them parallel across the port.
     """
-    if side == PortSide.TOP:
+    if side == PortSide.TOP or section_id in ctx.tb_right_entry:
         return _get_offset(ctx, station_id, line_id)
-    return _tb_x_offset(ctx, station_id, line_id, section_id)
+    return reversed_offset(
+        _get_offset(ctx, station_id, line_id), _max_offset_at(ctx, station_id)
+    )

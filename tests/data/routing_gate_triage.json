@@ -883,10 +883,6 @@
     "note": "_propagate_reversal_along_rows iterates sec_id values drawn from reversed_secs, which only ever holds real section ids added from graph.sections. graph.sections.get(sec_id) is never None; the continue is a defensive null guard.",
     "status": "defensive"
   },
-  "reversal.py::if not src or not src.is_port:::#1": {
-    "note": "Phase 1a (_detect_tb_bottom_top_entries) iterates edges feeding a TOP entry port. Entry ports are synthetic nodes created by section resolution; the only edges targeting them are the resolved chain's exit_port->entry_port and junction->entry_port links, so edge.source is always a registered port or junction station (both is_port=True). The continue (missing or non-port source) is a structural-contract guard no valid topology reaches.",
-    "status": "defensive"
-  },
   "reversal.py::if not src or not tgt:::#1": {
     "note": "_build_section_adjacency iterates graph.edges; every edge endpoint is a registered station, so graph.stations.get never returns None for edge.source or edge.target. The continue is a defensive null guard no valid graph reaches.",
     "status": "defensive"

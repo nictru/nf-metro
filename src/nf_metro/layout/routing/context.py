@@ -19,9 +19,6 @@ from nf_metro.layout.routing.common import (
     merge_trunk_force_cross_row,
     resolve_section,
 )
-from nf_metro.layout.routing.corners import (
-    reversed_offset,
-)
 from nf_metro.parser.model import (
     Edge,
     MetroGraph,
@@ -396,14 +393,22 @@ def _max_offset_at(ctx: _RoutingCtx, station_id: str) -> float:
 def _tb_x_offset(
     ctx: _RoutingCtx, station_id: str, line_id: str, section_id: str | None
 ) -> float:
-    """Compute the TB-aware X offset for a station.
+    """Per-line X delta drawing a line through a TB station, relative to ``x``.
 
-    RIGHT-entry sections use non-reversed offsets; others use reversed.
+    A TB section is the LR model rotated 90 degrees clockwise: LR fans its
+    bundle to ``+y`` (screen-down) at ``station.y + offset``, and screen-down
+    rotates to screen-left, so a TB line draws at ``station.x - offset`` -- the
+    lane sign of :func:`~nf_metro.layout.geometry.lane_delta` for a vertical
+    flow.  The trunk line (offset 0) stays on the grid-column centre and the
+    bundle fans left, the chirality-preserving image of the LR fan rather than
+    its transpose.
+
+    Negating the stored priority offset (rather than reversing it against a
+    per-station bundle max) keeps the delta constant along a collinear run, so a
+    feeder or continuation sharing a merge's column drops straight; the section
+    arranger settles which line owns which lane slot.
     """
-    off = _get_offset(ctx, station_id, line_id)
-    if section_id in ctx.tb_right_entry:
-        return off
-    return reversed_offset(off, _max_offset_at(ctx, station_id))
+    return -_get_offset(ctx, station_id, line_id)
 
 
 def _resolve_section_col(graph: MetroGraph, station: Station) -> int | None:

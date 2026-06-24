@@ -36,20 +36,21 @@ def detect_reversed_sections(graph: MetroGraph) -> set[str]:
     A section is "reversed" when it receives lines via a TB section's
     exit port that reverses the bundle ordering. This happens in two cases:
 
-    1. TOP entry fed by a TB section's BOTTOM exit: the TB section reverses
-       X offsets in the vertical bundle, so the downstream section must use
-       reversed Y ordering to match.
-
-    2. LEFT/RIGHT entry fed by a TB section's LEFT/RIGHT exit: the
+    1. LEFT/RIGHT entry fed by a TB section's LEFT/RIGHT exit: the
        concentric corner routing reverses the bundle ordering (outermost
        vertical line becomes outermost horizontal line), so the downstream
        section must use reversed Y ordering to match.
 
-    3. RIGHT entry fed through a fold junction by a BOTTOM exit: the
+    2. RIGHT entry fed through a fold junction by a BOTTOM exit: the
        exit drops the bundle vertically (X offsets) and the fold
        junction turns it left into the RIGHT entry.  That down->left
        concentric corner reverses the bundle ordering, so the
        downstream section must use reversed Y ordering to match.
+
+    A straight TOP entry fed by a BOTTOM exit is *not* reversed: under the
+    rotation draw both ends draw at ``station.x - offset`` and the entry
+    inherits the exit's offsets directly, so the per-line drop is straight
+    (see ``_entry_top_from_tb_bottom_exits``).
 
     Reversal propagates: if a reversed section exits to another section
     on the same row, that downstream section is also reversed so bundle
@@ -60,13 +61,10 @@ def detect_reversed_sections(graph: MetroGraph) -> set[str]:
     reversed_secs: set[str] = set()
     junction_ids = graph.junction_ids
 
-    _detect_tb_bottom_top_entries(graph, tb_sections, reversed_secs)
     _detect_fold_right_entries(graph, junction_ids, reversed_secs)
 
     sec_successors, horizontal_succ_pairs = _build_section_adjacency(graph)
 
-    # Propagate Phase 1a reversals to horizontal successors
-    # (e.g. stat_analysis -> reporting via LEFT exit -> RIGHT entry).
     _propagate_reversal_along_rows(
         graph, reversed_secs, tb_sections, sec_successors, horizontal_succ_pairs
     )
@@ -82,29 +80,6 @@ def detect_reversed_sections(graph: MetroGraph) -> set[str]:
     )
 
     return reversed_secs
-
-
-def _detect_tb_bottom_top_entries(
-    graph: MetroGraph, tb_sections: set[str], reversed_secs: set[str]
-) -> None:
-    """Phase 1a: mark sections whose TOP entry is fed by a TB BOTTOM exit."""
-    for sec_id, section in graph.sections.items():
-        for port_id in section.entry_ports:
-            port = graph.ports.get(port_id)
-            if not port or port.side != PortSide.TOP:
-                continue
-            for edge in graph.edges_to(port_id):
-                src = graph.stations.get(edge.source)
-                if not src or not src.is_port:
-                    continue
-                src_port = graph.ports.get(edge.source)
-                if (
-                    src_port
-                    and not src_port.is_entry
-                    and src_port.side == PortSide.BOTTOM
-                    and src.section_id in tb_sections
-                ):
-                    reversed_secs.add(sec_id)
 
 
 def _detect_fold_right_entries(

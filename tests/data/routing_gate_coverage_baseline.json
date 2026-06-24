@@ -301,14 +301,16 @@
   "reversal.py::elif src.is_port:::#1",
   "reversal.py::if not s2 or not s2.is_port:::#1",
   "reversal.py::if not section:::#1",
-  "reversal.py::if not src or not src.is_port:::#1",
   "reversal.py::if not src or not tgt:::#1",
   "reversal.py::if not src:::#1",
   "reversal.py::if not succ:::#1",
+  "reversal.py::if sec_id in reversed_secs:::#1",
   "reversal.py::or (sec_id, succ_id) in horizontal_succ_pairs::#1",
+  "tb_handlers.py::abs(drop_delta) > COORD_TOLERANCE::#1",
   "tb_handlers.py::and tgt_sec is not None::#1",
   "tb_handlers.py::and tgt_sec.direction not in (\"TB\", \"BT\")::#1",
   "tb_handlers.py::if crossing_x is not None:::#1",
   "tb_handlers.py::if diag_end < diag_start:::#1",
-  "tb_handlers.py::if diag_end > diag_start:::#1"
+  "tb_handlers.py::if diag_end > diag_start:::#1",
+  "tb_handlers.py::if max(src_offs) - min(src_offs) >= (n - 1) * ctx.offset_step - COORD_TOLERANCE:::#1"
 ]
