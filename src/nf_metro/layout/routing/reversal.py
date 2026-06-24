@@ -85,7 +85,7 @@ def detect_reversed_sections(graph: MetroGraph) -> set[str]:
 def _detect_fold_right_entries(
     graph: MetroGraph, junction_ids: set[str], reversed_secs: set[str]
 ) -> None:
-    """Phase 1c: mark RIGHT entries fed through a fold junction by a BOTTOM exit."""
+    """Mark RIGHT entries fed through a fold junction by a BOTTOM exit."""
     for sec_id, section in graph.sections.items():
         if sec_id in reversed_secs:
             continue
@@ -248,7 +248,7 @@ def _detect_tb_lr_exit_fed(
     sec_successors: dict[str, set[str]],
     horizontal_succ_pairs: set[tuple[str, str]],
 ) -> None:
-    """Phase 1b + Phase 2: mark sections fed by TB LEFT/RIGHT exits, iteratively.
+    """Mark sections fed by TB LEFT/RIGHT exits, iteratively.
 
     The concentric corner reverses the bundle ordering ONLY when the feeding TB
     section is RIGHT-entry (its column runs in raw priority order) and is not
