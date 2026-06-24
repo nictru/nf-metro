@@ -7,7 +7,6 @@ from collections.abc import Sequence
 from dataclasses import dataclass, field
 
 from nf_metro.layout.constants import (
-    COORD_TOLERANCE,
     COORD_TOLERANCE_FINE,
     OFFSET_STEP,
     SAME_Y_TOLERANCE,
@@ -20,6 +19,7 @@ from nf_metro.layout.routing.context import (
     fanout_divergence_peel_order,
     is_far_side_around_below_left_entry,
     is_near_vertical_junction_right_entry,
+    is_over_top_right_entry,
 )
 from nf_metro.layout.routing.corners import reversed_offset
 from nf_metro.layout.routing.invariants import (
@@ -31,7 +31,6 @@ from nf_metro.layout.routing.reversal import detect_reversed_sections
 from nf_metro.parser.model import (
     LineSpread,
     MetroGraph,
-    Port,
     PortSide,
     Section,
     Station,
@@ -711,6 +710,75 @@ def _reorder_fanout_divergence(ctx: _OffsetCtx) -> None:
         if new_order is None:
             continue
 
+        _apply_section_line_order(ctx, sec_id, new_order)
+
+
+def _tb_intra_fan_order(ctx: _OffsetCtx, section: Section) -> tuple[str, ...] | None:
+    """Determining lane order for a TB section's dominant intra-section fan.
+
+    A TB section fans its lanes to -X, so a line's lane is ``station.x - offset``
+    and lanes run rightmost-first (offset 0 on the column, growing leftward).  A
+    crossing-free bundle therefore orders its lanes by where each line connects
+    to the rest of the graph along the section's widest fan: at a fan-in (a merge
+    gathering feeders from several columns) the rightmost-sourced line takes lane
+    0; at a fan-out (a hub splitting to several columns) the rightmost target
+    takes lane 0.  The line reaching/leaving on the column itself (the
+    continuation) keeps the column's own lane, so its run stays straight by the
+    constant-offset draw.
+
+    Returns the determining order (rightmost connection first), or ``None`` when
+    no station fans across two distinct columns.
+    """
+    graph = ctx.graph
+    best: dict[str, float] = {}
+    for sid in section.station_ids:
+        station = graph.stations.get(sid)
+        if station is None or station.is_port:
+            continue
+        for incoming in (True, False):
+            edges = graph.edges_to(sid) if incoming else graph.edges_from(sid)
+            neighbour_x: dict[str, float] = {}
+            for edge in edges:
+                nbr = graph.stations.get(edge.source if incoming else edge.target)
+                if nbr is None or nbr.is_port or nbr.section_id != section.id:
+                    continue
+                neighbour_x[edge.line_id] = nbr.x
+            distinct = {round(x, 3) for x in neighbour_x.values()}
+            if len(distinct) >= 2 and len(neighbour_x) > len(best):
+                best = neighbour_x
+    if not best:
+        return None
+    return tuple(
+        sorted(best, key=lambda lid: (-best[lid], ctx.line_priority.get(lid, 0)))
+    )
+
+
+def _reorder_tb_intra_fan(ctx: _OffsetCtx) -> None:
+    """Order a TB section's bundle by its widest intra-section fan's column order.
+
+    The intra-section analogue of :func:`_reorder_reconvergence` /
+    :func:`_reorder_fanout_divergence`, for a fan that lives wholly inside one
+    section (a merge or hub spanning several of its columns).  Driven by the
+    arranger so the lane order is the fan's column order and the continuation
+    line keeps the trunk lane; lines the fan does not constrain fall to the back
+    in priority order.  Non-compact TB sections only.
+    """
+    if ctx.compact:
+        return
+    graph = ctx.graph
+    for sec_id, section in graph.sections.items():
+        if sec_id not in ctx.tb_sections or graph.is_rail_section(sec_id):
+            continue
+        determining = _tb_intra_fan_order(ctx, section)
+        if determining is None:
+            continue
+        config = BoundaryConfig(
+            present=tuple(_section_present_line_set(ctx, sec_id)),
+            determining=determining,
+        )
+        new_order = lane_order(config, ctx.line_priority)
+        if new_order is None:
+            continue
         _apply_section_line_order(ctx, sec_id, new_order)
 
 
@@ -2019,6 +2087,7 @@ def compute_station_offsets(
     _assert_sections_anchored_on_trunk(ctx)
     _reorder_exit_only_lines(ctx)
     _reorder_fanout_divergence(ctx)
+    _reorder_tb_intra_fan(ctx)
     _apply_compact_section_consistency(ctx)
     _compact_station_gaps(ctx)
     _compute_exit_port_offsets(ctx)
@@ -2033,43 +2102,6 @@ def compute_station_offsets(
     _reverse_around_below_left_entry_offsets(ctx)
     _reverse_near_vertical_junction_right_entry_offsets(ctx)
     return ctx.offsets
-
-
-def _is_over_top_right_entry(
-    graph: MetroGraph, port: Port, tb_sections: set[str]
-) -> bool:
-    """Whether *port* is a RIGHT entry reached by an over-the-top loop.
-
-    Matches the dispatch of ``_route_right_entry_over_top``: a RIGHT entry on a
-    TB section fed by an exit port in the SAME grid row, an ADJACENT column, and
-    to the port's LEFT.  That feed loops over the section's top and approaches
-    from the right -- a U-turn that transposes the bundle.  A right entry fed
-    from the right (a fold) or across columns (a bypass) keeps its order and is
-    excluded.
-    """
-    if not (port.is_entry and port.side == PortSide.RIGHT):
-        return False
-    if port.section_id not in tb_sections:
-        return False
-    psec = graph.sections.get(port.section_id)
-    pst = graph.stations.get(port.id)
-    if psec is None or pst is None:
-        return False
-    for edge in graph.edges_to(port.id):
-        src = graph.stations.get(edge.source)
-        src_port = graph.ports.get(edge.source)
-        if not (src and src_port and not src_port.is_entry):
-            continue
-        ssec = graph.sections.get(src.section_id) if src.section_id else None
-        if ssec is None:
-            continue
-        if (
-            ssec.grid_row == psec.grid_row
-            and abs(ssec.grid_col - psec.grid_col) <= 1
-            and src.x < pst.x - COORD_TOLERANCE
-        ):
-            return True
-    return False
 
 
 def _reverse_offsets_from_roots(ctx: _OffsetCtx, roots: set[str]) -> None:
@@ -2124,7 +2156,7 @@ def _reverse_tb_right_entry_offsets(ctx: _OffsetCtx) -> None:
         {
             port.section_id
             for port in graph.ports.values()
-            if _is_over_top_right_entry(graph, port, ctx.tb_sections)
+            if is_over_top_right_entry(graph, port, ctx.tb_sections)
         },
     )
 

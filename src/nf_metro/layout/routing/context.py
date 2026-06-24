@@ -505,6 +505,43 @@ def is_near_vertical_drop(dx: float, dy: float) -> bool:
     return abs(dx) <= JUNCTION_MARGIN + COORD_TOLERANCE and abs(dy) > abs(dx) * 3
 
 
+def is_over_top_right_entry(
+    graph: MetroGraph, port: Port, tb_sections: set[str]
+) -> bool:
+    """Whether *port* is a RIGHT entry reached by an over-the-top loop.
+
+    Matches the dispatch of ``_route_right_entry_over_top``: a RIGHT entry on a
+    TB section fed by an exit port in the SAME grid row, an ADJACENT column, and
+    to the port's LEFT.  That feed loops over the section's top and approaches
+    from the right -- a U-turn that transposes the bundle.  A right entry fed
+    from the right (a fold) or across columns (a bypass) keeps its order and is
+    excluded.
+    """
+    if not (port.is_entry and port.side == PortSide.RIGHT):
+        return False
+    if port.section_id not in tb_sections:
+        return False
+    psec = graph.sections.get(port.section_id)
+    pst = graph.stations.get(port.id)
+    if psec is None or pst is None:
+        return False
+    for edge in graph.edges_to(port.id):
+        src = graph.stations.get(edge.source)
+        src_port = graph.ports.get(edge.source)
+        if not (src and src_port and not src_port.is_entry):
+            continue
+        ssec = graph.sections.get(src.section_id) if src.section_id else None
+        if ssec is None:
+            continue
+        if (
+            ssec.grid_row == psec.grid_row
+            and abs(ssec.grid_col - psec.grid_col) <= 1
+            and src.x < pst.x - COORD_TOLERANCE
+        ):
+            return True
+    return False
+
+
 def is_near_vertical_junction_right_entry(graph: MetroGraph, port: Port) -> bool:
     """Whether *port* is a RIGHT entry a multi-line fan-out junction drops into.
 
