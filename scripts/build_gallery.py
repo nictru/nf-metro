@@ -1343,6 +1343,44 @@ def render_mmd(mmd_path: Path, svg_path: Path, *, debug: bool = DEBUG_RENDERS) -
     _record_metrics(graph, svg_path.name, svg_str)
 
 
+def render_mmd_both(
+    mmd_path: Path,
+    dark_path: Path,
+    light_path: Path,
+    *,
+    debug: bool = DEBUG_RENDERS,
+) -> None:
+    """Parse and layout once, then render to both dark (nfcore) and light (seqera) SVGs.
+
+    The light render uses the seqera theme regardless of what the .mmd file specifies,
+    so every gallery entry has a matching light variant for dark/light mode switching.
+    """
+    text = mmd_path.read_text()
+    graph = parse_metro_mermaid(text)
+    compute_layout(graph)
+    theme_name = graph.style if graph.style in THEMES else "nfcore"
+    svg_str = render_drawn_svg(graph, THEMES[theme_name], debug=debug)
+    dark_path.write_text(svg_str)
+    _record_metrics(graph, dark_path.name, svg_str)
+    svg_str_light = render_drawn_svg(graph, THEMES["seqera"])
+    light_path.write_text(svg_str_light)
+
+
+def _picture_html(dark_src: str, light_src: str, alt: str) -> str:
+    """Return an MDX-compatible <picture> block for dark/light SVG switching.
+
+    The <source> handles OS-level preference (CSS, no flash). The data-* attributes let
+    the gallery-theme script swap sources when the site toggle overrides OS preference.
+    """
+    return (
+        '<picture class="nfm-gallery-image">\n'
+        f'  <source srcset="{light_src}" media="(prefers-color-scheme: light)" />\n'
+        f'  <img src="{dark_src}" data-dark-src="{dark_src}"'
+        f' data-light-src="{light_src}" alt="{alt}" loading="lazy" />\n'
+        "</picture>"
+    )
+
+
 def clean_name(stem: str) -> str:
     """Convert filename stem to a display-friendly heading."""
     return stem.replace("_", " ").title()
@@ -1482,9 +1520,10 @@ def build_gallery() -> None:
             lines.append("---\n")
             lines.append(f"## {current_category}\n")
 
-        # Render SVG
+        # Render SVG (dark + light)
+        light_svg_path = RENDERS_DIR / f"{stem}_light.svg"
         try:
-            render_mmd(mmd_path, svg_path)
+            render_mmd_both(mmd_path, svg_path, light_svg_path)
             status = "OK"
         except Exception as e:
             status = f"FAIL: {e}"
@@ -1498,13 +1537,15 @@ def build_gallery() -> None:
         identifier, import_statement, source_label = mmd_import(stem, source_dir)
         imports.append(import_statement)
 
+        dark_src = f"{RENDERS_REL}/{stem}.svg"
+        light_src = f"{RENDERS_REL}/{stem}_light.svg"
         lines.append(f"### {heading}\n")
         lines.append(f"{description}\n")
         lines.append("**CLI command:**\n")
         lines.append(f"```bash\nnf-metro render {source_label} -o {stem}.svg\n```\n")
         lines.extend(_details_code(identifier, source_label))
         lines.append("**Rendered output:**\n")
-        lines.append(f"![{heading}]({RENDERS_REL}/{stem}.svg)\n")
+        lines.append(_picture_html(dark_src, light_src, heading) + "\n")
 
     gallery_md = "\n".join(mdx_page("Gallery", imports, lines))
     gallery_path = GALLERY_DIR / "index.mdx"
@@ -1586,8 +1627,9 @@ def build_pipelines_page() -> None:
             print(f"  WARNING: {mmd_path} not found, skipping")
             continue
 
+        light_svg_path = RENDERS_DIR / f"pipeline_{stem}_light.svg"
         try:
-            render_mmd(mmd_path, svg_path, debug=True)
+            render_mmd_both(mmd_path, svg_path, light_svg_path, debug=True)
             status = "OK"
         except Exception as e:
             status = f"FAIL: {e}"
@@ -1600,9 +1642,11 @@ def build_pipelines_page() -> None:
         identifier, import_statement, source_label = mmd_import(stem, EXAMPLES_DIR)
         imports.append(import_statement)
 
+        dark_src = f"{RENDERS_REL}/pipeline_{stem}.svg"
+        light_src = f"{RENDERS_REL}/pipeline_{stem}_light.svg"
         lines.append(f"## [{display_name}]({repo_url})\n")
         lines.append(f"{description}\n")
-        lines.append(f"![{display_name}]({RENDERS_REL}/pipeline_{stem}.svg)\n")
+        lines.append(_picture_html(dark_src, light_src, display_name) + "\n")
         lines.extend(_details_code(identifier, source_label))
 
     pipelines_md = "\n".join(mdx_page("nf-core pipelines", imports, lines))

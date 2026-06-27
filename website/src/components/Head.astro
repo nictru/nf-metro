@@ -32,3 +32,34 @@ import { ClientRouter } from "astro:transitions";
           : "light";
   });
 </script>
+<script is:inline>
+  // Sync gallery <picture> elements with Starlight's data-theme toggle.
+  // CSS <source media="(prefers-color-scheme: light)"> handles OS-level preference
+  // automatically. This script takes over only for manual site-level overrides.
+  if (!window._nfmGalleryThemeInit) {
+    window._nfmGalleryThemeInit = true;
+    function _nfmSyncGallery() {
+      var isLight = document.documentElement.dataset.theme === "light";
+      document.querySelectorAll(".nfm-gallery-image").forEach(function (pic) {
+        var source = pic.querySelector("source");
+        var img = pic.querySelector("img");
+        if (!img || !img.dataset.darkSrc) return;
+        // Once JS has resolved the theme, it fully owns source selection so that
+        // a manual dark-mode toggle isn't overridden by OS-level CSS media queries.
+        source.media = "not all";
+        img.src = isLight ? img.dataset.lightSrc : img.dataset.darkSrc;
+      });
+    }
+    // Run after each page load (initial + SPA navigations via ClientRouter).
+    document.addEventListener("astro:page-load", _nfmSyncGallery);
+    // Run immediately when the toggle fires (data-theme mutation on <html>).
+    new MutationObserver(function (mutations) {
+      if (mutations.some(function (m) { return m.attributeName === "data-theme"; })) {
+        _nfmSyncGallery();
+      }
+    }).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"],
+    });
+  }
+</script>
