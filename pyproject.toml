@@ -103,6 +103,14 @@ max-complexity = 30
 # fully annotated engine-glue helpers, matching the scripts/ convention.
 ".claude/skills/nf-metro-layout-triage/build_review.py" = ["E501", "ANN"]
 
+[tool.coverage.run]
+source = ["nf_metro"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = false
+
 [tool.mypy]
 files = ["src"]
 mypy_path = "src"

@@ -48,3 +48,29 @@ jobs:
           cache-dependency-path: pyproject.toml
       - run: pip install -e ".[dev,font]"
       - run: pytest --splits 3 --group ${{ matrix.split }}
+
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - run: pip install -e ".[dev,font]"
+      - run: pytest --override-ini="addopts=-rxX" --cov --cov-report=term-missing --cov-report=json
+      - name: Write coverage summary
+        run: |
+          python - <<'EOF' >> $GITHUB_STEP_SUMMARY
+          import json, pathlib
+          data = json.loads(pathlib.Path("coverage.json").read_text())
+          total = data["totals"]["percent_covered_display"]
+          print(f"## Test coverage: {total}%\n")
+          print("| Module | Stmts | Miss | Branch | BrPart | Cover |")
+          print("| --- | ---: | ---: | ---: | ---: | ---: |")
+          for path, info in sorted(data["files"].items()):
+              mod = path.removeprefix("src/nf_metro/").replace("/", ".")
+              s = info["summary"]
+              print(f"| {mod} | {s['num_statements']} | {s['missing_lines']} | {s['num_branches']} | {s['num_partial_branches']} | {s['percent_covered_display']}% |")
+          EOF
