@@ -59,7 +59,7 @@ jobs:
           cache: pip
           cache-dependency-path: pyproject.toml
       - run: pip install -e ".[dev,font]"
-      - run: pytest --override-ini="addopts=-rxX" --cov --cov-report=term-missing --cov-report=json
+      - run: pytest --cov --cov-report=term-missing --cov-report=json
       - name: Write coverage summary
         run: |
           python - <<'EOF' >> $GITHUB_STEP_SUMMARY
