@@ -139,7 +139,7 @@ export default defineConfig({
           // in the current Astro build.
           // live_demo.mp4 is a public/ static asset, not a navigable page.
           exclude: ({ link }) =>
-            (link.startsWith("/nf-metro/") && !link.startsWith(base)) ||
+            (link.startsWith("/nf-metro/") && base !== "/nf-metro/") ||
             link.startsWith("/nf-metro/gallery") ||
             link.startsWith("/nf-metro/pipelines") ||
             link.startsWith("/nf-metro/releases") ||
