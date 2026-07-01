@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="512" height="350" viewBox="0 0 512 350">
+<defs>
+</defs>
+<style>.nf-metro-bg { fill: var(--nfm-bg, #2b2b2b); }
+.nf-metro-title { fill: var(--nfm-title-color, #ffffff); }
+.nf-metro-station-label { fill: var(--nfm-label-color, #e0e0e0); }
+.nf-metro-section-box { fill: var(--nfm-section-fill, #373737); stroke: var(--nfm-section-stroke, #595959); }
+.nf-metro-section-label { fill: var(--nfm-section-label-color, #c8c8c8); }
+.nf-metro-group-label { fill: var(--nfm-section-label-color, #c8c8c8); }
+.nf-metro-group-underline { stroke: var(--nfm-section-label-color, #c8c8c8); }
+.nf-metro-legend-bg { fill: var(--nfm-legend-bg, rgba(0, 0, 0, 0.3)); }
+.nf-metro-legend-text { fill: var(--nfm-legend-text-color, #e0e0e0); }</style>
+<rect x="0" y="0" width="512" height="350" fill="#2b2b2b" class="nf-metro-bg" />
+<text x="60.0" y="30.0" font-size="24.0" fill="#ffffff" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" class="nf-metro-title">Directional Flow</text>
+<path d="M80.0,128.0 L140.0,128.0" stroke="#43A047" stroke-width="3.0" stroke-linecap="round" class="metro-line-meth" data-line-id="meth" />
+<path d="M140.0,128.0 L200.0,128.0" stroke="#43A047" stroke-width="3.0" stroke-linecap="round" class="metro-line-meth" data-line-id="meth" />
+<path d="M200.0,128.0 L260.0,128.0" stroke="#43A047" stroke-width="3.0" stroke-linecap="round" class="metro-line-meth" data-line-id="meth" />
+<path d="M260.0,128.0 L271.5,128.0 Q281.5,128.0,285.0112344158839,137.36329177569044 L307.9887655841161,198.63670822430956 Q311.5,208.0,321.5,208.0 L356.0,208.0" stroke="#43A047" stroke-width="3.0" fill="none" stroke-linecap="round" stroke-linejoin="round" class="metro-line-meth" data-line-id="meth" />
+<path d="M356.0,208.0 L386.0,208.0 Q396.0,208.0,399.5112344158839,198.63670822430956 L422.4887655841161,137.36329177569044 Q426.0,128.0,436.0,128.0 L452.0,128.0" stroke="#43A047" stroke-width="3.0" fill="none" stroke-linecap="round" stroke-linejoin="round" class="metro-line-meth" data-line-id="meth" />
+<path d="M80.0,124.0 L140.0,124.0" stroke="#1E88E5" stroke-width="3.0" stroke-linecap="round" class="metro-line-rna" data-line-id="rna" />
+<path d="M140.0,124.0 L200.0,124.0" stroke="#1E88E5" stroke-width="3.0" stroke-linecap="round" class="metro-line-rna" data-line-id="rna" />
+<path d="M200.0,124.0 L260.0,124.0" stroke="#1E88E5" stroke-width="3.0" stroke-linecap="round" class="metro-line-rna" data-line-id="rna" />
+<path d="M260.0,124.0 L273.5,124.0 Q283.5,124.0,289.5,132.0 L307.5,156.0 Q313.5,164.0,323.5,164.0 L356.0,164.0" stroke="#1E88E5" stroke-width="3.0" fill="none" stroke-linecap="round" stroke-linejoin="round" class="metro-line-rna" data-line-id="rna" />
+<path d="M356.0,164.0 L384.0,164.0 Q394.0,164.0,400.0,156.0 L418.0,132.0 Q424.0,124.0,434.0,124.0 L452.0,124.0" stroke="#1E88E5" stroke-width="3.0" fill="none" stroke-linecap="round" stroke-linejoin="round" class="metro-line-rna" data-line-id="rna" />
+<path d="M80.0,120.0 L140.0,120.0" stroke="#E64A19" stroke-width="3.0" stroke-linecap="round" class="metro-line-dna" data-line-id="dna" />
+<path d="M140.0,120.0 L200.0,120.0" stroke="#E64A19" stroke-width="3.0" stroke-linecap="round" class="metro-line-dna" data-line-id="dna" />
+<path d="M200.0,120.0 L260.0,120.0" stroke="#E64A19" stroke-width="3.0" stroke-linecap="round" class="metro-line-dna" data-line-id="dna" />
+<path d="M260.0,120.0 L356.0,120.0" stroke="#E64A19" stroke-width="3.0" stroke-linecap="round" class="metro-line-dna" data-line-id="dna" />
+<path d="M356.0,120.0 L452.0,120.0" stroke="#E64A19" stroke-width="3.0" stroke-linecap="round" class="metro-line-dna" data-line-id="dna" />
+<path d="M106.0,124.0 L114.0,120.0 L106.0,116.0" stroke="#E64A19" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.75" class="metro-direction-dna" data-line-id="dna" />
+<path d="M106.0,128.0 L114.0,124.0 L106.0,120.0" stroke="#1E88E5" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.75" class="metro-direction-rna" data-line-id="rna" />
+<path d="M106.0,132.0 L114.0,128.0 L106.0,124.0" stroke="#43A047" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.75" class="metro-direction-meth" data-line-id="meth" />
+<path d="M166.0,124.0 L174.0,120.0 L166.0,116.0" stroke="#E64A19" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.75" class="metro-direction-dna" data-line-id="dna" />
+<path d="M166.0,128.0 L174.0,124.0 L166.0,120.0" stroke="#1E88E5" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.75" class="metro-direction-rna" data-line-id="rna" />
+<path d="M166.0,132.0 L174.0,128.0 L166.0,124.0" stroke="#43A047" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.75" class="metro-direction-meth" data-line-id="meth" />
+<path d="M226.0,124.0 L234.0,120.0 L226.0,116.0" stroke="#E64A19" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.75" class="metro-direction-dna" data-line-id="dna" />
+<path d="M226.0,128.0 L234.0,124.0 L226.0,120.0" stroke="#1E88E5" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.75" class="metro-direction-rna" data-line-id="rna" />
+<path d="M226.0,132.0 L234.0,128.0 L226.0,124.0" stroke="#43A047" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.75" class="metro-direction-meth" data-line-id="meth" />
+<path d="M304.0,124.0 L312.0,120.0 L304.0,116.0" stroke="#E64A19" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.75" class="metro-direction-dna" data-line-id="dna" />
+<path d="M298.6,150.8 L306.59999999999997,154.79999999999998 L305.0,146.0" stroke="#1E88E5" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.75" class="metro-direction-rna" data-line-id="rna" />
+<path d="M284.1521589708082,146.46442891591198 L290.7064632137915,152.55056857011076 L291.6427923913606,143.65544138320485" stroke="#43A047" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.75" class="metro-direction-meth" data-line-id="meth" />
+<path d="M308.2799812734123,212.0 L316.2799812734123,208.0 L308.2799812734123,204.0" stroke="#43A047" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.75" class="metro-direction-meth" data-line-id="meth" />
+<path d="M400.0,124.0 L408.0,120.0 L400.0,116.0" stroke="#E64A19" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.75" class="metro-direction-dna" data-line-id="dna" />
+<path d="M406.8,153.6 L408.4,144.8 L400.40000000000003,148.79999999999998" stroke="#1E88E5" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.75" class="metro-direction-rna" data-line-id="rna" />
+<path d="M399.6470087219754,209.66664840182247 L398.7106795444063,200.77152121491656 L392.156375301423,206.85766086911534" stroke="#43A047" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.75" class="metro-direction-meth" data-line-id="meth" />
+<path d="M422.1189089836325,149.74158103740362 L421.18257980606336,140.8464538504977 L414.6282755630801,146.93259350469648" stroke="#43A047" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.75" class="metro-direction-meth" data-line-id="meth" />
+<rect x="75.0" y="115.0" width="10.0" height="18.0" rx="5.0" ry="5.0" fill="#ffffff" stroke="#333333" stroke-width="1.5" class="nf-metro-station" data-station-id="reads" data-station-lines="dna,meth,rna" data-station-label="Reads" />
+<rect x="135.0" y="115.0" width="10.0" height="18.0" rx="5.0" ry="5.0" fill="#ffffff" stroke="#333333" stroke-width="1.5" class="nf-metro-station" data-station-id="qc" data-station-lines="dna,meth,rna" data-station-label="QC" />
+<rect x="195.0" y="115.0" width="10.0" height="18.0" rx="5.0" ry="5.0" fill="#ffffff" stroke="#333333" stroke-width="1.5" class="nf-metro-station" data-station-id="trim" data-station-lines="dna,meth,rna" data-station-label="Trim" />
+<rect x="255.0" y="115.0" width="10.0" height="18.0" rx="5.0" ry="5.0" fill="#ffffff" stroke="#333333" stroke-width="1.5" class="nf-metro-station" data-station-id="align" data-station-lines="dna,meth,rna" data-station-label="Align" />
+<rect x="351.0" y="115.0" width="10.0" height="10.0" rx="5.0" ry="5.0" fill="#ffffff" stroke="#333333" stroke-width="1.5" class="nf-metro-station" data-station-id="callvar" data-station-lines="dna" data-station-label="Call variants" />
+<rect x="351.0" y="159.0" width="10.0" height="10.0" rx="5.0" ry="5.0" fill="#ffffff" stroke="#333333" stroke-width="1.5" class="nf-metro-station" data-station-id="quant" data-station-lines="rna" data-station-label="Quantify" />
+<rect x="351.0" y="203.0" width="10.0" height="10.0" rx="5.0" ry="5.0" fill="#ffffff" stroke="#333333" stroke-width="1.5" class="nf-metro-station" data-station-id="methcall" data-station-lines="meth" data-station-label="Call methylation" />
+<rect x="447.0" y="115.0" width="10.0" height="18.0" rx="5.0" ry="5.0" fill="#ffffff" stroke="#333333" stroke-width="1.5" class="nf-metro-station" data-station-id="report" data-station-lines="dna,meth,rna" data-station-label="Report" />
+<text x="80.0" y="139.0" font-size="13.0" fill="#2b2b2b" stroke="#2b2b2b" stroke-width="3.0" stroke-linejoin="round" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" aria-hidden="true" text-anchor="middle" dominant-baseline="hanging">Reads</text>
+<text x="80.0" y="139.0" font-size="13.0" fill="#e0e0e0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" text-anchor="middle" dominant-baseline="hanging" data-station-id="reads" class="nf-metro-station-label">Reads</text>
+<text x="140.0" y="106.0" font-size="13.0" fill="#2b2b2b" stroke="#2b2b2b" stroke-width="3.0" stroke-linejoin="round" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" aria-hidden="true" text-anchor="middle" dominant-baseline="auto">QC</text>
+<text x="140.0" y="106.0" font-size="13.0" fill="#e0e0e0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" text-anchor="middle" dominant-baseline="auto" data-station-id="qc" class="nf-metro-station-label">QC</text>
+<text x="200.0" y="139.0" font-size="13.0" fill="#2b2b2b" stroke="#2b2b2b" stroke-width="3.0" stroke-linejoin="round" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" aria-hidden="true" text-anchor="middle" dominant-baseline="hanging">Trim</text>
+<text x="200.0" y="139.0" font-size="13.0" fill="#e0e0e0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" text-anchor="middle" dominant-baseline="hanging" data-station-id="trim" class="nf-metro-station-label">Trim</text>
+<text x="260.0" y="106.0" font-size="13.0" fill="#2b2b2b" stroke="#2b2b2b" stroke-width="3.0" stroke-linejoin="round" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" aria-hidden="true" text-anchor="middle" dominant-baseline="auto">Align</text>
+<text x="260.0" y="106.0" font-size="13.0" fill="#e0e0e0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" text-anchor="middle" dominant-baseline="auto" data-station-id="align" class="nf-metro-station-label">Align</text>
+<text x="356.0" y="109.0" font-size="13.0" fill="#2b2b2b" stroke="#2b2b2b" stroke-width="3.0" stroke-linejoin="round" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" aria-hidden="true" text-anchor="middle" dominant-baseline="auto">Call variants</text>
+<text x="356.0" y="109.0" font-size="13.0" fill="#e0e0e0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" text-anchor="middle" dominant-baseline="auto" data-station-id="callvar" class="nf-metro-station-label">Call variants</text>
+<text x="356.0" y="175.0" font-size="13.0" fill="#2b2b2b" stroke="#2b2b2b" stroke-width="3.0" stroke-linejoin="round" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" aria-hidden="true" text-anchor="middle" dominant-baseline="hanging">Quantify</text>
+<text x="356.0" y="175.0" font-size="13.0" fill="#e0e0e0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" text-anchor="middle" dominant-baseline="hanging" data-station-id="quant" class="nf-metro-station-label">Quantify</text>
+<text x="356.0" y="219.0" font-size="13.0" fill="#2b2b2b" stroke="#2b2b2b" stroke-width="3.0" stroke-linejoin="round" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" aria-hidden="true" text-anchor="middle" dominant-baseline="hanging">Call methylation</text>
+<text x="356.0" y="219.0" font-size="13.0" fill="#e0e0e0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" text-anchor="middle" dominant-baseline="hanging" data-station-id="methcall" class="nf-metro-station-label">Call methylation</text>
+<text x="452.0" y="106.0" font-size="13.0" fill="#2b2b2b" stroke="#2b2b2b" stroke-width="3.0" stroke-linejoin="round" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" aria-hidden="true" text-anchor="middle" dominant-baseline="auto">Report</text>
+<text x="452.0" y="106.0" font-size="13.0" fill="#e0e0e0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="bold" text-anchor="middle" dominant-baseline="auto" data-station-id="report" class="nf-metro-station-label">Report</text>
+<circle cx="283.5" cy="124.0" r="3.0" fill="rgba(255, 200, 50, 0.6)" />
+<circle cx="313.5" cy="164.0" r="3.0" fill="rgba(255, 200, 50, 0.6)" />
+<circle cx="281.5" cy="128.0" r="3.0" fill="rgba(255, 200, 50, 0.6)" />
+<circle cx="311.5" cy="208.0" r="3.0" fill="rgba(255, 200, 50, 0.6)" />
+<circle cx="394.0" cy="164.0" r="3.0" fill="rgba(255, 200, 50, 0.6)" />
+<circle cx="424.0" cy="124.0" r="3.0" fill="rgba(255, 200, 50, 0.6)" />
+<circle cx="396.0" cy="208.0" r="3.0" fill="rgba(255, 200, 50, 0.6)" />
+<circle cx="426.0" cy="128.0" r="3.0" fill="rgba(255, 200, 50, 0.6)" />
+<rect x="60.0" y="230.0" width="167.8" height="96.0" rx="6" ry="6" fill="rgba(0, 0, 0, 0.3)" class="nf-metro-legend-bg" />
+<path d="M72.0,254.0 L96.0,254.0" stroke="#E64A19" stroke-width="3.0" stroke-linecap="round" />
+<text x="108.0" y="254.0" font-size="14.0" fill="#e0e0e0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" dy="0.3em" class="nf-metro-legend-text">DNA variants</text>
+<path d="M72.0,278.0 L96.0,278.0" stroke="#1E88E5" stroke-width="3.0" stroke-linecap="round" />
+<text x="108.0" y="278.0" font-size="14.0" fill="#e0e0e0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" dy="0.3em" class="nf-metro-legend-text">RNA expression</text>
+<path d="M72.0,302.0 L96.0,302.0" stroke="#43A047" stroke-width="3.0" stroke-linecap="round" />
+<text x="108.0" y="302.0" font-size="14.0" fill="#e0e0e0" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" dy="0.3em" class="nf-metro-legend-text">Methylation</text>
+<text x="482.0" y="342.0" font-size="8" fill="rgba(150, 150, 150, 0.6)" font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" text-anchor="end">created with nf-metro v0.7.2+dev</text>
+</svg>
