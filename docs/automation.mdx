@@ -35,9 +35,7 @@ Inputs (all optional): `input` (default `assets/metro_map.mmd`), `output`
 
 ## Reusable workflow
 
-The turn-key option. It wraps the action and keeps the committed SVG in sync:
-commit the re-render on pushes, warn on pull requests — no shell glue in your
-repo.
+nf-metro provides a reusable action which will update an SVG based on your mermaid diagram. If the metro map has been updated it will commit the updated image.
 
 ```yaml
 # .github/workflows/metro-map.yml
