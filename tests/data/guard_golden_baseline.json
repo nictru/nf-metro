@@ -19,6 +19,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -231,6 +232,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -829,6 +831,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -1061,6 +1064,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -1277,6 +1281,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -1302,6 +1307,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -1518,6 +1524,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -1730,6 +1737,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -1942,6 +1950,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -2154,6 +2163,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -2382,6 +2392,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -2626,6 +2637,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -2838,6 +2850,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -2863,6 +2876,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -3079,6 +3093,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -3299,6 +3314,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -3511,6 +3527,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -3727,6 +3744,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -3939,6 +3957,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -4151,6 +4170,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -4363,6 +4383,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -4575,6 +4596,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -4787,6 +4809,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -4999,6 +5022,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -5211,6 +5235,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -5236,6 +5261,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -5448,6 +5474,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -5473,6 +5500,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -5689,6 +5717,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -5901,6 +5930,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -6117,6 +6147,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -6329,6 +6360,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -6541,6 +6573,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -6761,6 +6794,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -6981,6 +7015,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -7404,6 +7439,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -7827,6 +7863,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -8043,6 +8080,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -8068,6 +8106,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -8654,6 +8693,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -8866,6 +8906,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -9078,6 +9119,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -9298,6 +9340,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -9518,6 +9561,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -9738,6 +9782,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -9954,6 +9999,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -10174,6 +10220,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -10390,6 +10437,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -10602,6 +10650,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -10818,6 +10867,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -11034,6 +11084,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -11246,6 +11297,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -11462,6 +11514,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -11674,6 +11727,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -11886,6 +11940,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -12098,6 +12153,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -12318,6 +12374,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -12530,6 +12587,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -12742,6 +12800,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -12954,6 +13013,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -13363,6 +13423,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -13575,6 +13636,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -13787,6 +13849,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -14198,6 +14261,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -14418,6 +14482,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -14630,6 +14695,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -14842,6 +14908,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -15058,6 +15125,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -15278,6 +15346,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -15494,6 +15563,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -15718,6 +15788,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -15938,6 +16009,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -16154,6 +16226,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -16374,6 +16447,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -16586,6 +16660,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -16798,6 +16873,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -17010,6 +17086,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -17226,6 +17303,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -17438,6 +17516,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -17658,6 +17737,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -17870,6 +17950,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -18086,6 +18167,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -18302,6 +18384,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -18518,6 +18601,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -18734,6 +18818,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -18950,6 +19035,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -19174,6 +19260,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -19386,6 +19473,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -19602,6 +19690,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final",
@@ -19815,6 +19904,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -20031,6 +20121,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final",
@@ -20244,6 +20335,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -20464,6 +20556,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -20688,6 +20781,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -21286,6 +21380,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -21506,6 +21601,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -21734,6 +21830,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -21950,6 +22047,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -22349,6 +22447,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -22756,6 +22855,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -22976,6 +23076,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -23196,6 +23297,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -23408,6 +23510,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final",
@@ -23617,6 +23720,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -23849,6 +23953,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -24061,6 +24166,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -24273,6 +24379,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -24499,6 +24606,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -24715,6 +24823,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -24927,6 +25036,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -25139,6 +25249,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -25351,6 +25462,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -25567,6 +25679,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -25783,6 +25896,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -25999,6 +26113,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -26211,6 +26326,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -26423,6 +26539,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -26635,6 +26752,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -26847,6 +26965,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -27059,6 +27178,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -27275,6 +27395,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -27491,6 +27612,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -27707,6 +27829,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -27923,6 +28046,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -28139,6 +28263,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -28355,6 +28480,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -28571,6 +28697,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -28787,6 +28914,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -29003,6 +29131,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -29223,6 +29352,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -29439,6 +29569,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -29655,6 +29786,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -29871,6 +30003,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -30087,6 +30220,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -30303,6 +30437,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -30519,6 +30654,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -30735,6 +30871,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -30951,6 +31088,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -31171,6 +31309,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -31387,6 +31526,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -31611,6 +31751,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -31823,6 +31964,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -32039,6 +32181,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -32255,6 +32398,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -32471,6 +32615,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -32683,6 +32828,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -32895,6 +33041,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -33119,6 +33266,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -33335,6 +33483,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -33551,6 +33700,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -33767,6 +33917,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -33979,6 +34130,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -34191,6 +34343,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -34403,6 +34556,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -34647,6 +34801,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -34863,6 +35018,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -35079,6 +35235,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -35295,6 +35452,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -35511,6 +35669,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -35723,6 +35882,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -35939,6 +36099,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -36151,6 +36312,223 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
+      "_guard_symmetric_diamond_branches_straddle_trunk|final",
+      "_guard_symmetric_diamond_branches_half_pitch|final"
+    ]
+  },
+  "examples/topologies/rowmate_tb_side_entry_top_align.mmd": {
+    "raised": null,
+    "trace": [
+      "_guard_no_same_row_backward_feed|None",
+      "_guard_no_mixed_entry_directions|None",
+      "_guard_section_bboxes_positive|after Stage 1.1",
+      "_guard_no_negative_grid_columns|after Stage 1.1",
+      "_guard_explicit_grid_directions|after Stage 1.1",
+      "_guard_fold_relocated_flow_ports_face_connections|after Stage 1.1",
+      "_guard_tall_anchor_stack_well_formed|after Stage 1.1",
+      "_guard_independent_components_disjoint|after Stage 1.3",
+      "_guard_multi_section_cell_packed|after Stage 1.3",
+      "_guard_coordinates_finite|after Stage 2.1",
+      "_guard_stations_in_sections|after Stage 2.1",
+      "_guard_section_bboxes_positive|after Stage 2.1",
+      "_guard_ports_on_boundaries|after Stage 3.1",
+      "_guard_ports_on_boundaries|after top-align",
+      "_guard_anchors_frozen_during_placement|Stage 4.9 _redistribute_fanout_siblings",
+      "_guard_anchors_frozen_during_placement|Stage 4.10 _redistribute_full_bundle_columns",
+      "_guard_coordinates_finite|after Stage 5.2",
+      "_guard_section_bboxes_positive|after Stage 5.2",
+      "_guard_ports_on_boundaries|after Stage 5.2",
+      "_guard_station_x_column_drift|after Stage 5.2",
+      "_guard_coordinates_finite|after Stage 5.3",
+      "_guard_section_bboxes_positive|after Stage 5.3",
+      "_guard_stations_in_sections|after Stage 5.3",
+      "_guard_ports_on_boundaries|after Stage 5.3",
+      "_guard_station_x_column_drift|after Stage 5.3",
+      "_guard_coordinates_finite|after Stage 5.4",
+      "_guard_section_bboxes_positive|after Stage 5.4",
+      "_guard_stations_in_sections|after Stage 5.4",
+      "_guard_ports_on_boundaries|after Stage 5.4",
+      "_guard_station_x_column_drift|after Stage 5.4",
+      "_guard_coordinates_finite|after Stage 5.5",
+      "_guard_section_bboxes_positive|after Stage 5.5",
+      "_guard_stations_in_sections|after Stage 5.5",
+      "_guard_ports_on_boundaries|after Stage 5.5",
+      "_guard_station_x_column_drift|after Stage 5.5",
+      "_guard_anchors_frozen_during_placement|Stage 6.1 _fan_free_content_upward",
+      "_guard_anchors_frozen_during_placement|Stage 6.1 _fan_free_content_upward",
+      "_guard_coordinates_finite|after Stage 6.1",
+      "_guard_section_bboxes_positive|after Stage 6.1",
+      "_guard_stations_in_sections|after Stage 6.1",
+      "_guard_ports_on_boundaries|after Stage 6.1",
+      "_guard_station_x_column_drift|after Stage 6.1",
+      "_guard_anchors_frozen_during_placement|Stage 6.2 _fan_source_inputs_upward",
+      "_guard_anchors_frozen_during_placement|Stage 6.2 _fan_source_inputs_upward",
+      "_guard_coordinates_finite|after Stage 6.2",
+      "_guard_section_bboxes_positive|after Stage 6.2",
+      "_guard_stations_in_sections|after Stage 6.2",
+      "_guard_ports_on_boundaries|after Stage 6.2",
+      "_guard_station_x_column_drift|after Stage 6.2",
+      "_guard_coordinates_finite|after Stage 6.4",
+      "_guard_section_bboxes_positive|after Stage 6.4",
+      "_guard_stations_in_sections|after Stage 6.4",
+      "_guard_ports_on_boundaries|after Stage 6.4",
+      "_guard_no_station_overlap|after Stage 6.4",
+      "_guard_no_coincident_station_coords|after Stage 6.4",
+      "_guard_station_x_column_drift|after Stage 6.4",
+      "_guard_coordinates_finite|after Stage 6.5",
+      "_guard_section_bboxes_positive|after Stage 6.5",
+      "_guard_stations_in_sections|after Stage 6.5",
+      "_guard_ports_on_boundaries|after Stage 6.5",
+      "_guard_no_station_overlap|after Stage 6.5",
+      "_guard_no_coincident_station_coords|after Stage 6.5",
+      "_guard_station_x_column_drift|after Stage 6.5",
+      "_guard_coordinates_finite|after Stage 6.6",
+      "_guard_section_bboxes_positive|after Stage 6.6",
+      "_guard_stations_in_sections|after Stage 6.6",
+      "_guard_ports_on_boundaries|after Stage 6.6",
+      "_guard_no_station_overlap|after Stage 6.6",
+      "_guard_no_coincident_station_coords|after Stage 6.6",
+      "_guard_station_x_column_drift|after Stage 6.6",
+      "_guard_coordinates_finite|after Stage 6.10",
+      "_guard_section_bboxes_positive|after Stage 6.10",
+      "_guard_stations_in_sections|after Stage 6.10",
+      "_guard_ports_on_boundaries|after Stage 6.10",
+      "_guard_no_station_overlap|after Stage 6.10",
+      "_guard_no_coincident_station_coords|after Stage 6.10",
+      "_guard_station_x_column_drift|after Stage 6.10",
+      "_guard_anchors_frozen_during_placement|Stage 6.11 _balance_section_content_around_trunk",
+      "_guard_anchors_frozen_during_placement|Stage 6.11 _balance_section_content_around_trunk",
+      "_guard_coordinates_finite|after Stage 6.11",
+      "_guard_section_bboxes_positive|after Stage 6.11",
+      "_guard_stations_in_sections|after Stage 6.11",
+      "_guard_ports_on_boundaries|after Stage 6.11",
+      "_guard_no_station_overlap|after Stage 6.11",
+      "_guard_no_coincident_station_coords|after Stage 6.11",
+      "_guard_station_x_column_drift|after Stage 6.11",
+      "_guard_anchors_frozen_during_placement|Stage 6.12 _recenter_loop_side_stations",
+      "_guard_anchors_frozen_during_placement|Stage 6.12 _recenter_loop_side_stations",
+      "_guard_coordinates_finite|after Stage 6.12",
+      "_guard_section_bboxes_positive|after Stage 6.12",
+      "_guard_stations_in_sections|after Stage 6.12",
+      "_guard_ports_on_boundaries|after Stage 6.12",
+      "_guard_no_station_overlap|after Stage 6.12",
+      "_guard_no_coincident_station_coords|after Stage 6.12",
+      "_guard_station_x_column_drift|after Stage 6.12",
+      "_guard_coordinates_finite|after Stage 6.13",
+      "_guard_section_bboxes_positive|after Stage 6.13",
+      "_guard_stations_in_sections|after Stage 6.13",
+      "_guard_ports_on_boundaries|after Stage 6.13",
+      "_guard_no_station_overlap|after Stage 6.13",
+      "_guard_no_coincident_station_coords|after Stage 6.13",
+      "_guard_station_x_column_drift|after Stage 6.13",
+      "_guard_coordinates_finite|after Stage 6.14",
+      "_guard_section_bboxes_positive|after Stage 6.14",
+      "_guard_stations_in_sections|after Stage 6.14",
+      "_guard_ports_on_boundaries|after Stage 6.14",
+      "_guard_no_station_overlap|after Stage 6.14",
+      "_guard_no_coincident_station_coords|after Stage 6.14",
+      "_guard_no_line_crosses_non_consumer|after Stage 6.14",
+      "_guard_sparse_loop_station_clears_column_neighbour|after Stage 6.14",
+      "_guard_station_x_column_drift|after Stage 6.14",
+      "_guard_coordinates_finite|after Stage 6.15",
+      "_guard_section_bboxes_positive|after Stage 6.15",
+      "_guard_stations_in_sections|after Stage 6.15",
+      "_guard_ports_on_boundaries|after Stage 6.15",
+      "_guard_no_station_overlap|after Stage 6.15",
+      "_guard_no_coincident_station_coords|after Stage 6.15",
+      "_guard_no_line_crosses_non_consumer|after Stage 6.15",
+      "_guard_sparse_loop_station_clears_column_neighbour|after Stage 6.15",
+      "_guard_station_x_column_drift|after Stage 6.15",
+      "_guard_coordinates_finite|after Stage 6.16",
+      "_guard_section_bboxes_positive|after Stage 6.16",
+      "_guard_stations_in_sections|after Stage 6.16",
+      "_guard_ports_on_boundaries|after Stage 6.16",
+      "_guard_no_station_overlap|after Stage 6.16",
+      "_guard_no_coincident_station_coords|after Stage 6.16",
+      "_guard_no_line_crosses_non_consumer|after Stage 6.16",
+      "_guard_sparse_loop_station_clears_column_neighbour|after Stage 6.16",
+      "_guard_station_x_column_drift|after Stage 6.16",
+      "_guard_coordinates_finite|after final",
+      "_guard_section_bboxes_positive|after final",
+      "_guard_stations_in_sections|after final",
+      "_guard_ports_on_boundaries|after final",
+      "_guard_no_station_overlap|after final",
+      "_guard_no_coincident_station_coords|after final",
+      "_guard_no_line_crosses_non_consumer|after final",
+      "_guard_sparse_loop_station_clears_column_neighbour|after final",
+      "_guard_station_x_column_drift|after final",
+      "_guard_row_trunk_cy_consistent|after final",
+      "_guard_off_track_clear_of_anchor|after final",
+      "_guard_fanout_junction_shares_exit_port_y|after final",
+      "_guard_fanout_junction_resolves_upstream|after final",
+      "_guard_entry_port_fed_only_by_ports|after final",
+      "_guard_flow_exit_anchored_to_carrier|after final",
+      "_guard_fold_lr_exit_follows_target|after final",
+      "_guard_fold_lr_exit_sections_share_bbox_bottom|after final",
+      "_guard_stacked_rows_fill_rowspan_band|after final",
+      "_guard_perp_fed_entry_anchored_to_consumer|after final",
+      "_guard_corridor_fed_solo_rides_trunk|after final",
+      "_guard_perp_entry_clears_vertical_trunk_head|after final",
+      "_guard_post_convergence_trunk_continues|after final",
+      "_guard_perp_entry_feed_not_collinear|after final",
+      "_guard_merge_port_approach_side|after final",
+      "_guard_convergence_shallow_feeder_concentric|after final",
+      "_guard_merge_port_outgoing_side_preserved|after final",
+      "_guard_exit_inherits_entry_bundle_order|after final",
+      "_guard_bypass_port_no_slot_gaps|after final",
+      "_guard_partial_branch_offset_gaps|after final",
+      "_guard_row_gaps|after final",
+      "_guard_section_top_padding|after final",
+      "_guard_terminus_icons_within_bbox|after final",
+      "_guard_inter_section_routes_in_row_band|after final",
+      "_guard_topmost_row_top_entry_hugs_section|after final",
+      "_guard_off_track_output_clears_non_producer|after final",
+      "_guard_tb_exit_corner_column_order|after final",
+      "_guard_no_split_same_line_fanout_descents|after final",
+      "_guard_no_distinct_line_fanout_crossing|after final",
+      "_guard_fan_merge_no_partition_crossing|after final",
+      "_guard_trunk_continuation_drops_straight|after final",
+      "_guard_no_dogleg_crosses_exempt_trunk|after final",
+      "_guard_no_stacked_elbow_graze|after final",
+      "_guard_fanout_tail_join|after final",
+      "_guard_perp_entry_boundary_consistent|after final",
+      "_guard_perp_exit_over_leadin_no_overdip|after final",
+      "_guard_right_entry_drop_in_when_clear|after final",
+      "_guard_right_entry_corridor_descent_no_jog|after final",
+      "_guard_inter_section_route_no_backtrack|after final",
+      "_guard_inter_section_route_no_full_width_backtrack|after final",
+      "_guard_routes_enter_sections_at_ports|after final",
+      "_guard_rail_connector_ports_no_stub|after final",
+      "_guard_no_route_through_section|after final",
+      "_guard_inter_section_route_clears_own_section_interior|after final",
+      "_guard_feeder_exits_section_through_side|after final",
+      "_guard_entry_approach_from_port_side|after final",
+      "_guard_no_opposing_line_overlap|after final",
+      "_guard_serpentine_no_backtrack|after final",
+      "_guard_no_artefactual_counter_flow|after final",
+      "_guard_inter_row_run_clearance|after final",
+      "_guard_trunk_bands_crossing_optimal|after final",
+      "_guard_inter_section_descent_edge_clearance|after final",
+      "_guard_fan_bundles_coincide_or_separate|after final",
+      "_guard_no_label_overlap|final",
+      "_guard_no_diagonal_strikes_horizontal_label|final",
+      "_guard_no_line_strikes_label|final",
+      "_guard_bypass_v_flat_visible|final",
+      "_guard_no_wrapped_label_trunk_strike|final",
+      "_guard_file_icon_no_name_label|final",
+      "_guard_no_line_crosses_file_icon|final",
+      "_guard_centered_line_spread_balanced|final",
+      "_guard_rail_above_label_band|final",
+      "_guard_rail_stations_seat_on_rails|final",
+      "_guard_rail_one_station_per_column|final",
+      "_guard_single_trunk_off_track_step|final",
+      "_guard_off_track_consumer_on_trunk|final",
+      "_guard_off_track_input_column_stack|final",
+      "_guard_interchange_bar_clears_non_members|final",
+      "_guard_interchange_label_clears_connector|final",
+      "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -36363,6 +36741,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -36579,6 +36958,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -36791,6 +37171,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -37011,6 +37392,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -37231,6 +37613,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -37447,6 +37830,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -37663,6 +38047,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -37883,6 +38268,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -38095,6 +38481,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -38311,6 +38698,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -38531,6 +38919,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -38930,6 +39319,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -39142,6 +39532,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -39358,6 +39749,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -39578,6 +39970,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -39794,6 +40187,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -40006,6 +40400,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -40218,6 +40613,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final",
@@ -40427,6 +40823,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -40639,6 +41036,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -40859,6 +41257,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -41075,6 +41474,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -41287,6 +41687,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -41499,6 +41900,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -41711,6 +42113,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -41923,6 +42326,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -42139,6 +42543,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -42538,6 +42943,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -42750,6 +43156,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -42976,6 +43383,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -43001,6 +43409,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -43217,6 +43626,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -43443,6 +43853,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -43659,6 +44070,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -43684,6 +44096,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -43896,6 +44309,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -44311,6 +44725,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -44535,6 +44950,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -44759,6 +45175,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -45186,6 +45603,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -45211,6 +45629,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -45423,6 +45842,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -45635,6 +46055,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -45851,6 +46272,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -46067,6 +46489,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -46283,6 +46706,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -46509,6 +46933,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -46735,6 +47160,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -46961,6 +47387,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -47187,6 +47614,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -47419,6 +47847,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -48065,6 +48494,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -48297,6 +48727,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -48523,6 +48954,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -48755,6 +49187,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -48981,6 +49414,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -49408,6 +49842,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -49634,6 +50069,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -49860,6 +50296,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -50086,6 +50523,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -50316,6 +50754,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -50556,6 +50995,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -50655,6 +51095,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -50881,6 +51322,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -51113,6 +51555,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -51339,6 +51782,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
@@ -51364,6 +51808,7 @@
       "_guard_interchange_bar_clears_non_members|final",
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
+      "_guard_side_entered_vertical_top_not_below_feeder|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
       "_guard_wide_fan_branch_label_clears_next_row|final"
