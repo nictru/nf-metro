@@ -28,6 +28,7 @@ from nf_metro.layout.constants import (
     SECTION_Y_GAP,
     SECTION_Y_PADDING,
     STATION_RADIUS_APPROX,
+    TITLE_BAND_OVERLAP_FLOOR,
     X_SPACING,
 )
 from nf_metro.layout.geometry import (
@@ -39,12 +40,11 @@ from nf_metro.layout.geometry import (
 from nf_metro.layout.phases._common import (
     _bbox_cols_overlap,
     _canvas_width,
-    _is_side_entered_vertical_section,
     _restoring_layout_geometry,
     _route_crosses_section_boundary,
-    _row_contiguous_column_groups,
     _section_bundle_lines,
     _section_lr_port_anchor_y,
+    _side_entered_vertical_feeder_pairs,
     _station_marker_bbox,
     first_vertical_leg_sign,
     first_vertical_leg_x,
@@ -59,7 +59,7 @@ from nf_metro.layout.phases._common import (
     routes_through_own_section_interior,
     routes_through_unrelated_sections,
 )
-from nf_metro.layout.phases.bbox import _section_fit_top
+from nf_metro.layout.phases.bbox import _min_drawn_section_bbox_top, _section_fit_top
 from nf_metro.layout.phases.off_track import (
     _column_grouped_branch_rows,
     _fork_join_adjacency,
@@ -635,21 +635,14 @@ def _guard_side_entered_vertical_top_not_below_feeder(
     beneath the rest of its grid row).
     """
     tol = SAME_COORD_TOLERANCE
-    for group in _row_contiguous_column_groups(graph):
-        for section in group:
-            if not _is_side_entered_vertical_section(graph, section):
-                continue
-            left = [s for s in group if s.grid_col < section.grid_col]
-            if not left:
-                continue
-            neighbour = max(left, key=lambda s: s.grid_col)
-            if section.bbox_y - neighbour.bbox_y > tol:
-                raise PhaseInvariantError(
-                    f"{phase}: side-entered vertical section {section.id!r} "
-                    f"bbox top y={section.bbox_y:.1f} drops "
-                    f"{section.bbox_y - neighbour.bbox_y:.1f}px below its feeder "
-                    f"row-mate {neighbour.id!r} (top y={neighbour.bbox_y:.1f})"
-                )
+    for section, neighbour in _side_entered_vertical_feeder_pairs(graph):
+        if section.bbox_y - neighbour.bbox_y > tol:
+            raise PhaseInvariantError(
+                f"{phase}: side-entered vertical section {section.id!r} "
+                f"bbox top y={section.bbox_y:.1f} drops "
+                f"{section.bbox_y - neighbour.bbox_y:.1f}px below its feeder "
+                f"row-mate {neighbour.id!r} (top y={neighbour.bbox_y:.1f})"
+            )
 
 
 def _guard_symmetric_diamond_branches_straddle_trunk(
@@ -2758,6 +2751,31 @@ def _guard_topmost_row_top_entry_hugs_section(
             )
 
 
+def _guard_title_band_clearance(
+    graph: MetroGraph, phase: str, *, section_y_padding: float
+) -> None:
+    """A titled map's topmost drawn section must not overlap the title band.
+
+    The title is drawn in the canvas-top padding at a fixed baseline; the
+    section header badge protrudes ``SECTION_HEADER_PROTRUSION`` above its box
+    top.  A drawn box top above ``TITLE_BAND_OVERLAP_FLOOR`` sits its badge
+    level with the title.  Untitled maps, and implicit holders (which draw no
+    badge), are exempt.
+    """
+    if not graph.title:
+        return
+    min_top = _min_drawn_section_bbox_top(graph)
+    if min_top is None:
+        return
+    limit = max(section_y_padding, TITLE_BAND_OVERLAP_FLOOR) - GUARD_TOLERANCE
+    if min_top < limit:
+        raise PhaseInvariantError(
+            f"{phase}: titled map's topmost section box top y={min_top:.1f} "
+            f"sits above the title-band floor {limit:.1f}; the header badge "
+            f"would rise level with the map title"
+        )
+
+
 def _ensure_routes(
     graph: MetroGraph, routes: list[RoutedPath] | None
 ) -> list[RoutedPath]:
@@ -4785,6 +4803,16 @@ GUARD_REGISTRY: tuple[GuardSpec, ...] = (
         _guard_topmost_row_top_entry_hugs_section,
         "B",
         needs=frozenset({"offsets", "routes"}),
+    ),
+    GuardSpec(
+        _guard_title_band_clearance,
+        "B",
+        needs=frozenset({"section_y_padding"}),
+        issue_pin=("#1273",),
+        narrow_reason=(
+            "Scoped to titled maps, whose canvas-top title band the header "
+            "must clear; untitled maps keep the tighter section_y_padding top."
+        ),
     ),
     GuardSpec(
         _guard_off_track_output_clears_non_producer,
