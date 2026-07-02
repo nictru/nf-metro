@@ -20,7 +20,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/cross_track_interchange.mmd": {
@@ -231,7 +232,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/diagonal_labels.mmd": {
@@ -828,7 +830,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/differentialabundance.mmd": {
@@ -1059,7 +1062,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/differentialabundance_default.mmd": {
@@ -1274,7 +1278,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/directional_flow.mmd": {
@@ -1298,7 +1303,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/disconnected_components.mmd": {
@@ -1513,7 +1519,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/epitopeprediction.mmd": {
@@ -1724,7 +1731,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/file_icons.mmd": {
@@ -1935,7 +1943,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/genomeassembly.mmd": {
@@ -2146,7 +2155,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/genomeassembly_staggered.mmd": {
@@ -2373,7 +2383,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/genomic_pipeline.mmd": {
@@ -2616,7 +2627,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/group_labels.mmd": {
@@ -2827,7 +2839,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/guide/01_minimal.mmd": {
@@ -2851,7 +2864,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/guide/02_sections.mmd": {
@@ -3066,7 +3080,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/guide/03_fan_out.mmd": {
@@ -3285,7 +3300,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/guide/03b_fan_in_merge.mmd": {
@@ -3496,7 +3512,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/guide/04_directions.mmd": {
@@ -3711,7 +3728,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/guide/05_file_icons.mmd": {
@@ -3922,7 +3940,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/guide/05b_multi_icons.mmd": {
@@ -4133,7 +4152,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/guide/05c_files_icon.mmd": {
@@ -4344,7 +4364,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/guide/05d_folder_icon.mmd": {
@@ -4555,7 +4576,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/guide/05f_banner_labels.mmd": {
@@ -4766,7 +4788,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/guide/06a_without_hidden.mmd": {
@@ -4977,7 +5000,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/guide/06b_with_hidden.mmd": {
@@ -5188,7 +5212,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/guide/07_track_gap.mmd": {
@@ -5212,7 +5237,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/hlatyping.mmd": {
@@ -5423,7 +5449,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/legend_combo.mmd": {
@@ -5447,7 +5474,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/legend_logo_placement.mmd": {
@@ -5662,7 +5690,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/line_spread.mmd": {
@@ -5873,7 +5902,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/longread_variant_calling.mmd": {
@@ -6088,7 +6118,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/marker_styles.mmd": {
@@ -6299,7 +6330,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/off_track_outputs.mmd": {
@@ -6510,7 +6542,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/rail_mode.mmd": {
@@ -6729,7 +6762,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/rnaseq_auto.mmd": {
@@ -6948,7 +6982,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/rnaseq_sections.mmd": {
@@ -7370,7 +7405,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/rnaseq_sections_manual.mmd": {
@@ -7792,7 +7828,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/sarek_metro.mmd": {
@@ -8007,7 +8044,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/simple_pipeline.mmd": {
@@ -8031,7 +8069,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/tb_file_termini.mmd": {
@@ -8616,7 +8655,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/aligner_row_pinned_continuation.mmd": {
@@ -8827,7 +8867,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/aligner_row_terminator_lane_gap.mmd": {
@@ -9038,7 +9079,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/around_below_ep_col_gt0.mmd": {
@@ -9257,7 +9299,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/around_section_below.mmd": {
@@ -9476,7 +9519,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/asymmetric_tree.mmd": {
@@ -9695,7 +9739,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/bottom_row_climb_clear_corridor.mmd": {
@@ -9910,7 +9955,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/branch_fold_forward.mmd": {
@@ -10129,7 +10175,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/branch_fold_stability.mmd": {
@@ -10344,7 +10391,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/bt_chain.mmd": {
@@ -10555,7 +10603,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/bt_exit_top_above.mmd": {
@@ -10770,7 +10819,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/bt_exit_top_above_2line.mmd": {
@@ -10985,7 +11035,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/bt_fork.mmd": {
@@ -11196,7 +11247,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/bt_perp_entry_below.mmd": {
@@ -11411,7 +11463,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/bt_to_lr.mmd": {
@@ -11622,7 +11675,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/bt_to_tb.mmd": {
@@ -11833,7 +11887,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/bundle_terminator_continuation.mmd": {
@@ -12044,7 +12099,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/bypass_fan_in_outer_slot.mmd": {
@@ -12263,7 +12319,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/bypass_gap2_rightward_overflow.mmd": {
@@ -12474,7 +12531,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/bypass_label_rake.mmd": {
@@ -12685,7 +12743,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/bypass_label_rake_left.mmd": {
@@ -12896,7 +12955,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/bypass_label_rake_wide.mmd": {
@@ -13304,7 +13364,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/bypass_leftward_far_side_entry.mmd": {
@@ -13515,7 +13576,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/bypass_leftward_overflow.mmd": {
@@ -13726,7 +13788,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/bypass_v_tight.mmd": {
@@ -14136,7 +14199,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/clear_channel_target_aware_push.mmd": {
@@ -14355,7 +14419,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/compact_gap_peer_conflict.mmd": {
@@ -14566,7 +14631,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/compact_hidden_passthrough.mmd": {
@@ -14777,7 +14843,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/complex_multipath.mmd": {
@@ -14992,7 +15059,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/convergence_fold_diamond.mmd": {
@@ -15211,7 +15279,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/convergence_sink_above.mmd": {
@@ -15426,7 +15495,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/convergence_sink_fold.mmd": {
@@ -15649,7 +15719,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/convergence_stacked_sink.mmd": {
@@ -15868,7 +15939,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/convergent_offrow_exit_climb.mmd": {
@@ -16083,7 +16155,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/corridor_narrow_gap_fallback.mmd": {
@@ -16302,7 +16375,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/cross_col_top_entry.mmd": {
@@ -16513,7 +16587,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/cross_column_perp_drop.mmd": {
@@ -16724,7 +16799,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/cross_column_perp_drop_far_exit.mmd": {
@@ -16935,7 +17011,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/cross_row_gap_wrap.mmd": {
@@ -17150,7 +17227,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/deep_linear.mmd": {
@@ -17361,7 +17439,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/disconnected_components_fold.mmd": {
@@ -17580,7 +17659,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/disjoint_sameline_trunks.mmd": {
@@ -17791,7 +17871,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/divergent_fanout_split.mmd": {
@@ -18006,7 +18087,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/dogleg_exempt_distinct.mmd": {
@@ -18221,7 +18303,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/dogleg_exempt_sameline.mmd": {
@@ -18436,7 +18519,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/dogleg_twoline_fanout.mmd": {
@@ -18651,7 +18735,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/exit_corner_offset_dogleg.mmd": {
@@ -18866,7 +18951,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/fan_bypass_nesting.mmd": {
@@ -19089,7 +19175,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/fan_in_merge.mmd": {
@@ -19300,7 +19387,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/fold_bypass_creep.mmd": {
@@ -19516,6 +19604,7 @@
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final",
       "_guard_no_same_row_backward_feed|None",
       "_guard_no_mixed_entry_directions|None",
       "_guard_no_same_row_backward_feed|None",
@@ -19727,7 +19816,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/fold_bypass_creep_tight.mmd": {
@@ -19943,6 +20033,7 @@
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final",
       "_guard_no_same_row_backward_feed|None",
       "_guard_no_mixed_entry_directions|None",
       "_guard_no_same_row_backward_feed|None",
@@ -20154,7 +20245,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/fold_double.mmd": {
@@ -20373,7 +20465,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/fold_fan_across.mmd": {
@@ -20596,7 +20689,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/fold_left_exit_right_entry.mmd": {
@@ -21193,7 +21287,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/fold_split_targets.mmd": {
@@ -21412,7 +21507,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/fold_stacked_branch.mmd": {
@@ -21639,7 +21735,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/foldback_exit_peeloff.mmd": {
@@ -21854,7 +21951,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/fork_join_interior_label.mmd": {
@@ -22252,7 +22350,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/funcprofiler_upstream.mmd": {
@@ -22445,12 +22544,6 @@
       "_guard_trunk_bands_crossing_optimal|after final",
       "_guard_inter_section_descent_edge_clearance|after final",
       "_guard_fan_bundles_coincide_or_separate|after final",
-      "_guard_no_same_row_backward_feed|None",
-      "_guard_no_mixed_entry_directions|None",
-      "_guard_no_same_row_backward_feed|None",
-      "_guard_no_mixed_entry_directions|None",
-      "_guard_no_same_row_backward_feed|None",
-      "_guard_no_mixed_entry_directions|None",
       "_guard_no_same_row_backward_feed|None",
       "_guard_no_mixed_entry_directions|None",
       "_guard_no_same_row_backward_feed|None",
@@ -22664,7 +22757,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/header_nudge.mmd": {
@@ -22883,7 +22977,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/header_side_rotated.mmd": {
@@ -23102,7 +23197,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/inrow_skip_breeze.mmd": {
@@ -23314,6 +23410,7 @@
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final",
       "_guard_no_same_row_backward_feed|None",
       "_guard_no_mixed_entry_directions|None",
       "_guard_no_same_row_backward_feed|None",
@@ -23521,7 +23618,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/inter_row_wrap_clearance.mmd": {
@@ -23752,7 +23850,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/interchange_label_clears_bridge.mmd": {
@@ -23963,7 +24062,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/interchange_lane_reorder.mmd": {
@@ -24174,7 +24274,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/internal_source_equal_sibling_2fan.mmd": {
@@ -24399,7 +24500,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/junction_entry_align.mmd": {
@@ -24614,7 +24716,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/junction_entry_collision.mmd": {
@@ -24825,7 +24928,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/junction_entry_reversed_fold.mmd": {
@@ -25036,7 +25140,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/junction_fanout_convergence.mmd": {
@@ -25247,7 +25352,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/left_entry_up_wrap.mmd": {
@@ -25462,7 +25568,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/left_exit_sink_below.mmd": {
@@ -25677,7 +25784,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/lr_bottom_exit_rl_top_entry_jog.mmd": {
@@ -25892,7 +26000,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/lr_perp_bottom_exit_perp_entry.mmd": {
@@ -26103,7 +26212,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/lr_perp_bottom_exit_side_entry.mmd": {
@@ -26314,7 +26424,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/lr_perp_top_exit_perp_entry.mmd": {
@@ -26525,7 +26636,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/lr_perp_top_exit_perp_entry_diverging.mmd": {
@@ -26736,7 +26848,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/lr_perp_top_exit_side_entry.mmd": {
@@ -26947,7 +27060,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/lr_to_tb_top_cross_col.mmd": {
@@ -27162,7 +27276,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/lr_to_tb_top_drop.mmd": {
@@ -27377,7 +27492,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/lr_to_tb_top_drop_two_lines.mmd": {
@@ -27592,7 +27708,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/lr_to_tb_top_near_vertical.mmd": {
@@ -27807,7 +27924,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/lr_to_tb_top_two_lines.mmd": {
@@ -28022,7 +28140,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/lr_top_entry_cross_column.mmd": {
@@ -28237,7 +28356,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/lr_top_entry_cross_column_two_line.mmd": {
@@ -28452,7 +28572,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/manual_rl_row_nonconsumer_bypass.mmd": {
@@ -28667,7 +28788,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/merge_around_below_leftmost.mmd": {
@@ -28882,7 +29004,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/merge_bottom_row_bypass.mmd": {
@@ -29101,7 +29224,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/merge_leftmost_sink_branch.mmd": {
@@ -29316,7 +29440,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/merge_offrow_continuation.mmd": {
@@ -29531,7 +29656,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/merge_port_above_approach.mmd": {
@@ -29746,7 +29872,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/merge_pullaway.mmd": {
@@ -29961,7 +30088,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/merge_right_entry.mmd": {
@@ -30176,7 +30304,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/merge_trunk_out_of_range_section.mmd": {
@@ -30391,7 +30520,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/merge_trunk_over_low_section.mmd": {
@@ -30606,7 +30736,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/mismatched_tracks.mmd": {
@@ -30821,7 +30952,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/mixed_bundle_column.mmd": {
@@ -31040,7 +31172,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/mixed_port_sides.mmd": {
@@ -31255,7 +31388,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/multi_input_convergence.mmd": {
@@ -31478,7 +31612,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/multi_line_bundle.mmd": {
@@ -31689,7 +31824,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/multi_section_cell.mmd": {
@@ -31904,7 +32040,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/multicarrier_offrow_exit_climb.mmd": {
@@ -32119,7 +32256,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/near_vertical_junction_hook.mmd": {
@@ -32334,7 +32472,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/off_track_convergence.mmd": {
@@ -32545,7 +32684,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/off_track_convergence_multiline.mmd": {
@@ -32756,7 +32896,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/off_track_input_above_consumer.mmd": {
@@ -32979,7 +33120,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/packed_cell_cellmate_bypass.mmd": {
@@ -33194,7 +33336,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/packed_cell_cellmate_bypass_adjacent.mmd": {
@@ -33409,7 +33552,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/parallel_independent.mmd": {
@@ -33624,7 +33768,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/peeloff_extra_line_consumer.mmd": {
@@ -33835,7 +33980,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/peeloff_riser_respace.mmd": {
@@ -34046,7 +34192,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/post_convergence_trunk.mmd": {
@@ -34257,7 +34404,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/rail_inter_section.mmd": {
@@ -34500,7 +34648,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/right_entry_from_above.mmd": {
@@ -34715,7 +34864,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/right_entry_from_above_far.mmd": {
@@ -34930,7 +35080,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/right_entry_gap_above_empty_row.mmd": {
@@ -35145,7 +35296,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/right_entry_wrap_no_fan.mmd": {
@@ -35360,7 +35512,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/rl_entry_runway.mmd": {
@@ -35571,7 +35724,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/rnaseq_lite.mmd": {
@@ -35786,7 +35940,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/route_around_intervening.mmd": {
@@ -35997,7 +36152,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/same_side_culdesac.mmd": {
@@ -36208,7 +36364,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/section_diamond.mmd": {
@@ -36423,7 +36580,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/sectionless_skip_breeze.mmd": {
@@ -36634,7 +36792,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/self_crossing_bridge.mmd": {
@@ -36853,7 +37012,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/serpentine_grid_tall_bundle.mmd": {
@@ -37072,7 +37232,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/serpentine_grid_wide_bundle.mmd": {
@@ -37287,7 +37448,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/serpentine_rl_bundle.mmd": {
@@ -37502,7 +37664,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/shared_sink_parallel.mmd": {
@@ -37721,7 +37884,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/single_section.mmd": {
@@ -37932,7 +38096,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/stacked_left_exit_drop.mmd": {
@@ -38147,7 +38312,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/stacked_lr_serpentine.mmd": {
@@ -38366,7 +38532,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/symmetric_diamond_beside_wide_fan.mmd": {
@@ -38764,7 +38931,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/tb_bottom_entry_flow_start.mmd": {
@@ -38975,7 +39143,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/tb_bottom_exit_bundle_jog.mmd": {
@@ -39190,7 +39359,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/tb_bottom_exit_fork_diamond.mmd": {
@@ -39409,7 +39579,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/tb_column_continuation_two_lines.mmd": {
@@ -39624,7 +39795,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/tb_convergence_straight_drop.mmd": {
@@ -39835,7 +40007,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/tb_fork_lane_transpose.mmd": {
@@ -40047,6 +40220,7 @@
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
       "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final",
       "_guard_no_same_row_backward_feed|None",
       "_guard_no_mixed_entry_directions|None",
       "_guard_no_same_row_backward_feed|None",
@@ -40254,7 +40428,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/tb_internal_diagonal.mmd": {
@@ -40465,7 +40640,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/tb_left_exit_step.mmd": {
@@ -40684,7 +40860,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/tb_lr_exit_left.mmd": {
@@ -40899,7 +41076,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/tb_lr_exit_right.mmd": {
@@ -41110,7 +41288,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/tb_passthrough_continuation.mmd": {
@@ -41321,7 +41500,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/tb_passthrough_trunk.mmd": {
@@ -41532,7 +41712,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/tb_perp_exit_side_neighbour.mmd": {
@@ -41743,7 +41924,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/tb_right_entry_stack.mmd": {
@@ -41958,7 +42140,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/tb_trunk_through_fan.mmd": {
@@ -42356,7 +42539,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/tb_two_line_vert_seam.mmd": {
@@ -42567,7 +42751,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/terminal_symmetric_fan.mmd": {
@@ -42792,7 +42977,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/terminus_join.mmd": {
@@ -42816,7 +43002,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/top_entry_header_clash.mmd": {
@@ -43031,7 +43218,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/trunk_through_fan.mmd": {
@@ -43256,7 +43444,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/u_turn_fold.mmd": {
@@ -43471,7 +43660,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/uneven_diamond.mmd": {
@@ -43495,7 +43685,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/upward_bypass.mmd": {
@@ -43706,7 +43897,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/variant_calling.mmd": {
@@ -44120,7 +44312,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/wide_fan_in.mmd": {
@@ -44343,7 +44536,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/wide_fan_out.mmd": {
@@ -44566,7 +44760,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/wide_label_fan.mmd": {
@@ -44992,7 +45187,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/topologies/wrapped_label_trunk.mmd": {
@@ -45016,7 +45212,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/variant_calling.mmd": {
@@ -45227,7 +45424,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/variant_calling_tuned.mmd": {
@@ -45438,7 +45636,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/variantbenchmarking.mmd": {
@@ -45653,7 +45852,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/variantbenchmarking_auto.mmd": {
@@ -45868,7 +46068,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "examples/variantprioritization.mmd": {
@@ -46083,7 +46284,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "tests/fixtures/bubble_forced_label_clears_diagonal.mmd": {
@@ -46308,7 +46510,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "tests/fixtures/bubble_label_clears_diagonal.mmd": {
@@ -46533,7 +46736,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "tests/fixtures/bubble_output_above.mmd": {
@@ -46758,7 +46962,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "tests/fixtures/captioned_sibling_outputs.mmd": {
@@ -46983,7 +47188,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "tests/fixtures/da_pipeline.mmd": {
@@ -47214,7 +47420,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "tests/fixtures/diagonal_single_trunk_off_track.mmd": {
@@ -47859,7 +48066,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "tests/fixtures/file_icon_fanin.mmd": {
@@ -48090,7 +48298,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "tests/fixtures/font_scale.mmd": {
@@ -48315,7 +48524,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "tests/fixtures/genomeassembly_organellar.mmd": {
@@ -48546,7 +48756,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "tests/fixtures/icon_caption_wrap.mmd": {
@@ -48771,7 +48982,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "tests/fixtures/leaf_file_icon_on_trunk.mmd": {
@@ -49197,7 +49409,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "tests/fixtures/multiline_labels.mmd": {
@@ -49422,7 +49635,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "tests/fixtures/off_track_output_branched.mmd": {
@@ -49647,7 +49861,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "tests/fixtures/off_track_outputs_along_trunk.mmd": {
@@ -49872,7 +50087,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "tests/fixtures/rail_diagonal_labels.mmd": {
@@ -50101,7 +50317,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "tests/fixtures/rail_marker_fill.mmd": {
@@ -50340,7 +50557,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "tests/fixtures/rail_single_line_callers.mmd": {
@@ -50350,7 +50568,7 @@
   "tests/fixtures/rnaseq_sections.mmd": {
     "raised": [
       "PhaseInvariantError",
-      "after Stage 6.4: station 'fastp' marker bbox (x=456.5, y=60.0..70.0, half_h=5.0) outside section 'preprocessing' bbox (22.0, 70.0, w=772.5, h=140.0)"
+      "after Stage 6.4: station 'fastp' marker bbox (x=456.5, y=60.0..70.0, half_h=5.0) outside section 'preprocessing' bbox (22.0, 70.0, w=772.5, h=146.0)"
     ],
     "trace": [
       "_guard_no_same_row_backward_feed|None",
@@ -50438,7 +50656,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "tests/fixtures/tb_right_exit_feeder_slots.mmd": {
@@ -50663,7 +50882,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "tests/fixtures/topologies/twoline_fanout_up.mmd": {
@@ -50894,7 +51114,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "tests/fixtures/trunk_align_matching_bundle.mmd": {
@@ -51119,7 +51340,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   },
   "tests/fixtures/uneven_diamond.mmd": {
@@ -51143,7 +51365,8 @@
       "_guard_interchange_label_clears_connector|final",
       "_guard_tb_top_entry_drop_hugs_top|final",
       "_guard_symmetric_diamond_branches_straddle_trunk|final",
-      "_guard_symmetric_diamond_branches_half_pitch|final"
+      "_guard_symmetric_diamond_branches_half_pitch|final",
+      "_guard_wide_fan_branch_label_clears_next_row|final"
     ]
   }
 }

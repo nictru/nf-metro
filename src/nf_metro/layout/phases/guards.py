@@ -20,6 +20,7 @@ from nf_metro.layout.constants import (
     GUARD_TOLERANCE,
     ICON_HALF_HEIGHT,
     INTER_ROW_EDGE_CLEARANCE,
+    LABEL_MARGIN,
     OFFSET_STEP,
     ROW_BAND_SLACK,
     SAME_COORD_TOLERANCE,
@@ -706,6 +707,77 @@ def _guard_symmetric_diamond_branches_half_pitch(graph: MetroGraph, phase: str) 
                 f"{0.5 * full_pitch:.1f} expected beside a full-pitch "
                 f"{full_pitch:.1f} fan; the diamond was not compacted"
             )
+
+
+def _guard_wide_fan_branch_label_clears_next_row(graph: MetroGraph, phase: str) -> None:
+    """Final: a straight-style 3+-way fan's branch label clears the next row's marker.
+
+    Layer-column alternation stacks every branch label of a wide fork/join
+    fan on the same side, so a branch's label lands in the gap toward the
+    next branch row rather than alternating clear of it; the row pitch must
+    stay wide enough that the label doesn't bleed into that row's marker.
+    ``diamond_style: symmetric`` routes the loop to the side instead of
+    stacking rows, so this is skipped there.
+    """
+    if graph.diamond_style != "straight":
+        return
+    from nf_metro.layout.labels import _label_bbox
+    from nf_metro.layout.phases.spacing import _probe_label_placements
+
+    groups: list[list[str]] = []
+    for section in graph.sections.values():
+        if section.direction not in ("LR", "RL"):
+            continue
+        sec_ids = set(section.station_ids)
+        out_targets: dict[str, set[str]] = defaultdict(set)
+        in_sources: dict[str, set[str]] = defaultdict(set)
+        for e in graph.edges:
+            if e.source in sec_ids and e.target in sec_ids:
+                out_targets[e.source].add(e.target)
+                in_sources[e.target].add(e.source)
+        for branch_ids in (*out_targets.values(), *in_sources.values()):
+            # A wide broadcast hub can fan to targets/sources scattered across
+            # several columns (e.g. limma's 9-way fan-out); only stations
+            # sharing a column are genuinely stacked branch rows.
+            by_x: dict[float, list[str]] = defaultdict(list)
+            for sid in branch_ids:
+                st = graph.stations.get(sid)
+                if st is None or st.is_port or st.off_track:
+                    continue
+                by_x[round(st.x, 1)].append(sid)
+            for same_col in by_x.values():
+                if len(same_col) >= 3:
+                    groups.append(
+                        sorted(same_col, key=lambda sid: graph.stations[sid].y)
+                    )
+
+    if not groups:
+        return
+
+    probe = _probe_label_placements(graph, allow_hyphenation=True)
+    if probe is None:
+        return
+    offsets, _routes, placements = probe
+    placement_by_sid = {p.station_id: p for p in placements}
+
+    for group in groups:
+        for upper, lower in zip(group, group[1:]):
+            placement = placement_by_sid.get(upper)
+            label = graph.stations[upper].label
+            if placement is None or not label.strip() or "\n" in label:
+                continue
+            marker = _station_marker_bbox(graph, lower, offsets=offsets)
+            if marker is None:
+                continue
+            label_bottom = _label_bbox(placement)[3]
+            marker_top = marker[1]
+            gap = marker_top - label_bottom
+            if gap < LABEL_MARGIN:
+                raise PhaseInvariantError(
+                    f"{phase}: {upper!r} label bottom={label_bottom:.1f} comes "
+                    f"within {gap:.1f}px of {lower!r}'s marker (top={marker_top:.1f}), "
+                    f"short of the {LABEL_MARGIN}px margin"
+                )
 
 
 def _guard_section_bboxes_positive(graph: MetroGraph, phase: str) -> None:
@@ -4950,6 +5022,7 @@ INLINE_GUARD_REGISTRY: tuple[GuardSpec, ...] = (
     GuardSpec(_guard_symmetric_diamond_branches_half_pitch, "B"),
     GuardSpec(_guard_tall_anchor_stack_well_formed, "B"),
     GuardSpec(_guard_tb_top_entry_drop_hugs_top, "B"),
+    GuardSpec(_guard_wide_fan_branch_label_clears_next_row, "B"),
 )
 
 
