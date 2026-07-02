@@ -59,6 +59,8 @@ from nf_metro.layout.phases._common import (
 )
 from nf_metro.layout.phases.bbox import _section_fit_top
 from nf_metro.layout.phases.off_track import (
+    _column_grouped_branch_rows,
+    _fork_join_adjacency,
     _is_single_trunk_lr_section,
     _off_track_anchor_of,
     _off_track_lift_step,
@@ -728,28 +730,10 @@ def _guard_wide_fan_branch_label_clears_next_row(graph: MetroGraph, phase: str) 
     for section in graph.sections.values():
         if section.direction not in ("LR", "RL"):
             continue
-        sec_ids = set(section.station_ids)
-        out_targets: dict[str, set[str]] = defaultdict(set)
-        in_sources: dict[str, set[str]] = defaultdict(set)
-        for e in graph.edges:
-            if e.source in sec_ids and e.target in sec_ids:
-                out_targets[e.source].add(e.target)
-                in_sources[e.target].add(e.source)
-        for branch_ids in (*out_targets.values(), *in_sources.values()):
-            # A wide broadcast hub can fan to targets/sources scattered across
-            # several columns (e.g. limma's 9-way fan-out); only stations
-            # sharing a column are genuinely stacked branch rows.
-            by_x: dict[float, list[str]] = defaultdict(list)
-            for sid in branch_ids:
-                st = graph.stations.get(sid)
-                if st is None or st.is_port or st.off_track:
-                    continue
-                by_x[round(st.x, 1)].append(sid)
-            for same_col in by_x.values():
-                if len(same_col) >= 3:
-                    groups.append(
-                        sorted(same_col, key=lambda sid: graph.stations[sid].y)
-                    )
+        out_targets, in_sources = _fork_join_adjacency(
+            graph, graph, set(section.station_ids)
+        )
+        groups.extend(_column_grouped_branch_rows(graph, out_targets, in_sources))
 
     if not groups:
         return

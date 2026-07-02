@@ -15,7 +15,6 @@ __all__ = [
 ]
 
 import warnings
-from collections import defaultdict
 from collections.abc import Callable
 
 from nf_metro.layout.constants import (
@@ -231,6 +230,7 @@ from nf_metro.layout.phases.off_track import (  # noqa: F401
     _align_phantom_pass_throughs,
     _bump_off_track_clear_of_trunks,
     _compute_fork_join_gaps,
+    _fork_join_adjacency,
     _insert_phantom_pass_throughs,
     _lift_off_track_stations,
     _line_crossed_file_icon_sinks,
@@ -421,17 +421,19 @@ def _wide_fan_branch_label_pitch(
     pitch to keep its label off the next branch row's marker.
     ``diamond_style: symmetric`` routes the loop to the side instead of
     stacking rows, so this returns 0 there.
+
+    Runs before layout assigns station coordinates, so unlike the matching
+    ``_guard_wide_fan_branch_label_clears_next_row`` this cannot narrow a wide
+    hub's targets/sources to the ones that will end up sharing a column; it
+    treats every 3+-way hub as a potential stack, which only widens the
+    (global) pitch floor and never narrows a layout the guard would accept.
     """
     if graph.diamond_style != "straight":
         return 0.0
 
-    sec_ids = set(section.station_ids)
-    out_targets: dict[str, set[str]] = defaultdict(set)
-    in_sources: dict[str, set[str]] = defaultdict(set)
-    for e in graph.edges:
-        if e.source in sec_ids and e.target in sec_ids:
-            out_targets[e.source].add(e.target)
-            in_sources[e.target].add(e.source)
+    out_targets, in_sources = _fork_join_adjacency(
+        graph, graph, set(section.station_ids)
+    )
 
     required = 0.0
     for group in (*out_targets.values(), *in_sources.values()):

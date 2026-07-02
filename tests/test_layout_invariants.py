@@ -73,6 +73,8 @@ from nf_metro.layout.phases.guards import (
     _tb_top_entry_drop_overshoot,
 )
 from nf_metro.layout.phases.off_track import (
+    _column_grouped_branch_rows,
+    _fork_join_adjacency,
     _is_single_trunk_lr_section,
     _off_track_anchor_of,
     _off_track_fit_top,
@@ -8808,32 +8810,11 @@ def _wide_fan_branch_row_pairs(graph: MetroGraph) -> list[tuple[str, str]]:
     fan stacks every branch label on the same side; each upper branch's label
     then lands in the gap toward the next branch row.
     """
-    outs: dict[str, set[str]] = defaultdict(set)
-    ins: dict[str, set[str]] = defaultdict(set)
-    for e in graph.edges:
-        if e.source in graph.stations and e.target in graph.stations:
-            outs[e.source].add(e.target)
-            ins[e.target].add(e.source)
-    groups = [g for g in outs.values() if len(g) >= 3] + [
-        g for g in ins.values() if len(g) >= 3
-    ]
+    out_targets, in_sources = _fork_join_adjacency(graph, None, None)
     pairs: set[tuple[str, str]] = set()
-    for group in groups:
-        # A wide broadcast hub can fan to targets/sources scattered across
-        # several columns; only stations sharing a column are genuinely
-        # stacked branch rows.
-        by_x: dict[float, list[str]] = defaultdict(list)
-        for sid in group:
-            st = graph.stations[sid]
-            if st.is_port or st.off_track:
-                continue
-            by_x[round(st.x, 1)].append(sid)
-        for same_col in by_x.values():
-            if len(same_col) < 3:
-                continue
-            ordered = sorted(same_col, key=lambda s: graph.stations[s].y)
-            for upper, lower in zip(ordered, ordered[1:]):
-                pairs.add((upper, lower))
+    for group in _column_grouped_branch_rows(graph, out_targets, in_sources):
+        for upper, lower in zip(group, group[1:]):
+            pairs.add((upper, lower))
     return sorted(pairs)
 
 
