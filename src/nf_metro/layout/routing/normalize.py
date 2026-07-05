@@ -222,35 +222,28 @@ def _fused_sibling_spans(
     return spans
 
 
-def _is_shared_trunk_mixed_direction_corridor(
+def _corridor_feeds_single_entry_port(
     chans: list[_VChannel], graph: MetroGraph
-) -> bool:
-    """True when up- and down-going gap channels share one fan trunk anchor.
-
-    Fan-in feeders converging on one entry port, and fan-out feeders
-    diverging from one exit port or junction, must share one vertical
-    channel X at that trunk.  The default gap layout splits bundles by
-    travel direction and offsets them by ``BUNDLE_TO_BUNDLE_CLEARANCE``,
-    which staggers those legs.
-    """
-    if len(chans) < 2:
-        return False
-    if not any(c.down for c in chans) or not any(not c.down for c in chans):
-        return False
+) -> str | None:
+    """Entry port id when every channel targets the same entry port, else ``None``."""
     targets: set[str] = set()
-    fan_in = True
     for ch in chans:
         tgt = graph.stations.get(ch.route.edge.target)
         if tgt is None or not tgt.is_port:
-            fan_in = False
-            break
+            return None
         port = graph.ports.get(tgt.id)
         if port is None or not port.is_entry:
-            fan_in = False
-            break
+            return None
         targets.add(tgt.id)
-    if fan_in and len(targets) == 1:
-        return True
+    if len(targets) == 1:
+        return next(iter(targets))
+    return None
+
+
+def _corridor_diverges_from_single_source(
+    chans: list[_VChannel], graph: MetroGraph
+) -> bool:
+    """True when every channel leaves one fan-out exit port or junction."""
     sources: set[str] = set()
     for ch in chans:
         src_id = ch.route.edge.source
@@ -267,18 +260,80 @@ def _is_shared_trunk_mixed_direction_corridor(
     return len(sources) == 1
 
 
+def _is_shared_trunk_mixed_direction_corridor(
+    chans: list[_VChannel], graph: MetroGraph
+) -> bool:
+    """True when up- and down-going gap channels share one fan trunk anchor.
+
+    Fan-in feeders converging on one entry port, and fan-out feeders
+    diverging from one exit port or junction, must share one vertical
+    channel X at that trunk.  The default gap layout splits bundles by
+    travel direction and offsets them by ``BUNDLE_TO_BUNDLE_CLEARANCE``,
+    which staggers those legs.
+    """
+    if len(chans) < 2:
+        return False
+    if not any(c.down for c in chans) or not any(not c.down for c in chans):
+        return False
+    if _corridor_feeds_single_entry_port(chans, graph) is not None:
+        return True
+    return _corridor_diverges_from_single_source(chans, graph)
+
+
+def _narrowest_gap_half_inset(
+    graph: MetroGraph, lo_col: int, hi_col: int
+) -> float | None:
+    """Half-width of the narrowest row band in a column gap pair."""
+    narrowest: float | None = None
+    for row in _grid_row_bands(graph):
+        gl, gr = column_gap_edges(graph, lo_col, hi_col, row=row)
+        if gr <= gl:
+            continue
+        width = gr - gl
+        if narrowest is None or width < narrowest:
+            narrowest = width
+    return narrowest / 2 if narrowest is not None else None
+
+
+def _shared_trunk_source_inset(
+    chans: list[_VChannel],
+    gap_left: float,
+    gap_right: float,
+    graph: MetroGraph,
+    lo_col: int,
+) -> float:
+    """Inset from ``gap_left`` for the rank-0 line in a shared fan trunk.
+
+    Fan-out corridors centre in their own gap.  Fan-in corridors mirror the
+    narrowest inset of the paired upstream gap beside the aligner column so
+    channel spacing next to the aligner boxes matches the preprocessing
+    fan-out on the left instead of drifting toward an oversized gap midline.
+    """
+    actual_half = (gap_right - gap_left) / 2
+    if _corridor_feeds_single_entry_port(chans, graph) is not None and lo_col >= 1:
+        mirror = _narrowest_gap_half_inset(graph, lo_col - 1, lo_col)
+        if mirror is not None:
+            return mirror
+    return actual_half
+
+
 def _restack_shared_trunk_corridor(
     chans: list[_VChannel],
     gap_left: float,
     gap_right: float,
     ctx: _RoutingCtx,
+    *,
+    lo_col: int,
 ) -> None:
-    """Centre every mixed-direction leg in a shared fan trunk on the gap midline."""
-    mid = (gap_left + gap_right) / 2
+    """Seat every mixed-direction leg in a shared fan trunk on one channel X."""
+    inset = _shared_trunk_source_inset(
+        chans, gap_left, gap_right, ctx.graph, lo_col
+    )
+    anchor = gap_left + inset
     step = ctx.offset_step
     for ch in chans:
         lead_right = _corridor_leadout_right([ch], ch.down)
-        _restack_channel(ch, mid, 0, 1, step, ctx.curve_radius, lead_right)
+        _restack_channel(ch, anchor, 0, 1, step, ctx.curve_radius, lead_right)
 
 
 def _materialize_gap_slots(routes: list[RoutedPath], ctx: _RoutingCtx) -> None:
@@ -334,7 +389,9 @@ def _materialize_gap_slots(routes: list[RoutedPath], ctx: _RoutingCtx) -> None:
                 gap_left = max(gap_left, r_left)
                 gap_right = min(gap_right, r_right)
         if _is_shared_trunk_mixed_direction_corridor(chans, graph):
-            _restack_shared_trunk_corridor(chans, gap_left, gap_right, ctx)
+            _restack_shared_trunk_corridor(
+                chans, gap_left, gap_right, ctx, lo_col=lo
+            )
             continue
         bundles: list[tuple[bool, list[_VChannel]]] = []
         for down in (True, False):

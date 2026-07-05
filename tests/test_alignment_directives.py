@@ -1268,6 +1268,100 @@ class TestSharedTrunkVerticalChannelAlignment:
         assert all(x == pytest.approx(scrnaseq_x, abs=0.5) for x in by_line["scrnaseq"])
         assert by_line["multiome"][0] == pytest.approx(scrnaseq_x + 4.0, abs=0.5)
 
+    def test_scrnaseq_multiome_fanin_keeps_line_offset(self):
+        from pathlib import Path
+
+        map_path = (
+            Path(__file__).resolve().parents[2] / "pipelines" / "scrnaseq" / "map.mmd"
+        )
+        graph, routes = _layout_and_routes(map_path.read_text())
+        aligner_secs = {
+            "simpleaf",
+            "kallisto",
+            "star",
+            "cell_ranger",
+            "cell_ranger_arc",
+            "cell_ranger_multi",
+        }
+        entry_ports = [
+            pid
+            for pid, port in graph.ports.items()
+            if port.is_entry and port.section_id == "convergence"
+        ]
+        fan_routes = [
+            r
+            for r in routes
+            if r.edge is not None
+            and r.edge.target in entry_ports
+            and graph.stations[r.edge.source].section_id in aligner_secs
+        ]
+        by_line: dict[str, list[float]] = {}
+        for r in fan_routes:
+            xs = _vertical_gap_xs(r.points)
+            assert xs, f"expected vertical gap leg for {r.edge.source}"
+            by_line.setdefault(r.line_id, []).append(xs[0])
+        assert len(by_line["scrnaseq"]) == 5
+        assert len(by_line["multiome"]) == 1
+        scrnaseq_x = by_line["scrnaseq"][0]
+        assert all(x == pytest.approx(scrnaseq_x, abs=0.5) for x in by_line["scrnaseq"])
+        assert by_line["multiome"][0] == pytest.approx(scrnaseq_x + 4.0, abs=0.5)
+
+    def test_scrnaseq_aligner_gap_channel_spacing_matches_left_and_right(self):
+        from pathlib import Path
+
+        from nf_metro.layout.constants import OFFSET_STEP
+        from nf_metro.layout.routing.common import column_gap_edges
+
+        map_path = (
+            Path(__file__).resolve().parents[2] / "pipelines" / "scrnaseq" / "map.mmd"
+        )
+        graph, routes = _layout_and_routes(map_path.read_text())
+        aligner_secs = {
+            "simpleaf",
+            "kallisto",
+            "star",
+            "cell_ranger",
+            "cell_ranger_arc",
+            "cell_ranger_multi",
+        }
+
+        def _aligner_adjacent_channels(lo_col: int, hi_col: int) -> dict[str, float]:
+            gap_left, gap_right = column_gap_edges(graph, lo_col, hi_col)
+            xs: dict[str, float] = {}
+            for r in routes:
+                if not r.is_inter_section:
+                    continue
+                src = graph.stations.get(r.edge.source) if r.edge else None
+                tgt = graph.stations.get(r.edge.target) if r.edge else None
+                if src is None or tgt is None:
+                    continue
+                if not (
+                    src.section_id in aligner_secs or tgt.section_id in aligner_secs
+                ):
+                    continue
+                for x in _vertical_gap_xs(r.points):
+                    if gap_left - 1 <= x <= gap_right + 1:
+                        xs.setdefault(r.line_id, x)
+            return xs
+
+        left = _aligner_adjacent_channels(0, 1)
+        right = _aligner_adjacent_channels(1, 2)
+        assert left["scrnaseq"] == pytest.approx(311.0, abs=0.5)
+        assert left["multiome"] == pytest.approx(315.0, abs=0.5)
+        assert right["scrnaseq"] == pytest.approx(702.0, abs=0.5)
+        assert right["multiome"] == pytest.approx(706.0, abs=0.5)
+
+        left_spacing = left["multiome"] - left["scrnaseq"]
+        right_spacing = right["multiome"] - right["scrnaseq"]
+        assert left_spacing == pytest.approx(OFFSET_STEP, abs=0.5)
+        assert right_spacing == pytest.approx(left_spacing, abs=0.5)
+
+        aligner_left = graph.sections["simpleaf"].bbox_x
+        aligner_right = aligner_left + graph.sections["simpleaf"].bbox_w
+        left_inset = aligner_left - left["scrnaseq"]
+        right_inset = right["scrnaseq"] - aligner_right
+        assert right_inset == pytest.approx(left_inset, abs=0.5)
+
     def test_scrnaseq_preprocessing_channels_center_processing_nodes(self):
         from pathlib import Path
 
