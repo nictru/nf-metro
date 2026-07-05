@@ -314,6 +314,13 @@ class Section:
     offset_y: float = 0.0
     # Implicit sections are auto-created for loose stations; no visible box
     is_implicit: bool = False
+    # Hidden sections route through but draw no box, header, or badge number
+    is_hidden: bool = False
+
+    @property
+    def is_visible(self) -> bool:
+        """True when the section draws a box and participates in numbering."""
+        return not self.is_implicit and not self.is_hidden
     # Extra runway, in whole grid columns, that the strike-clearance loop grows
     # on the entry/exit side when a boundary-fan diagonal rakes a station's name
     # label.  Sides are independent so the loop grows only the struck one.  The
@@ -490,6 +497,28 @@ class MetroGraph:
     )
     # Pending off-track marks: station_ids to lift above section top track
     _pending_off_track: list[str] = field(default_factory=list)
+    # Pending hidden-section marks: section_ids to hide from render/numbering
+    _pending_hidden_sections: list[str] = field(default_factory=list)
+    # Section groups whose bbox widths are equalised during placement
+    equal_width_groups: list[list[str]] = field(default_factory=list)
+    # station_id -> (mode, [reference_station_ids]) for Y alignment
+    station_y_alignments: dict[str, tuple[str, list[str]]] = field(
+        default_factory=dict
+    )
+    # Section groups redistributed evenly along Y after grid placement.
+    # Each entry is (section_ids, mode, gap_px); gap_px is None to fill the band.
+    section_y_distributions: list[tuple[list[str], str, float | None]] = field(
+        default_factory=list
+    )
+    # Inter-section route channel Y rules: (from|to, station_id, mode, section_ids).
+    route_channel_y_rules: list[tuple[str, str, str, list[str]]] = field(
+        default_factory=list
+    )
+    # Section groups vertically aligned to a reference band after grid placement.
+    # Each entry is (target_section_ids, mode, ref_section_ids, anchor_station_id).
+    section_y_alignments: list[tuple[list[str], str, list[str], str | None]] = field(
+        default_factory=list
+    )
     # Pending per-station marker styles: station_id -> MarkerStyle, applied
     # after parse so directives may precede or follow the node definition.
     _pending_markers: dict[str, MarkerStyle] = field(default_factory=dict)
@@ -728,5 +757,5 @@ class MetroGraph:
 
     @property
     def real_sections(self) -> dict[str, Section]:
-        """Sections that draw a visible box (excludes implicit holders)."""
-        return {sid: sec for sid, sec in self.sections.items() if not sec.is_implicit}
+        """Sections that draw a visible box (excludes implicit/hidden holders)."""
+        return {sid: sec for sid, sec in self.sections.items() if sec.is_visible}

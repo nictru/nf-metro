@@ -93,6 +93,7 @@ from nf_metro.layout.routing.perp import (
     _perp_approach_fan_x,
     _perp_riser_lateral,
 )
+from nf_metro.layout.routing.route_channel import lookup_route_channel_y
 from nf_metro.parser.model import (
     Edge,
     MetroGraph,
@@ -1770,6 +1771,16 @@ def _route_bypass(
         base_y = sy + src_off
         nest_offset = 0.0
 
+    author_channel_y = lookup_route_channel_y(
+        ctx.route_channel_y_from,
+        ctx.route_channel_y_to,
+        edge.source,
+        edge.target,
+    )
+    if author_channel_y is not None:
+        base_y = author_channel_y
+        nest_offset = 0.0
+
     # Determine actual vertical direction at each gap from the geometry.
     # Gap1 goes from source Y to trunk Y; gap2 from trunk Y to target Y.
     # Normally gap1 goes down and gap2 goes up, but when the source is
@@ -2135,6 +2146,77 @@ def _route_l_shape(
     return _route_l_shape_fan(edge, src, tgt, fan, ctx)
 
 
+def _route_l_shape_through_channel_y(
+    edge: Edge,
+    src: Station,
+    tgt: Station,
+    n: int,
+    ctx: _RoutingCtx,
+    channel_y: float,
+) -> RoutedPath | None:
+    """L-shape with a shared horizontal channel at *channel_y*."""
+    sx, sy = src.x, src.y
+    tx, ty = tgt.x, tgt.y
+    dx = tx - sx
+
+    max_r = ctx.curve_radius + (n - 1) * ctx.offset_step
+    mid_x = inter_column_channel_x(
+        ctx.graph, src, tgt, sx, tx, dx, max_r, ctx.offset_step
+    )
+    half_width = (n - 1) * ctx.offset_step / 2
+    mid_x = clear_channel_of_section_edge(
+        ctx.graph,
+        mid_x,
+        half_width,
+        min(sy, ty, channel_y),
+        max(sy, ty, channel_y),
+        endpoint_port_xs(ctx.graph, edge),
+        target_x=tx,
+    )
+
+    members, src_center, tgt_center = gather_tapered_bundle(ctx, edge)
+    sy_c = sy + src_center
+    ty_c = ty + tgt_center
+    rigid = all(abs(src - tgt) <= COORD_TOLERANCE for _e, _lid, src, tgt in members)
+    if rigid:
+        src_off = _get_offset(ctx, edge.source, edge.line_id)
+        tgt_off = _get_offset(ctx, edge.target, edge.line_id)
+        centerline = [
+            (sx, sy + src_off),
+            (mid_x, sy + src_off),
+            (mid_x, channel_y),
+            (mid_x, ty + tgt_off),
+            (tx, ty + tgt_off),
+        ]
+        route = route_along(
+            edge,
+            [(edge, edge.line_id, 0.0)],
+            centerline,
+            base_radius=ctx.curve_radius,
+            min_radius=COORD_TOLERANCE,
+            normalize_exempt=False,
+        )
+    else:
+        centerline = [
+            (sx, sy_c),
+            (mid_x, sy_c),
+            (mid_x, channel_y),
+            (mid_x, ty_c),
+            (tx, ty_c),
+        ]
+        route = route_tapered(
+            edge,
+            members,
+            centerline,
+            transition_leg=1,
+            base_radius=ctx.curve_radius,
+            min_radius=COORD_TOLERANCE,
+        )
+    if route is not None:
+        _declare_channel(route, ctx, mid_x, vertical_direction(channel_y - sy))
+    return route
+
+
 def _route_l_shape_plain(
     edge: Edge, src: Station, tgt: Station, n: int, ctx: _RoutingCtx
 ) -> RoutedPath | None:
@@ -2148,6 +2230,17 @@ def _route_l_shape_plain(
     sx, sy = src.x, src.y
     tx, ty = tgt.x, tgt.y
     dx = tx - sx
+
+    channel_y = lookup_route_channel_y(
+        ctx.route_channel_y_from,
+        ctx.route_channel_y_to,
+        edge.source,
+        edge.target,
+    )
+    if channel_y is not None and (
+        abs(channel_y - sy) > COORD_TOLERANCE and abs(channel_y - ty) > COORD_TOLERANCE
+    ):
+        return _route_l_shape_through_channel_y(edge, src, tgt, n, ctx, channel_y)
 
     max_r = ctx.curve_radius + (n - 1) * ctx.offset_step
     mid_x = inter_column_channel_x(
@@ -2205,6 +2298,16 @@ def _route_l_shape_fan(
     horizontal = horizontal_direction(tx - sx)
     vertical = vertical_direction(ty - sy)
 
+    channel_y = lookup_route_channel_y(
+        ctx.route_channel_y_from,
+        ctx.route_channel_y_to,
+        edge.source,
+        edge.target,
+    )
+    use_channel_y = channel_y is not None and (
+        abs(channel_y - sy) > COORD_TOLERANCE and abs(channel_y - ty) > COORD_TOLERANCE
+    )
+
     ui, un = fan
     delta = l_shape_stagger(ui, un, vertical, ctx.offset_step)
     # Channel centre within the combined fan-out: every fan line diverges at sx,
@@ -2219,8 +2322,8 @@ def _route_l_shape_fan(
         ctx.graph,
         mid_x,
         half_width,
-        min(sy, ty),
-        max(sy, ty),
+        min(sy, ty, channel_y) if use_channel_y else min(sy, ty),
+        max(sy, ty, channel_y) if use_channel_y else max(sy, ty),
         endpoint_port_xs(ctx.graph, edge),
         target_x=tx,
     )
@@ -2236,12 +2339,24 @@ def _route_l_shape_fan(
     lead_x = min(lead_x, sx) if horizontal.sign > 0 else max(lead_x, sx)
     src_off = _get_offset(ctx, edge.source, edge.line_id)
     tgt_off = _get_offset(ctx, edge.target, edge.line_id)
-    centerline = [
-        (lead_x, sy + src_off + delta),
-        (mid_x, sy + src_off + delta),
-        (mid_x, ty + tgt_off + delta),
-        (tx, ty + tgt_off + delta),
-    ]
+    if use_channel_y:
+        assert channel_y is not None
+        centerline = [
+            (lead_x, sy + src_off + delta),
+            (mid_x, sy + src_off + delta),
+            (mid_x, channel_y + delta),
+            (mid_x, ty + tgt_off + delta),
+            (tx, ty + tgt_off + delta),
+        ]
+        channel_decl_y = channel_y
+    else:
+        centerline = [
+            (lead_x, sy + src_off + delta),
+            (mid_x, sy + src_off + delta),
+            (mid_x, ty + tgt_off + delta),
+            (tx, ty + tgt_off + delta),
+        ]
+        channel_decl_y = ty
     # Not normalize-exempt: L-shape fans from one junction to different targets
     # share the inter-column gap, and _materialize_gap_slots restacks them into
     # distinct channels so two lines never overlay the same descent.
@@ -2254,7 +2369,9 @@ def _route_l_shape_fan(
         normalize_exempt=False,
     )
     assert route is not None  # the lone member is always in its own bundle
-    _declare_channel(route, ctx, mid_x, vertical_direction(ty - sy), ui, un)
+    _declare_channel(
+        route, ctx, mid_x, vertical_direction(channel_decl_y - sy), ui, un
+    )
     return route
 
 

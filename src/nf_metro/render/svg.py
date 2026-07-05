@@ -1297,7 +1297,7 @@ def _render_first_class_sections(
     for section in graph.sections.values():
         if section.bbox_w <= 0 or section.bbox_h <= 0:
             continue
-        if section.is_implicit:
+        if not section.is_visible:
             continue
 
         section_lines: set[str] = set()
@@ -2057,7 +2057,7 @@ def _station_group_attrs(
     """
     section = graph.sections.get(station.section_id) if station.section_id else None
     section_id = (
-        station.section_id if section is not None and not section.is_implicit else None
+        station.section_id if section is not None and section.is_visible else None
     )
     cx: float = station.x
     cy: float = station.y
@@ -2885,7 +2885,7 @@ def _reserve_section_space_for_groups(
         )
     for sid, far_y in needed_bottom.items():
         sec = graph.sections.get(sid)
-        if sec is None or sec.is_implicit:
+        if sec is None or not sec.is_visible:
             continue
         target_bottom = far_y + GROUP_LABEL_BAND_PADDING
         if target_bottom > sec.bbox_y + sec.bbox_h:
@@ -2911,7 +2911,7 @@ def _reserve_rail_space_for_termini(graph: MetroGraph, theme: Theme) -> None:
         if not (graph.station_is_rail(station.id) and station.is_terminus):
             continue
         sec = graph.sections.get(station.section_id) if station.section_id else None
-        if sec is None or sec.is_implicit:
+        if sec is None or not sec.is_visible:
             continue
         n = len(station.terminus_labels)
         names = station.terminus_names or [""] * n

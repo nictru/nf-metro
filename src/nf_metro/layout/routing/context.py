@@ -27,6 +27,7 @@ from nf_metro.layout.routing.reversal import (
     detect_reversed_sections,
     tb_positive_fan_sections,
 )
+from nf_metro.layout.routing.route_channel import resolve_route_channel_y_maps
 from nf_metro.parser.model import (
     Edge,
     MetroGraph,
@@ -104,6 +105,8 @@ class _RoutingCtx:
             index_exclude=set(),
         )
     )
+    route_channel_y_from: dict[str, float] = field(default_factory=dict)
+    route_channel_y_to: dict[str, float] = field(default_factory=dict)
 
 
 def _classify_merge_edges(
@@ -285,6 +288,12 @@ def _build_routing_context(
     # Merge routing classification
     merge = _classify_merge_edges(graph, junction_ids, join_sources, fork_targets)
 
+    route_channel_y_from, route_channel_y_to = resolve_route_channel_y_maps(graph)
+    if route_channel_y_to:
+        for mjid, channel_y in route_channel_y_to.items():
+            if mjid in merge.junctions:
+                merge.trunk_by[mjid] = channel_y
+
     # Section trunk Ys: the dominant on-track Y per LR/RL section, used
     # to detect side-branch ascents (a below-trunk station feeding the
     # trunk bundle).  Routing such edges with a late diagonal keeps the
@@ -325,6 +334,8 @@ def _build_routing_context(
         skip_edges=merge.skip_edges,
         section_trunk_y=section_trunk_y,
         merge=merge,
+        route_channel_y_from=route_channel_y_from,
+        route_channel_y_to=route_channel_y_to,
     )
 
 

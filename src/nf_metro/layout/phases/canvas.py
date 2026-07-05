@@ -103,7 +103,13 @@ def _renumber_sections_by_grid(graph: MetroGraph) -> None:
         col = -s.grid_col if sweep_is_rl.get(sw, False) else s.grid_col
         return (comp_idx.get(s.id, 0), sw, col, s.grid_row)
 
-    sorted_sections = sorted(graph.sections.values(), key=_sort_key)
+    sorted_sections = sorted(
+        (s for s in graph.sections.values() if s.is_visible),
+        key=_sort_key,
+    )
+    for section in graph.sections.values():
+        if not section.is_visible:
+            section.number = 0
     for i, section in enumerate(sorted_sections, start=1):
         section.number = i
 

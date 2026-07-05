@@ -163,6 +163,8 @@ def _compute_section_offsets(
     packs = _scoped_cell_packs(graph, scoped)
     packed_members = {m for members in packs.values() for m in members}
 
+    _apply_equal_width_groups(graph, scoped)
+
     min_col = min(col_assign.values()) if col_assign else 0
     max_col = max(col_assign.values()) if col_assign else 0
     for sid in scoped:
@@ -242,6 +244,144 @@ def _effective_section_width(section: Section) -> float:
     overhang via a global x_offset bump.
     """
     return section.bbox_x + section.bbox_w + SECTION_X_PADDING
+
+
+def _section_visual_top(section: Section) -> float:
+    return section.bbox_y
+
+
+def _section_visual_bottom(section: Section) -> float:
+    return section.bbox_y + section.bbox_h
+
+
+def _shift_section_y(graph: MetroGraph, section: Section, delta: float) -> None:
+    """Move a section box and its stations/ports vertically by ``delta``."""
+    if abs(delta) < 1e-6:
+        return
+    section.bbox_y += delta
+    for sid in section.station_ids:
+        station = graph.stations.get(sid)
+        if station:
+            station.y += delta
+    for pid in section.port_ids:
+        port = graph.ports.get(pid)
+        if port:
+            port.y += delta
+
+
+def apply_section_y_distributions(graph: MetroGraph) -> None:
+    """Redistribute listed section boxes with equal vertical gaps.
+
+    Expects global section coordinates (after Stage 2.1).  Runs late in the
+    layout pipeline so row-alignment passes do not undo the distribution.
+    """
+    for section_ids, mode, fixed_gap in graph.section_y_distributions:
+        if mode != "even":
+            continue
+        members = [
+            graph.sections[sid]
+            for sid in section_ids
+            if sid in graph.sections and graph.sections[sid].bbox_h > 0
+        ]
+        if len(members) < 2:
+            continue
+
+        band_top = _section_visual_top(members[0])
+        last_bottom_before = _section_visual_bottom(members[-1])
+        if fixed_gap is not None:
+            gap = fixed_gap
+        else:
+            band_bottom = _section_visual_bottom(members[-1])
+            total_height = sum(section.bbox_h for section in members)
+            gap = (band_bottom - band_top - total_height) / (len(members) - 1)
+
+        cursor = band_top
+        for section in members:
+            _shift_section_y(graph, section, cursor - section.bbox_y)
+            cursor += section.bbox_h + gap
+
+        if fixed_gap is not None:
+            delta = _section_visual_bottom(members[-1]) - last_bottom_before
+            if abs(delta) > 1e-6:
+                member_ids = set(section_ids)
+                aligner_col = min(
+                    (s.grid_col for s in members if s.grid_col >= 0),
+                    default=0,
+                )
+                for section in graph.sections.values():
+                    if section.id in member_ids:
+                        continue
+                    if section.grid_col < aligner_col + 1:
+                        continue
+                    _shift_section_y(graph, section, delta)
+
+
+def apply_section_y_alignments(graph: MetroGraph) -> None:
+    """Shift target sections so they align to a reference section band.
+
+    Used by ``%%metro align_section_y:`` after grid placement and
+    ``distribute_y`` have settled the reference band.  When an anchor
+    station is given, that station's Y is matched to the band midpoint;
+    otherwise the combined visual midpoint of the target sections is used.
+    """
+    from nf_metro.layout.routing.route_channel import _section_band_midpoint
+
+    for target_ids, mode, ref_ids, anchor_id in graph.section_y_alignments:
+        if mode != "section_midpoint":
+            continue
+        target_y = _section_band_midpoint(graph, ref_ids)
+        if target_y is None:
+            continue
+
+        if anchor_id:
+            anchor = graph.stations.get(anchor_id)
+            if anchor is None:
+                continue
+            current_y = anchor.y
+        else:
+            members = [
+                graph.sections[sid]
+                for sid in target_ids
+                if sid in graph.sections and graph.sections[sid].bbox_h > 0
+            ]
+            if not members:
+                continue
+            top = min(_section_visual_top(section) for section in members)
+            bottom = max(_section_visual_bottom(section) for section in members)
+            current_y = (top + bottom) / 2
+
+        delta = target_y - current_y
+        for sid in target_ids:
+            section = graph.sections.get(sid)
+            if section is not None:
+                _shift_section_y(graph, section, delta)
+
+
+def apply_equal_width_groups(graph: MetroGraph) -> None:
+    """Expand each equal-width group's members to the widest bbox in the group."""
+    for group in graph.equal_width_groups:
+        members = [graph.sections[sid] for sid in group if sid in graph.sections]
+        if len(members) < 2:
+            continue
+        target_w = max(section.bbox_w for section in members)
+        for section in members:
+            if section.bbox_w < target_w:
+                section.bbox_w = target_w
+
+
+def _apply_equal_width_groups(
+    graph: MetroGraph,
+    scoped: dict[str, Section],
+) -> None:
+    """Expand scoped equal-width group members to the widest bbox in the group."""
+    for group in graph.equal_width_groups:
+        members = [scoped[sid] for sid in group if sid in scoped]
+        if len(members) < 2:
+            continue
+        target_w = max(section.bbox_w for section in members)
+        for section in members:
+            if section.bbox_w < target_w:
+                section.bbox_w = target_w
 
 
 def _scoped_cell_packs(

@@ -81,6 +81,152 @@ def _dir_off_track(value: str, graph: MetroGraph) -> None:
     graph._pending_off_track.extend(_split_csv(value))
 
 
+def _parse_equal_width_directive(value: str, graph: MetroGraph) -> None:
+    """Parse ``%%metro equal_width: section1, section2, ...``."""
+    section_ids = _split_csv(value)
+    if len(section_ids) < 2:
+        _warn_malformed("equal_width", value, "at least two comma-separated section ids")
+        return
+    graph.equal_width_groups.append(section_ids)
+
+
+def _parse_hidden_section_directive(value: str, graph: MetroGraph) -> None:
+    """Parse ``%%metro hidden_section: section1, section2, ...``."""
+    section_ids = _split_csv(value)
+    if not section_ids:
+        _warn_malformed("hidden_section", value, "one or more comma-separated section ids")
+        return
+    graph._pending_hidden_sections.extend(section_ids)
+
+
+def _parse_distribute_y_directive(value: str, graph: MetroGraph) -> None:
+    """Parse ``%%metro distribute_y: section1, section2 | even [| gap_px]``."""
+    parts = _split_fields(value)
+    if len(parts) < 2:
+        _warn_malformed("distribute_y", value, "'section_ids | even [| gap_px]'")
+        return
+    section_ids = _split_csv(parts[0])
+    mode_parts = [part.strip() for part in parts[1].split(",")]
+    mode = mode_parts[0].lower()
+    if mode != "even":
+        _warn_malformed("distribute_y", parts[1], "even")
+        return
+    gap: float | None = None
+    if len(mode_parts) >= 2:
+        try:
+            gap = float(mode_parts[1])
+        except ValueError:
+            _warn_malformed("distribute_y", mode_parts[1], "numeric gap in pixels")
+            return
+    elif len(parts) >= 3:
+        try:
+            gap = float(parts[2])
+        except ValueError:
+            _warn_malformed("distribute_y", parts[2], "numeric gap in pixels")
+            return
+    if len(section_ids) < 2:
+        _warn_malformed(
+            "distribute_y",
+            value,
+            "at least two comma-separated section ids",
+        )
+        return
+    graph.section_y_distributions.append((section_ids, mode, gap))
+
+
+def _parse_route_channel_y_directive(value: str, graph: MetroGraph) -> None:
+    """Parse ``%%metro route_channel_y: from|to station | mode | section_ids``."""
+    parts = _split_fields(value)
+    if len(parts) < 3:
+        _warn_malformed(
+            "route_channel_y",
+            value,
+            "'from|to station_id | mode | section_ids'",
+        )
+        return
+    side_station = parts[0].split(None, 1)
+    if len(side_station) != 2:
+        _warn_malformed(
+            "route_channel_y",
+            parts[0],
+            "'from station_id' or 'to station_id'",
+        )
+        return
+    side, station_id = side_station[0].lower(), side_station[1].strip()
+    if side not in ("from", "to"):
+        _warn_malformed("route_channel_y", side_station[0], "from or to")
+        return
+    mode = parts[1].lower()
+    if mode != "section_midpoint":
+        _warn_malformed("route_channel_y", parts[1], "section_midpoint")
+        return
+    section_ids = _split_csv(parts[2])
+    if len(section_ids) < 1:
+        _warn_malformed(
+            "route_channel_y",
+            value,
+            "at least one comma-separated section id",
+        )
+        return
+    graph.route_channel_y_rules.append((side, station_id, mode, section_ids))
+
+
+def _parse_align_section_y_directive(value: str, graph: MetroGraph) -> None:
+    """Parse ``%%metro align_section_y: sections | mode | ref_sections [| anchor]``."""
+    parts = _split_fields(value)
+    if len(parts) < 3:
+        _warn_malformed(
+            "align_section_y",
+            value,
+            "'section_ids | section_midpoint | ref_section_ids [| anchor_station]'",
+        )
+        return
+    target_ids = _split_csv(parts[0])
+    mode = parts[1].lower()
+    ref_ids = _split_csv(parts[2])
+    anchor = parts[3].strip() if len(parts) > 3 else None
+    if mode != "section_midpoint":
+        _warn_malformed("align_section_y", parts[1], "section_midpoint")
+        return
+    if not target_ids:
+        _warn_malformed(
+            "align_section_y",
+            value,
+            "at least one comma-separated target section id",
+        )
+        return
+    if not ref_ids:
+        _warn_malformed(
+            "align_section_y",
+            value,
+            "at least one comma-separated reference section id",
+        )
+        return
+    graph.section_y_alignments.append((target_ids, mode, ref_ids, anchor))
+
+
+def _parse_align_y_directive(value: str, graph: MetroGraph) -> None:
+    """Parse ``%%metro align_y: station | mode | ref1, ref2, ...``."""
+    parts = _split_fields(value)
+    if len(parts) < 3:
+        _warn_malformed(
+            "align_y",
+            value,
+            "'station_id | mode | ref1, ref2, ...'",
+        )
+        return
+    station_id = parts[0]
+    mode = parts[1].lower()
+    refs = _split_csv(parts[2])
+    if mode != "midpoint":
+        _warn_malformed("align_y", parts[1], "midpoint")
+        return
+    if not refs:
+        _warn_malformed("align_y", value, "at least one reference station id")
+        return
+    graph.station_y_alignments[station_id] = (mode, refs)
+
+
 def _dir_process(value: str, graph: MetroGraph) -> None:
     """Parse ``%%metro process: station_id | regex``.
 
@@ -510,6 +656,12 @@ _GLOBAL_DIRECTIVE_HANDLERS.update(
         "logo": _dir_logo,
         "line": _dir_line,
         "off_track": _dir_off_track,
+        "equal_width": _parse_equal_width_directive,
+        "distribute_y": _parse_distribute_y_directive,
+        "hidden_section": _parse_hidden_section_directive,
+        "align_y": _parse_align_y_directive,
+        "align_section_y": _parse_align_section_y_directive,
+        "route_channel_y": _parse_route_channel_y_directive,
         "process": _dir_process,
         "grid": _parse_grid_directive,
         "line_spread": _parse_line_spread_directive,

@@ -333,6 +333,11 @@ def _apply_pending_metadata(graph: MetroGraph) -> None:
             continue
         station.off_track = True
 
+    for section_id in graph._pending_hidden_sections:
+        section = graph.sections.get(section_id)
+        if section:
+            section.is_hidden = True
+
     for station_id, marker in graph._pending_markers.items():
         station = graph.stations.get(station_id)
         if station:

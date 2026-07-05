@@ -97,6 +97,10 @@ from nf_metro.layout.phases.canvas import (  # noqa: F401
     _shift_graph_into_canvas,
     _translate_graph_y,
 )
+from nf_metro.layout.section_placement import (
+    apply_section_y_alignments,
+    apply_section_y_distributions,
+)
 from nf_metro.layout.phases.fan_bundles import (  # noqa: F401
     _apply_half_grid_2branch_symfan,
     _apply_half_grid_symmetric_diamonds,
@@ -226,6 +230,7 @@ from nf_metro.layout.phases.junctions import (  # noqa: F401
     _resolve_source_section_id,
     _resolve_source_xy,
 )
+from nf_metro.layout.phases.station_align import apply_station_y_alignments
 from nf_metro.layout.phases.off_track import (  # noqa: F401
     _align_phantom_pass_throughs,
     _bump_off_track_clear_of_trunks,
@@ -1211,7 +1216,11 @@ def _compute_section_layout(
     stage's start; ``# Stage X.Y:`` comments above each helper call
     name the sub-stage.
     """
-    from nf_metro.layout.section_placement import place_sections, position_ports
+    from nf_metro.layout.section_placement import (
+        apply_equal_width_groups,
+        place_sections,
+        position_ports,
+    )
 
     # On-track consumers are not yet grid-snapped; the off-track reanchor
     # (Stage 6.6 / 6.8) refuses to run until Stage 6.4 sets this True.
@@ -1259,6 +1268,7 @@ def _compute_section_layout(
     _snap(graph, "1.2")
 
     # Stage 1.3: Place sections on the canvas
+    apply_equal_width_groups(graph)
     place_sections(graph, section_x_gap, section_y_gap)
     _snap(graph, "1.3")
     if validate:
@@ -1829,6 +1839,18 @@ def _finalize_layout(
     if validate:
         _run_pass_c_guards(graph, "after Stage 6.15")
 
+    # Stage 6.15b: Evenly distribute authored section stacks along Y.
+    if graph.section_y_distributions:
+        apply_section_y_distributions(graph)
+        _shift_graph_into_canvas(graph, section_y_padding)
+        _snap(graph, "6.15b")
+
+    # Stage 6.15c: Vertically align authored section groups to a reference band.
+    if graph.section_y_alignments:
+        apply_section_y_alignments(graph)
+        _shift_graph_into_canvas(graph, section_y_padding)
+        _snap(graph, "6.15c")
+
     # Stage 6.16: Re-align entry ports and junctions with their now-settled
     # feeders.  A vertical-flow (TB/BT) section's perpendicular entry port is
     # pinned a fixed offset above its first internal station, so the late
@@ -1854,6 +1876,13 @@ def _finalize_layout(
     if graph.diamond_style == "symmetric":
         _apply_half_grid_symmetric_diamonds(graph, y_spacing)
         _snap(graph, "6.17")
+
+    # Stage 6.18: Author-directed station Y alignment (``%%metro align_y:``).
+    # Runs after off-track re-anchoring and grid settling so reference
+    # stations have their final Y before targets are centred between them.
+    if graph.station_y_alignments:
+        apply_station_y_alignments(graph)
+        _snap(graph, "6.18")
 
     if validate:
         run_validate_guards(
