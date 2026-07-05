@@ -570,6 +570,23 @@ graph LR
     end
 """
 
+    FORK_ALIGN_X_MAP = """%%metro line: a | A | #4CAF50
+%%metro off_track: up_out
+%%metro align_x: middle | midpoint | left_in, right_out
+graph LR
+    subgraph prep [Prep]
+        left_in[In]
+        spacer[ ]
+        middle[Middle]
+        right_out[Out]
+        up_out[ ]
+        left_in -->|a| spacer
+        spacer -->|a| middle
+        middle -->|a| right_out
+        middle -->|a| up_out
+    end
+"""
+
     def test_align_x_midpoint(self):
         graph = _layout(self.ALIGN_X_MAP)
         left_in = graph.stations["left_in"]
@@ -603,6 +620,20 @@ graph LR
             assert min(xs) < middle_x - MIN_STRAIGHT_EDGE
             assert route.points[-1][0] == pytest.approx(middle_x)
 
+    def test_align_x_fork_diverges_right_of_station(self):
+        graph, routes = _layout_and_routes(self.FORK_ALIGN_X_MAP)
+        middle = graph.stations["middle"]
+        layout_x = graph.station_x_before_align["middle"]
+        assert middle.x < layout_x - MIN_STRAIGHT_EDGE
+        out_routes = [
+            r for r in routes if r.edge is not None and r.edge.source == "middle"
+        ]
+        assert len(out_routes) == 2
+        for route in out_routes:
+            xs = [p[0] for p in route.points]
+            assert max(xs) >= layout_x - 0.5
+            assert route.points[0][0] == pytest.approx(middle.x)
+
     def test_scrnaseq_off_track_joins_clear_station_labels(self):
         from pathlib import Path
 
@@ -632,6 +663,27 @@ graph LR
                     assert max(xs) <= station.x + 0.5
                     assert min(xs) <= approach_x + 1.0
                     assert route.points[-1][0] == pytest.approx(station.x)
+
+    def test_scrnaseq_mtx_to_h5ad_fork_clears_station_label(self):
+        from pathlib import Path
+
+        map_path = (
+            Path(__file__).resolve().parents[2] / "pipelines" / "scrnaseq" / "map.mmd"
+        )
+        graph, routes = _layout_and_routes(map_path.read_text())
+        mtx = graph.stations["mtx_to_h5ad"]
+        layout_x = graph.station_x_before_align["mtx_to_h5ad"]
+        assert mtx.x < layout_x - MIN_STRAIGHT_EDGE
+        out_routes = [
+            r
+            for r in routes
+            if r.edge is not None and r.edge.source == "mtx_to_h5ad"
+        ]
+        assert len(out_routes) == 4
+        for route in out_routes:
+            xs = [p[0] for p in route.points]
+            assert max(xs) >= layout_x - 0.5
+            assert route.points[0][0] == pytest.approx(mtx.x)
 
 
 class TestRouteChannelY:

@@ -613,6 +613,12 @@ class RoutedPath:
     ``None`` until a handler that emits a U-shaped bypass declares which gap its
     trunk runs in; :func:`_materialize_trunk_slots` resolves it to a concrete Y.
     A route owns at most one trunk, so this is a single slot, not a list."""
+    diagonal_indices: tuple[int, int] | None = None
+    """Waypoint indices of the sloped segment in an H-D-H route.
+
+    Defaults to ``(1, 2)`` on the canonical 4-point diagonal.  Handlers that
+    prepend a short lead-in (for example an ``align_x`` fork flat) set this
+    explicitly so diagonal spreading still targets the sloped leg."""
 
     def declare_gap_slot(
         self,

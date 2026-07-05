@@ -534,6 +534,27 @@ def _is_side_branch_ascent(
     return True
 
 
+def _align_x_fork_route_sx(
+    edge: Edge, src: Station, sx: float, ctx: _RoutingCtx
+) -> float:
+    """Flow-axis X where ``align_x``-shifted fork stations diverge outbound routes.
+
+    ``align_x`` can park a fork station to the left of its layout column.
+    Diagonal placement keyed on the station X drags the fan divergence with
+    it, so labelled forks get channels through their text.  When the station
+    was moved left by ``align_x``, diverge at the pre-align layout X instead
+    and leave a short flat from the station to the fork.
+    """
+    if edge.source not in ctx.fork_stations:
+        return sx
+    layout_x = ctx.graph.station_x_before_align.get(edge.source)
+    if layout_x is None:
+        return sx
+    if layout_x <= sx + MIN_STRAIGHT_EDGE:
+        return sx
+    return layout_x
+
+
 def _off_track_join_route_tx(
     edge: Edge, src: Station, tgt: Station, tx: float, ctx: _RoutingCtx
 ) -> float:
@@ -571,7 +592,8 @@ def _route_diagonal(
     sx, sy = src.x, src.y
     tx, ty = tgt.x, tgt.y
     route_tx = _off_track_join_route_tx(edge, src, tgt, tx, ctx)
-    dx = route_tx - sx
+    route_sx = _align_x_fork_route_sx(edge, src, sx, ctx)
+    dx = route_tx - route_sx
 
     # Minimum straight track at endpoints
     if src.is_port or tgt.is_port:
@@ -635,7 +657,7 @@ def _route_diagonal(
             src_min = MIN_STRAIGHT_EDGE
 
     diag_start_x, diag_end_x = _compute_diagonal_placement(
-        sx,
+        route_sx,
         route_tx,
         ctx.diagonal_run,
         src_min,
@@ -648,15 +670,21 @@ def _route_diagonal(
     direction = section.direction if section else "LR"
     if abs(route_tx - tx) > COORD_TOLERANCE:
         points = diagonal_centreline(
-            direction, (sx, sy), (route_tx, ty), diag_start_x, diag_end_x
+            direction, (route_sx, sy), (route_tx, ty), diag_start_x, diag_end_x
         )
         points.append((tx, ty))
     else:
         points = diagonal_centreline(
-            direction, (sx, sy), (tx, ty), diag_start_x, diag_end_x
+            direction, (route_sx, sy), (tx, ty), diag_start_x, diag_end_x
         )
+    if route_sx > sx + COORD_TOLERANCE:
+        points.insert(0, (sx, sy))
+        diagonal_indices: tuple[int, int] | None = (2, 3)
+    else:
+        diagonal_indices = None
     return RoutedPath(
         edge=edge,
         line_id=edge.line_id,
         points=points,
+        diagonal_indices=diagonal_indices,
     )

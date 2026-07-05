@@ -509,6 +509,8 @@ class MetroGraph:
     station_x_alignments: dict[str, tuple[str, list[str]]] = field(
         default_factory=dict
     )
+    # station_id -> layout X before ``apply_station_x_alignments`` (fork routing).
+    station_x_before_align: dict[str, float] = field(default_factory=dict)
     # Section groups redistributed evenly along Y after grid placement.
     # Each entry is (section_ids, mode, gap_px); gap_px is None to fill the band.
     section_y_distributions: list[tuple[list[str], str, float | None]] = field(

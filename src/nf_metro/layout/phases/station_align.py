@@ -24,6 +24,7 @@ def apply_station_x_alignments(graph: MetroGraph) -> None:
         if not ref_xs:
             continue
         if mode == "midpoint":
+            graph.station_x_before_align.setdefault(station_id, target.x)
             target.x = sum(ref_xs) / len(ref_xs)
 
 

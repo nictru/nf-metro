@@ -33,18 +33,32 @@ from nf_metro.parser.model import (
 )
 
 
+def _diag_waypoints(rp: RoutedPath) -> tuple[int, int] | None:
+    """Return the sloped waypoint pair in an H-D-H route, if present."""
+    if rp.diagonal_indices is not None:
+        i, j = rp.diagonal_indices
+    elif len(rp.points) == 4:
+        i, j = 1, 2
+    else:
+        return None
+    pts = rp.points
+    if j >= len(pts):
+        return None
+    dx = abs(pts[j][0] - pts[i][0])
+    dy = abs(pts[j][1] - pts[i][1])
+    if dx >= COORD_TOLERANCE and dy >= COORD_TOLERANCE_FINE:
+        return i, j
+    return None
+
+
 def _is_diagonal_route(rp: RoutedPath) -> bool:
-    """True if *rp* is a 4-point diagonal (horizontal-diagonal-horizontal).
+    """True if *rp* is a horizontal-diagonal-horizontal run.
 
     L-shapes also have 4 points with different Y at indices 1-2, but their
     middle points share the same X (vertical segment).  A true diagonal
-    changes both X and Y between points 1 and 2.
+    changes both X and Y between the sloped waypoint pair.
     """
-    if len(rp.points) != 4:
-        return False
-    dx = abs(rp.points[1][0] - rp.points[2][0])
-    dy = abs(rp.points[1][1] - rp.points[2][1])
-    return dx >= COORD_TOLERANCE and dy >= COORD_TOLERANCE_FINE
+    return _diag_waypoints(rp) is not None
 
 
 def _spread_diagonal_bundles(routes: list[RoutedPath], ctx: _RoutingCtx) -> None:
@@ -93,7 +107,8 @@ def _spread_diagonal_bundles(routes: list[RoutedPath], ctx: _RoutingCtx) -> None
         # factor and sign are correct for each route.
         by_dir: dict[bool, list[RoutedPath]] = defaultdict(list)
         for rp in unseen:
-            by_dir[rp.points[2][1] >= rp.points[1][1]].append(rp)
+            i, j = _diag_waypoints(rp) or (1, 2)
+            by_dir[rp.points[j][1] >= rp.points[i][1]].append(rp)
         for subgroup in by_dir.values():
             if len(subgroup) >= 2:
                 _apply_diagonal_spread(subgroup, station_id, ctx=ctx)
@@ -155,10 +170,13 @@ def _fit_spread_translation(
     his: list[float] = []
     for rp, delta in zip(group, deltas):
         src_min, tgt_min = _stub_minimums(rp)
-        # sign * (P1[ai] + delta + c - bound_src) >= 0  and
-        # sign * (bound_tgt - (P2[ai] + delta + c)) >= 0
-        a = rp.points[1][ai] + delta - (rp.points[0][ai] + sign * src_min)
-        b = (rp.points[3][ai] - sign * tgt_min) - (rp.points[2][ai] + delta)
+        i, j = _diag_waypoints(rp) or (1, 2)
+        src_anchor = max(i - 1, 0)
+        tgt_anchor = len(rp.points) - 1
+        # sign * (P_i[ai] + delta + c - bound_src) >= 0  and
+        # sign * (bound_tgt - (P_j[ai] + delta + c)) >= 0
+        a = rp.points[i][ai] + delta - (rp.points[src_anchor][ai] + sign * src_min)
+        b = (rp.points[tgt_anchor][ai] - sign * tgt_min) - (rp.points[j][ai] + delta)
         if sign > 0:
             los.append(-a)
             his.append(b)
@@ -192,10 +210,10 @@ def _baked_spread_deltas(
     """
     # Baked diagonals spread along Y (ai == 1), so the baked baseline sits on X.
     dx_diag, dy_diag = d_b, d_a
-    centroid_x = sum(rp.points[1][bi] for rp in group) / len(group)
+    centroid_x = sum(rp.points[i][bi] for rp in group) / len(group)
     deltas: list[float] = []
     for rp, off in zip(group, offsets):
-        rx = rp.points[1][bi] - centroid_x
+        rx = rp.points[i][bi] - centroid_x
         # Keep each line on the side its baked offset already places it (the
         # sign of its current perpendicular, rx * dy_diag), scaled up to a full
         # gap.
@@ -207,9 +225,12 @@ def _baked_spread_deltas(
     return deltas
 
 
-def _shift_diagonal(rp: RoutedPath, delta: float, ai: int) -> None:
+def _shift_diagonal(
+    rp: RoutedPath, delta: float, ai: int, indices: tuple[int, int] | None = None
+) -> None:
     """Translate a route's two diagonal waypoints by *delta* along axis *ai*."""
-    for idx in (1, 2):
+    i, j = indices or _diag_waypoints(rp) or (1, 2)
+    for idx in (i, j):
         p = rp.points[idx]
         rp.points[idx] = (p[0] + delta, p[1]) if ai == 0 else (p[0], p[1] + delta)
 
@@ -236,13 +257,14 @@ def _apply_diagonal_spread(
     center = sum(offsets) / len(offsets)
 
     rep = group[0]
+    i, j = _diag_waypoints(rep) or (1, 2)
     # Baked routes carry their offset along X already, so the complementary
     # spread runs along Y; render-time routes are the mirror image.
     baked = rep.offset_regime is OffsetRegime.BAKED
     ai = 1 if baked else 0
     bi = 1 - ai
-    d_a = rep.points[2][ai] - rep.points[1][ai]
-    d_b = rep.points[2][bi] - rep.points[1][bi]
+    d_a = rep.points[j][ai] - rep.points[i][ai]
+    d_b = rep.points[j][bi] - rep.points[i][bi]
     sign = 1.0 if d_a >= 0 else -1.0
     hypot = math.hypot(d_a, d_b)
 
@@ -269,11 +291,14 @@ def _apply_diagonal_spread(
     # separation, so clamp each line back to the floor for the best partial.
     for rp, delta in zip(group, deltas):
         src_min, tgt_min = _stub_minimums(rp)
-        bound_src = rp.points[0][ai] + sign * src_min
-        bound_tgt = rp.points[3][ai] - sign * tgt_min
+        i, j = _diag_waypoints(rp) or (1, 2)
+        src_anchor = max(i - 1, 0)
+        tgt_anchor = len(rp.points) - 1
+        bound_src = rp.points[src_anchor][ai] + sign * src_min
+        bound_tgt = rp.points[tgt_anchor][ai] - sign * tgt_min
         overshoot = max(
-            sign * (bound_src - (rp.points[1][ai] + delta)),
-            sign * ((rp.points[2][ai] + delta) - bound_tgt),
+            sign * (bound_src - (rp.points[i][ai] + delta)),
+            sign * ((rp.points[j][ai] + delta) - bound_tgt),
         )
         if overshoot > 0 and abs(delta) > COORD_TOLERANCE_FINE:
             delta *= max(0.0, 1.0 - overshoot / abs(delta))
