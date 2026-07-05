@@ -222,6 +222,65 @@ def _fused_sibling_spans(
     return spans
 
 
+def _is_shared_trunk_mixed_direction_corridor(
+    chans: list[_VChannel], graph: MetroGraph
+) -> bool:
+    """True when up- and down-going gap channels share one fan trunk anchor.
+
+    Fan-in feeders converging on one entry port, and fan-out feeders
+    diverging from one exit port or junction, must share one vertical
+    channel X at that trunk.  The default gap layout splits bundles by
+    travel direction and offsets them by ``BUNDLE_TO_BUNDLE_CLEARANCE``,
+    which staggers those legs.
+    """
+    if len(chans) < 2:
+        return False
+    if not any(c.down for c in chans) or not any(not c.down for c in chans):
+        return False
+    targets: set[str] = set()
+    fan_in = True
+    for ch in chans:
+        tgt = graph.stations.get(ch.route.edge.target)
+        if tgt is None or not tgt.is_port:
+            fan_in = False
+            break
+        port = graph.ports.get(tgt.id)
+        if port is None or not port.is_entry:
+            fan_in = False
+            break
+        targets.add(tgt.id)
+    if fan_in and len(targets) == 1:
+        return True
+    sources: set[str] = set()
+    for ch in chans:
+        src_id = ch.route.edge.source
+        if src_id in graph.junction_ids:
+            sources.add(src_id)
+            continue
+        src = graph.stations.get(src_id)
+        if src is None or not src.is_port:
+            return False
+        port = graph.ports.get(src_id)
+        if port is None or port.is_entry:
+            return False
+        sources.add(src_id)
+    return len(sources) == 1
+
+
+def _restack_shared_trunk_corridor(
+    chans: list[_VChannel],
+    gap_left: float,
+    gap_right: float,
+    ctx: _RoutingCtx,
+) -> None:
+    """Centre every mixed-direction leg in a shared fan trunk on the gap midline."""
+    mid = (gap_left + gap_right) / 2
+    step = ctx.offset_step
+    for ch in chans:
+        lead_right = _corridor_leadout_right([ch], ch.down)
+        _restack_channel(ch, mid, 0, 1, step, ctx.curve_radius, lead_right)
+
+
 def _materialize_gap_slots(routes: list[RoutedPath], ctx: _RoutingCtx) -> None:
     """Resolve every declared :class:`GapSlot` to a concentric channel X.
 
@@ -274,6 +333,9 @@ def _materialize_gap_slots(routes: list[RoutedPath], ctx: _RoutingCtx) -> None:
             if r_right > r_left:
                 gap_left = max(gap_left, r_left)
                 gap_right = min(gap_right, r_right)
+        if _is_shared_trunk_mixed_direction_corridor(chans, graph):
+            _restack_shared_trunk_corridor(chans, gap_left, gap_right, ctx)
+            continue
         bundles: list[tuple[bool, list[_VChannel]]] = []
         for down in (True, False):
             same = [c for c in chans if c.down is down]
@@ -654,6 +716,107 @@ def _stack_distinct_port_descents(
         for ch in by_line[lid]:
             if abs(ch.x - x) > COORD_TOLERANCE:
                 _set_vchannel_x(ch, x)
+
+
+def _fan_out_anchor_port(graph: MetroGraph, source_id: str) -> Port | None:
+    """Exit port feeding a fan-out junction, or the source when it is that port."""
+    if source_id in graph.junction_ids:
+        exit_port_ids = {
+            e.source
+            for e in graph.edges_to(source_id)
+            if e.source in graph.ports and not graph.ports[e.source].is_entry
+        }
+        if len(exit_port_ids) != 1:
+            return None
+        return graph.ports[next(iter(exit_port_ids))]
+    port = graph.ports.get(source_id)
+    if port is None or port.is_entry:
+        return None
+    return port
+
+
+def _stack_distinct_opening_descents(
+    cluster: list[tuple[RoutedPath, _VChannel]],
+    source_id: str,
+    graph: MetroGraph,
+    ctx: _RoutingCtx,
+) -> None:
+    """Re-seat coincident distinct-line opening descents from one fan-out trunk.
+
+    Mirror of :func:`_stack_distinct_port_descents` for diverging legs: after
+    mixed-direction channels are centred on the gap midline, distinct metro
+    lines still need ``OFFSET_STEP`` separation so their vertical runs do not
+    overlay in a shared Y band.
+    """
+    by_line: dict[str, list[_VChannel]] = defaultdict(list)
+    for rp, ch in cluster:
+        by_line[rp.line_id].append(ch)
+    if len(by_line) < 2:
+        return
+    anchor_port = _fan_out_anchor_port(graph, source_id)
+    if anchor_port is None:
+        return
+    offs = ctx.station_offsets or {}
+    span = {lid: max(ch.y_hi - ch.y_lo for ch in chs) for lid, chs in by_line.items()}
+    ordered = sorted(
+        by_line,
+        key=lambda lid: (
+            -span[lid],
+            offs.get((anchor_port.id, lid), 0.0),
+        ),
+    )
+    xs = [ch.x for _rp, ch in cluster]
+    step = ctx.offset_step
+    peel_right = (anchor_port.is_entry and anchor_port.side is PortSide.LEFT) or (
+        not anchor_port.is_entry and anchor_port.side is PortSide.RIGHT
+    )
+    base = min(xs) if peel_right else max(xs)
+    for rank, lid in enumerate(ordered):
+        x = base + rank * step if peel_right else base - rank * step
+        for ch in by_line[lid]:
+            if abs(ch.x - x) > COORD_TOLERANCE:
+                _set_vchannel_x(ch, x)
+
+
+def _stagger_divergent_distinct_openings(
+    routes: list[RoutedPath], ctx: _RoutingCtx
+) -> None:
+    """Spread distinct-line opening fan-out descents that share one channel.
+
+    Counterpart to :func:`_stagger_convergent_distinct_lines` on the diverging
+    side of a shared trunk: once mixed-direction bundles are centred on the
+    gap midline, distinct metro lines that still share an X are restacked
+    concentrically from the feeding exit port.
+    """
+    graph = ctx.graph
+    by_source: dict[str, list[tuple[RoutedPath, _VChannel]]] = defaultdict(list)
+    for rp in routes:
+        if not rp.is_inter_section:
+            continue
+        ch = _initial_fanout_descent(rp)
+        if ch is None:
+            continue
+        src_id = rp.edge.source
+        if src_id in graph.junction_ids:
+            by_source[src_id].append((rp, ch))
+            continue
+        src = graph.stations.get(src_id)
+        if src is None or not src.is_port:
+            continue
+        port = graph.ports.get(src_id)
+        if port is None or port.is_entry:
+            continue
+        by_source[src_id].append((rp, ch))
+
+    for src_id, entries in by_source.items():
+        entries.sort(key=lambda e: e[1].x)
+        cluster: list[tuple[RoutedPath, _VChannel]] = []
+        for rp, ch in entries:
+            if cluster and abs(ch.x - cluster[-1][1].x) > COORD_TOLERANCE + 1.0:
+                _stack_distinct_opening_descents(cluster, src_id, graph, ctx)
+                cluster = []
+            cluster.append((rp, ch))
+        _stack_distinct_opening_descents(cluster, src_id, graph, ctx)
 
 
 def _band_clusters(chans: list[_VChannel], band: float) -> list[list[_VChannel]]:

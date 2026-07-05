@@ -6,6 +6,7 @@ import re
 
 import pytest
 
+from nf_metro.layout.constants import MIN_STRAIGHT_EDGE
 from nf_metro.layout.engine import compute_layout
 from nf_metro.layout.routing import compute_station_offsets, route_edges
 from nf_metro.layout.routing.route_channel import (
@@ -104,7 +105,30 @@ graph LR
     ref_b[ ] -->|a| target
 """
         graph = parse_metro_mermaid(text)
-        assert graph.station_y_alignments["target"] == ("midpoint", ["ref_a", "ref_b"])
+        assert graph.station_y_alignments["target"] == (
+            "midpoint",
+            ["ref_a", "ref_b"],
+            None,
+        )
+
+    def test_align_x_parsed(self):
+        text = """%%metro line: a | A | #000
+%%metro align_x: target | midpoint | ref_a, ref_b
+graph LR
+    ref_a[ ] -->|a| target[T]
+    ref_b[ ] -->|a| target
+"""
+        graph = parse_metro_mermaid(text)
+        assert graph.station_x_alignments["target"] == (
+            "midpoint",
+            ["ref_a", "ref_b"],
+        )
+
+    def test_align_x_rejects_unknown_mode(self):
+        text = "%%metro align_x: target | center | ref_a\ngraph LR\n"
+        with pytest.warns(UserWarning, match="align_x"):
+            graph = parse_metro_mermaid(text)
+        assert graph.station_x_alignments == {}
 
     def test_equal_width_requires_two_sections(self):
         text = "%%metro equal_width: only\ngraph LR\n"
@@ -479,6 +503,135 @@ graph LR
         top_a_y = graph.stations["top_a"].y
         assert re.search(rf"M[0-9.]+,{top_a_y:.1f}", svg)
         assert re.search(rf"L[0-9.]+,{middle_y:.1f}", svg)
+
+    SPACING_TEMPLATE_MAP = """%%metro line: a | A | #4CAF50
+%%metro file: short_in | FASTQ
+%%metro file: long_in | CSV | Long Caption Label
+%%metro file: wide_top | GTF | Reference Annotation
+%%metro file: wide_bot | FASTA | Genome
+%%metro off_track: short_in, long_in, wide_top, wide_bot
+%%metro align_y: narrow | midpoint | short_in, long_in
+%%metro align_y: wide | midpoint | wide_top, wide_bot | short_in, long_in
+graph LR
+    subgraph prep [Prep]
+        short_in[ ]
+        long_in[ ]
+        wide_top[ ]
+        wide_bot[ ]
+        narrow[Narrow]
+        wide[Wide]
+        short_in -->|a| narrow
+        long_in -->|a| narrow
+        wide_top -->|a| wide
+        wide_bot -->|a| wide
+    end
+"""
+
+    def test_align_y_spacing_template_matches_reference_pair(self):
+        graph = _layout(self.SPACING_TEMPLATE_MAP)
+        short_in = graph.stations["short_in"]
+        long_in = graph.stations["long_in"]
+        wide_top = graph.stations["wide_top"]
+        wide_bot = graph.stations["wide_bot"]
+        template_gap = abs(long_in.y - short_in.y)
+        wide_gap = abs(wide_bot.y - wide_top.y)
+        assert wide_gap == pytest.approx(template_gap)
+        assert graph.stations["wide"].y == pytest.approx(
+            (wide_top.y + wide_bot.y) / 2
+        )
+
+
+class TestAlignX:
+    ALIGN_X_MAP = """%%metro line: a | A | #4CAF50
+%%metro off_track: left_in, right_out
+%%metro align_x: middle | midpoint | left_in, right_out
+graph LR
+    subgraph prep [Prep]
+        left_in[ ]
+        middle[Middle]
+        right_out[ ]
+        left_in -->|a| middle
+        middle -->|a| right_out
+    end
+"""
+
+    JOIN_ALIGN_X_MAP = """%%metro line: a | A | #4CAF50
+%%metro off_track: left_a, left_b, right_out
+%%metro align_x: middle | midpoint | left_a, right_out
+graph LR
+    subgraph prep [Prep]
+        left_a[ ]
+        left_b[ ]
+        middle[Middle]
+        right_out[ ]
+        left_a -->|a| middle
+        left_b -->|a| middle
+        middle -->|a| right_out
+    end
+"""
+
+    def test_align_x_midpoint(self):
+        graph = _layout(self.ALIGN_X_MAP)
+        left_in = graph.stations["left_in"]
+        right_out = graph.stations["right_out"]
+        middle = graph.stations["middle"]
+        expected = (left_in.x + right_out.x) / 2
+        assert middle.x == pytest.approx(expected)
+
+    def test_align_x_routes_through_centred_position(self):
+        graph, routes = _layout_and_routes(self.ALIGN_X_MAP)
+        middle_x = graph.stations["middle"].x
+        in_routes = [
+            r for r in routes if r.edge is not None and r.edge.target == "middle"
+        ]
+        out_routes = [
+            r for r in routes if r.edge is not None and r.edge.source == "middle"
+        ]
+        assert in_routes and out_routes
+        assert in_routes[0].points[-1][0] == pytest.approx(middle_x)
+        assert out_routes[0].points[0][0] == pytest.approx(middle_x)
+
+    def test_align_x_off_track_join_converges_left_of_station(self):
+        graph, routes = _layout_and_routes(self.JOIN_ALIGN_X_MAP)
+        middle_x = graph.stations["middle"].x
+        in_routes = [
+            r for r in routes if r.edge is not None and r.edge.target == "middle"
+        ]
+        assert len(in_routes) == 2
+        for route in in_routes:
+            xs = [p[0] for p in route.points]
+            assert min(xs) < middle_x - MIN_STRAIGHT_EDGE
+            assert route.points[-1][0] == pytest.approx(middle_x)
+
+    def test_scrnaseq_off_track_joins_clear_station_labels(self):
+        from pathlib import Path
+
+        from nf_metro.layout.constants import ICON_TERMINUS_FORK_LEAD
+
+        map_path = (
+            Path(__file__).resolve().parents[2] / "pipelines" / "scrnaseq" / "map.mmd"
+        )
+        graph, routes = _layout_and_routes(map_path.read_text())
+        for target in ("raw_data_qc", "prepare_genome"):
+            station = graph.stations[target]
+            by_line: dict[str, list] = {}
+            for route in routes:
+                if route.edge is None or route.edge.target != target:
+                    continue
+                by_line.setdefault(route.line_id, []).append(route)
+            assert len(by_line) == 2
+            approach_x = max(
+                graph.stations[r.edge.source].x
+                for routes_for_line in by_line.values()
+                for r in routes_for_line
+            ) + ICON_TERMINUS_FORK_LEAD
+            assert approach_x < station.x - MIN_STRAIGHT_EDGE
+            for routes_for_line in by_line.values():
+                for route in routes_for_line:
+                    xs = [p[0] for p in route.points]
+                    assert max(xs) <= station.x + 0.5
+                    assert min(xs) <= approach_x + 1.0
+                    assert route.points[-1][0] == pytest.approx(station.x)
 
 
 class TestRouteChannelY:
@@ -952,3 +1105,129 @@ graph LR
             horiz = _horizontal_segment_ys(route.points)
             assert horiz, f"expected horizontal run, got {route.points}"
             assert all(abs(y - barcode_y) < 1.0 for y in horiz)
+
+
+def _vertical_gap_xs(points: list[tuple[float, float]]) -> list[float]:
+    xs: list[float] = []
+    for (x1, y1), (x2, y2) in zip(points, points[1:], strict=False):
+        if abs(x1 - x2) < 0.5 and abs(y2 - y1) > 10.0:
+            xs.append(x1)
+    return xs
+
+
+class TestSharedTrunkVerticalChannelAlignment:
+    """Mixed-direction gap legs at a shared fan trunk share one vertical X."""
+
+    def test_scrnaseq_aligner_exits_share_vertical_channel(self):
+        from pathlib import Path
+
+        map_path = (
+            Path(__file__).resolve().parents[2] / "pipelines" / "scrnaseq" / "map.mmd"
+        )
+        graph, routes = _layout_and_routes(map_path.read_text())
+        entry_ports = [
+            pid
+            for pid, port in graph.ports.items()
+            if port.is_entry and port.section_id == "convergence"
+        ]
+        assert entry_ports
+        aligner_secs = {
+            "simpleaf",
+            "kallisto",
+            "star",
+            "cell_ranger",
+            "cell_ranger_multi",
+        }
+        fan_routes = [
+            r
+            for r in routes
+            if r.edge is not None
+            and r.edge.target in entry_ports
+            and graph.stations[r.edge.source].section_id in aligner_secs
+        ]
+        assert len(fan_routes) == 5
+        vert_xs = [_vertical_gap_xs(r.points) for r in fan_routes]
+        assert all(vert_xs), f"expected vertical gap legs, got {vert_xs}"
+        ref_x = vert_xs[0][0]
+        for xs in vert_xs[1:]:
+            assert xs[0] == pytest.approx(ref_x, abs=0.5)
+
+    def test_scrnaseq_preprocessing_fanout_shares_vertical_channel(self):
+        from pathlib import Path
+
+        map_path = (
+            Path(__file__).resolve().parents[2] / "pipelines" / "scrnaseq" / "map.mmd"
+        )
+        graph, routes = _layout_and_routes(map_path.read_text())
+        aligner_secs = {
+            "simpleaf",
+            "kallisto",
+            "star",
+            "cell_ranger",
+            "cell_ranger_multi",
+        }
+        fan_routes = [
+            r
+            for r in routes
+            if r.edge is not None
+            and r.is_inter_section
+            and r.line_id == "scrnaseq"
+            and r.edge.source in graph.junction_ids
+            and graph.stations[r.edge.target].section_id in aligner_secs
+        ]
+        assert len(fan_routes) == 5
+        vert_xs = [_vertical_gap_xs(r.points) for r in fan_routes]
+        assert all(vert_xs), f"expected vertical gap legs, got {vert_xs}"
+        ref_x = vert_xs[0][0]
+        for xs in vert_xs[1:]:
+            assert xs[0] == pytest.approx(ref_x, abs=0.5)
+
+    def test_scrnaseq_multiome_fanout_keeps_line_offset(self):
+        from pathlib import Path
+
+        map_path = (
+            Path(__file__).resolve().parents[2] / "pipelines" / "scrnaseq" / "map.mmd"
+        )
+        graph, routes = _layout_and_routes(map_path.read_text())
+        aligner_secs = {
+            "simpleaf",
+            "kallisto",
+            "star",
+            "cell_ranger",
+            "cell_ranger_arc",
+            "cell_ranger_multi",
+        }
+        fan_routes = [
+            r
+            for r in routes
+            if r.edge is not None
+            and r.is_inter_section
+            and r.edge.source in graph.junction_ids
+            and graph.stations[r.edge.target].section_id in aligner_secs
+        ]
+        by_line: dict[str, list[float]] = {}
+        for r in fan_routes:
+            xs = _vertical_gap_xs(r.points)
+            assert xs, f"expected vertical gap leg for {r.edge.target}"
+            by_line.setdefault(r.line_id, []).append(xs[0])
+        assert len(by_line["scrnaseq"]) == 5
+        assert len(by_line["multiome"]) == 1
+        scrnaseq_x = by_line["scrnaseq"][0]
+        assert all(x == pytest.approx(scrnaseq_x, abs=0.5) for x in by_line["scrnaseq"])
+        assert by_line["multiome"][0] == pytest.approx(scrnaseq_x + 4.0, abs=0.5)
+
+    def test_scrnaseq_preprocessing_channels_center_processing_nodes(self):
+        from pathlib import Path
+
+        map_path = (
+            Path(__file__).resolve().parents[2] / "pipelines" / "scrnaseq" / "map.mmd"
+        )
+        graph = _layout(map_path.read_text())
+        for target, left_ref in (
+            ("raw_data_qc", "fastq_in"),
+            ("prepare_genome", "gtf_in"),
+        ):
+            left_x = graph.stations[left_ref].x
+            right_x = graph.stations["_preprocessing_done"].x
+            expected = (left_x + right_x) / 2
+            assert graph.stations[target].x == pytest.approx(expected, abs=1.0)

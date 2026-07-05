@@ -233,7 +233,7 @@ def _parse_align_section_y_directive(value: str, graph: MetroGraph) -> None:
 
 
 def _parse_align_y_directive(value: str, graph: MetroGraph) -> None:
-    """Parse ``%%metro align_y: station | mode | ref1, ref2, ...``."""
+    """Parse ``%%metro align_y: station | mode | ref1, ref2 [| spacing_ref1, spacing_ref2]``."""
     parts = _split_fields(value)
     if len(parts) < 3:
         _warn_malformed(
@@ -245,13 +245,45 @@ def _parse_align_y_directive(value: str, graph: MetroGraph) -> None:
     station_id = parts[0]
     mode = parts[1].lower()
     refs = _split_csv(parts[2])
+    spacing_refs: list[str] | None = None
+    if len(parts) >= 4 and parts[3].strip():
+        spacing_refs = _split_csv(parts[3])
+        if len(spacing_refs) != 2:
+            _warn_malformed(
+                "align_y",
+                parts[3],
+                "exactly two spacing template station ids",
+            )
+            spacing_refs = None
     if mode != "midpoint":
         _warn_malformed("align_y", parts[1], "midpoint")
         return
     if not refs:
         _warn_malformed("align_y", value, "at least one reference station id")
         return
-    graph.station_y_alignments[station_id] = (mode, refs)
+    graph.station_y_alignments[station_id] = (mode, refs, spacing_refs)
+
+
+def _parse_align_x_directive(value: str, graph: MetroGraph) -> None:
+    """Parse ``%%metro align_x: station | mode | ref1, ref2, ...``."""
+    parts = _split_fields(value)
+    if len(parts) < 3:
+        _warn_malformed(
+            "align_x",
+            value,
+            "'station_id | midpoint | ref1, ref2, ...'",
+        )
+        return
+    station_id = parts[0]
+    mode = parts[1].lower()
+    refs = _split_csv(parts[2])
+    if mode != "midpoint":
+        _warn_malformed("align_x", parts[1], "midpoint")
+        return
+    if not refs:
+        _warn_malformed("align_x", value, "at least one reference station id")
+        return
+    graph.station_x_alignments[station_id] = (mode, refs)
 
 
 def _dir_process(value: str, graph: MetroGraph) -> None:
@@ -687,6 +719,7 @@ _GLOBAL_DIRECTIVE_HANDLERS.update(
         "distribute_y": _parse_distribute_y_directive,
         "hidden_section": _parse_hidden_section_directive,
         "align_y": _parse_align_y_directive,
+        "align_x": _parse_align_x_directive,
         "align_section_y": _parse_align_section_y_directive,
         "section_gap": _parse_section_gap_directive,
         "route_channel_y": _parse_route_channel_y_directive,

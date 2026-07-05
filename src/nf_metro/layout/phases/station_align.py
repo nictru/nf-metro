@@ -1,9 +1,30 @@
-"""Author-directed station Y alignment."""
+"""Author-directed station X/Y alignment."""
 
 from __future__ import annotations
 
 from nf_metro.layout.constants import SECTION_Y_PADDING
 from nf_metro.parser.model import MetroGraph, PortSide
+
+
+def apply_station_x_alignments(graph: MetroGraph) -> None:
+    """Apply ``%%metro align_x:`` directives after layout has settled.
+
+    Runs late in the layout pipeline so reference stations have their final
+    X before a target station is centred between them.
+    """
+    for station_id, (mode, ref_ids) in graph.station_x_alignments.items():
+        target = graph.stations.get(station_id)
+        if target is None:
+            continue
+        ref_xs = [
+            graph.stations[ref_id].x
+            for ref_id in ref_ids
+            if ref_id in graph.stations
+        ]
+        if not ref_xs:
+            continue
+        if mode == "midpoint":
+            target.x = sum(ref_xs) / len(ref_xs)
 
 
 def apply_station_y_alignments(
@@ -16,19 +37,40 @@ def apply_station_y_alignments(
     their final Y before a target station is centred between them.
     """
     aligned_off_track: set[str] = set()
-    for station_id, (mode, ref_ids) in graph.station_y_alignments.items():
+    for station_id, (mode, ref_ids, spacing_ref_ids) in (
+        graph.station_y_alignments.items()
+    ):
         target = graph.stations.get(station_id)
         if target is None:
             continue
-        ref_ys = [
-            graph.stations[ref_id].y
-            for ref_id in ref_ids
-            if ref_id in graph.stations
-        ]
-        if not ref_ys:
+        refs = [graph.stations[ref_id] for ref_id in ref_ids if ref_id in graph.stations]
+        if not refs:
             continue
         if mode == "midpoint":
-            target.y = sum(ref_ys) / len(ref_ys)
+            if (
+                spacing_ref_ids
+                and len(refs) == 2
+                and len(spacing_ref_ids) == 2
+            ):
+                template = [
+                    graph.stations[ref_id]
+                    for ref_id in spacing_ref_ids
+                    if ref_id in graph.stations
+                ]
+                if len(template) == 2:
+                    gap = abs(template[1].y - template[0].y)
+                    mid = sum(st.y for st in refs) / len(refs)
+                    target.y = mid
+                    top_ref, bottom_ref = sorted(refs, key=lambda st: st.y)
+                    top_ref.y = mid - gap / 2
+                    bottom_ref.y = mid + gap / 2
+                    for st in (top_ref, bottom_ref):
+                        if st.off_track:
+                            aligned_off_track.add(st.id)
+                    if target.off_track:
+                        aligned_off_track.add(station_id)
+                    continue
+            target.y = sum(st.y for st in refs) / len(refs)
             if target.off_track:
                 aligned_off_track.add(station_id)
 

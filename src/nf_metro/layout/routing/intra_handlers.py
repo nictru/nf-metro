@@ -534,13 +534,44 @@ def _is_side_branch_ascent(
     return True
 
 
+def _off_track_join_route_tx(
+    edge: Edge, src: Station, tgt: Station, tx: float, ctx: _RoutingCtx
+) -> float:
+    """Flow-axis X where off-track feeders converge before a join station.
+
+    ``align_x`` can park a join station to the right of its file-input column.
+    Diagonal placement keyed on the station X drags the fan convergence with
+    it, so labelled joins get channels through their text.  When every feeder
+    is off-track, converge at the input column's fork lead instead and leave a
+    short flat into the station.
+    """
+    if not src.off_track or edge.target not in ctx.join_stations:
+        return tx
+    graph = ctx.graph
+    feeders = graph.edges_to(edge.target)
+    if not feeders:
+        return tx
+    off_track_feeders = [
+        graph.stations[e.source]
+        for e in feeders
+        if e.source in graph.stations and graph.stations[e.source].off_track
+    ]
+    if len(off_track_feeders) != len(feeders):
+        return tx
+    approach = max(st.x for st in off_track_feeders) + ICON_TERMINUS_FORK_LEAD
+    if approach >= tx - MIN_STRAIGHT_EDGE:
+        return tx
+    return approach
+
+
 def _route_diagonal(
     edge: Edge, src: Station, tgt: Station, ctx: _RoutingCtx
 ) -> RoutedPath:
     """Route with horizontal runs and a 45-degree diagonal transition."""
     sx, sy = src.x, src.y
     tx, ty = tgt.x, tgt.y
-    dx = tx - sx
+    route_tx = _off_track_join_route_tx(edge, src, tgt, tx, ctx)
+    dx = route_tx - sx
 
     # Minimum straight track at endpoints
     if src.is_port or tgt.is_port:
@@ -605,7 +636,7 @@ def _route_diagonal(
 
     diag_start_x, diag_end_x = _compute_diagonal_placement(
         sx,
-        tx,
+        route_tx,
         ctx.diagonal_run,
         src_min,
         tgt_min,
@@ -615,10 +646,17 @@ def _route_diagonal(
 
     section = ctx.graph.sections.get(src.section_id or "")
     direction = section.direction if section else "LR"
+    if abs(route_tx - tx) > COORD_TOLERANCE:
+        points = diagonal_centreline(
+            direction, (sx, sy), (route_tx, ty), diag_start_x, diag_end_x
+        )
+        points.append((tx, ty))
+    else:
+        points = diagonal_centreline(
+            direction, (sx, sy), (tx, ty), diag_start_x, diag_end_x
+        )
     return RoutedPath(
         edge=edge,
         line_id=edge.line_id,
-        points=diagonal_centreline(
-            direction, (sx, sy), (tx, ty), diag_start_x, diag_end_x
-        ),
+        points=points,
     )

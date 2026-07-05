@@ -232,7 +232,10 @@ from nf_metro.layout.phases.junctions import (  # noqa: F401
     _resolve_source_section_id,
     _resolve_source_xy,
 )
-from nf_metro.layout.phases.station_align import apply_station_y_alignments
+from nf_metro.layout.phases.station_align import (
+    apply_station_x_alignments,
+    apply_station_y_alignments,
+)
 from nf_metro.layout.phases.off_track import (  # noqa: F401
     _align_phantom_pass_throughs,
     _bump_off_track_clear_of_trunks,
@@ -1893,9 +1896,13 @@ def _finalize_layout(
         _apply_half_grid_symmetric_diamonds(graph, y_spacing)
         _snap(graph, "6.17")
 
-    # Stage 6.18: Author-directed station Y alignment (``%%metro align_y:``).
-    # Runs after off-track re-anchoring and grid settling so reference
-    # stations have their final Y before targets are centred between them.
+    # Stage 6.18: Author-directed station X/Y alignment (``%%metro align_x:`` /
+    # ``%%metro align_y:``).  Runs after off-track re-anchoring and grid
+    # settling so reference stations have their final coordinates before
+    # targets are centred between them.
+    if graph.station_x_alignments:
+        apply_station_x_alignments(graph)
+        _snap(graph, "6.18x")
     if graph.station_y_alignments:
         apply_station_y_alignments(graph, section_y_padding)
         _shift_graph_into_canvas(graph, section_y_padding)

@@ -501,8 +501,12 @@ class MetroGraph:
     _pending_hidden_sections: list[str] = field(default_factory=list)
     # Section groups whose bbox widths are equalised during placement
     equal_width_groups: list[list[str]] = field(default_factory=list)
-    # station_id -> (mode, [reference_station_ids]) for Y alignment
-    station_y_alignments: dict[str, tuple[str, list[str]]] = field(
+    # station_id -> (mode, [reference_station_ids], optional spacing template ids)
+    station_y_alignments: dict[str, tuple[str, list[str], list[str] | None]] = (
+        field(default_factory=dict)
+    )
+    # station_id -> (mode, [reference_station_ids]) for X alignment
+    station_x_alignments: dict[str, tuple[str, list[str]]] = field(
         default_factory=dict
     )
     # Section groups redistributed evenly along Y after grid placement.
