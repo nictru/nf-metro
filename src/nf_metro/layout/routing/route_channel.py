@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from nf_metro.parser.model import MetroGraph
+from nf_metro.layout.constants import SECTION_Y_PADDING
+from nf_metro.parser.model import MetroGraph, PortSide
 
 RouteChannelRule = tuple[str, str, str, list[str]]
 
@@ -122,3 +123,102 @@ def lookup_route_channel_y(
     if target_id in to_map:
         return to_map[target_id]
     return None
+
+
+def _sync_feeder_exit_ports(
+    graph: MetroGraph, feeder_id: str, channel_y: float
+) -> None:
+    """Align RIGHT/LEFT exit ports fed from *feeder_id* to *channel_y*."""
+    from nf_metro.layout.phases.ports import _set_port_y
+
+    station = graph.stations.get(feeder_id)
+    if station is None or station.section_id is None:
+        return
+    section = graph.sections.get(station.section_id)
+    if section is None:
+        return
+    for pid in section.exit_ports:
+        port = graph.ports.get(pid)
+        if port is None or port.is_entry:
+            continue
+        if port.side not in (PortSide.LEFT, PortSide.RIGHT):
+            continue
+        for edge in graph.edges_to(pid):
+            if edge.source != feeder_id:
+                continue
+            _set_port_y(graph, pid, channel_y)
+
+
+def _refit_sections_after_route_channel_y(
+    graph: MetroGraph,
+    section_ids: set[str],
+    section_y_padding: float,
+) -> None:
+    """Tighten section bboxes after a hub moves within its box."""
+    from nf_metro.layout.phases._common import _pull_section_ports_to_edge
+    from nf_metro.layout.phases.bbox import (
+        _predict_section_content_bottom,
+        _section_content_hug_top,
+    )
+    from nf_metro.layout.routing import compute_station_offsets
+
+    offsets = compute_station_offsets(graph)
+    for section_id in section_ids:
+        section = graph.sections.get(section_id)
+        if section is None or section.bbox_h <= 0:
+            continue
+        top = _section_content_hug_top(
+            graph, section, section_y_padding, offsets
+        )
+        bottom = _predict_section_content_bottom(
+            graph, section, section_y_padding, offsets
+        )
+        if top is None or bottom is None:
+            continue
+        section.bbox_y = top
+        section.bbox_h = max(0.0, bottom - top)
+        _pull_section_ports_to_edge(graph, section, PortSide.TOP, section.bbox_y)
+        _pull_section_ports_to_edge(
+            graph,
+            section,
+            PortSide.BOTTOM,
+            section.bbox_y + section.bbox_h,
+        )
+
+
+def apply_route_channel_y_positions(
+    graph: MetroGraph,
+    section_y_padding: float = SECTION_Y_PADDING,
+) -> None:
+    """Seat ``route_channel_y: from`` sources at their authored channel Y.
+
+    Runs after ``align_section_y`` so reference bands are settled, then
+    re-anchors fan-out hubs and their exit ports before junction
+    positioning.  Refits affected section bboxes to remove slack opened
+    when a hub moves within its box.
+    """
+    if not graph.route_channel_y_rules:
+        return
+
+    from_map, _ = resolve_route_channel_y_maps(graph)
+    if not from_map:
+        return
+
+    affected_sections: set[str] = set()
+    for station_id, channel_y in from_map.items():
+        if station_id in graph.junction_ids:
+            continue
+        station = graph.stations.get(station_id)
+        if station is None:
+            continue
+        if abs(station.y - channel_y) <= 1e-6:
+            continue
+        station.y = channel_y
+        if station.section_id:
+            affected_sections.add(station.section_id)
+        _sync_feeder_exit_ports(graph, station_id, channel_y)
+
+    if affected_sections:
+        _refit_sections_after_route_channel_y(
+            graph, affected_sections, section_y_padding
+        )

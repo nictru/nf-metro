@@ -48,6 +48,12 @@ def _position_junctions(graph: MetroGraph) -> None:
     at ``max(pred.x) + _required_junction_margin(n)``, y = entry_port.y to
     create a visible single-line segment from merge point to entry.
     """
+    route_channel_y_from: dict[str, float] = {}
+    if graph.route_channel_y_rules:
+        from nf_metro.layout.routing.route_channel import resolve_route_channel_y_maps
+
+        route_channel_y_from, _ = resolve_route_channel_y_maps(graph)
+
     for jid in graph.junctions:
         junction = graph.stations.get(jid)
         if not junction:
@@ -115,6 +121,9 @@ def _position_junctions(graph: MetroGraph) -> None:
                 direction = 1.0 if nearest_entry_x > exit_port_x else -1.0
                 junction.x = exit_port_x + direction * margin
                 junction.y = exit_port_y
+
+        if jid in route_channel_y_from:
+            junction.y = route_channel_y_from[jid]
 
 
 def _position_merge_junction(

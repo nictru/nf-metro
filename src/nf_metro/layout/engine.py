@@ -1853,6 +1853,14 @@ def _finalize_layout(
         _shift_graph_into_canvas(graph, section_y_padding)
         _snap(graph, "6.15c")
 
+    # Stage 6.15e: Seat ``route_channel_y: from`` hubs on their channel Y.
+    if graph.route_channel_y_rules:
+        from nf_metro.layout.routing.route_channel import apply_route_channel_y_positions
+
+        apply_route_channel_y_positions(graph, section_y_padding)
+        _shift_graph_into_canvas(graph, section_y_padding)
+        _snap(graph, "6.15e")
+
     # Stage 6.15d: Fixed visual gaps between paired sections (``section_gap:``).
     if graph.section_y_gaps:
         apply_section_y_gaps(graph)

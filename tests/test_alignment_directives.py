@@ -604,6 +604,92 @@ class TestRouteChannelY:
             assert to_map[pid] == pytest.approx(expected)
 
 
+class TestRouteChannelYPositioning:
+    """Late layout pass seats fan-out hubs on the authored channel Y."""
+
+    MAP = """%%metro line: a | A | #4CAF50
+%%metro grid: prep | 0,2
+%%metro grid: top | 1,0
+%%metro grid: bot | 1,4
+%%metro distribute_y: top, bot | even | 50
+%%metro route_channel_y: from _done | section_midpoint | top, bot
+%%metro align_section_y: prep | section_midpoint | top, bot
+graph LR
+    subgraph prep [Prep]
+        %%metro exit: right | a
+        top_in[TopIn] -->|a| _done
+        bot_in[BotIn] -->|a| _done
+    end
+    subgraph top [Top]
+        %%metro entry: left | a
+        top_a[A] -->|a| top_b[B]
+    end
+    subgraph bot [Bot]
+        %%metro entry: left | a
+        bot_a[C] -->|a| bot_b[D]
+    end
+    _done -->|a| top_a
+    _done -->|a| bot_a
+"""
+
+    def test_fanout_hub_seated_on_channel_y(self):
+        graph = _layout(self.MAP)
+        expected = _section_band_midpoint(graph, ["top", "bot"])
+        assert expected is not None
+        assert graph.stations["_done"].y == pytest.approx(expected, abs=1.0)
+        exit_port = graph.sections["prep"].exit_ports[0]
+        assert graph.stations[exit_port].y == pytest.approx(expected, abs=1.0)
+
+    def test_fanout_routes_without_channel_detour(self):
+        graph, routes = _layout_and_routes(self.MAP)
+        expected = _section_band_midpoint(graph, ["top", "bot"])
+        assert expected is not None
+        prep_exit_x = max(
+            graph.stations[pid].x
+            for pid in graph.sections["prep"].exit_ports
+        )
+        entry_ports = [
+            pid
+            for pid, port in graph.ports.items()
+            if port.is_entry and port.section_id == "top"
+        ]
+        fan_routes = [
+            r
+            for r in routes
+            if r.edge is not None
+            and r.edge.target in entry_ports
+            and (
+                r.edge.source == "_done"
+                or r.edge.source in graph.junction_ids
+            )
+        ]
+        assert fan_routes
+        points = fan_routes[0].points
+        first_gap_y = None
+        for (x1, y1), (x2, y2) in zip(points, points[1:], strict=False):
+            if (
+                abs(y1 - y2) < 0.5
+                and abs(x2 - x1) > 5.0
+                and x1 >= prep_exit_x - 1.0
+            ):
+                first_gap_y = y1
+                break
+        assert first_gap_y is not None
+        assert abs(first_gap_y - expected) < 2.0
+
+    def test_section_bbox_tightens_below_hub(self):
+        graph = _layout(self.MAP)
+        done_y = graph.stations["_done"].y
+        prep = graph.sections["prep"]
+        slack = prep.bbox_y + prep.bbox_h - done_y
+        lowest = max(
+            graph.stations[sid].y
+            for sid in prep.station_ids
+            if sid in graph.stations and not graph.stations[sid].is_port
+        )
+        assert slack < lowest - done_y + 60.0
+
+
 class TestAlignSectionY:
     BASE_MAP = """%%metro line: a | A | #4CAF50
 %%metro grid: prep | 0,2
