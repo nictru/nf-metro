@@ -431,6 +431,10 @@
         "mmd": "%%metro title: Branch-fold placement stability\n%%metro style: dark\n%%metro fold_threshold: 6\n%%metro line: survey | Survey | #0570b0\n%%metro line: align | Alignment | #2db572\n\ngraph LR\n    subgraph ingest [Ingest]\n        i1[Read]\n        i2[Validate]\n        i1 -->|survey,align| i2\n    end\n\n    subgraph survey [Survey]\n        s1[Sketch]\n        s2[Profile]\n        s3[Classify]\n        s4[Summarise]\n        s1 -->|survey| s2\n        s2 -->|survey| s3\n        s3 -->|survey| s4\n    end\n\n    subgraph align [Alignment]\n        a1[Index]\n        a2[Map]\n        a1 -->|align| a2\n    end\n\n    subgraph report [Report]\n        r1[Aggregate]\n        r2[Publish]\n        r1 -->|align| r2\n    end\n\n    i2 -->|survey| s1\n    i2 -->|align| a1\n    a2 -->|align| r1\n"
       },
       {
+        "name": "rl_entry_right_exit_left",
+        "mmd": "%%metro title: RL entry-right exit-left\n%%metro line: a | A | #e6007e\n%%metro grid: feed | 2,0\n%%metro grid: mid | 1,0\n%%metro grid: sink | 0,0\n\ngraph LR\n    subgraph feed [Feed]\n        %%metro exit: left | a\n        f1[F1]\n    end\n    subgraph mid [Mid]\n        %%metro entry: right | a\n        %%metro exit: left | a\n        m1[M1]\n        m2[M2]\n        m1 -->|a| m2\n    end\n    subgraph sink [Sink]\n        %%metro entry: right | a\n        s1[S1]\n    end\n    f1 -->|a| m2\n    m2 -->|a| s1\n"
+      },
+      {
         "name": "inrow_skip_breeze",
         "mmd": "%%metro title: In-row express skip\n%%metro style: dark\n%%metro line: a | Local | #2db572\n%%metro line: b | Express | #e63946\ngraph LR\n    subgraph s [Section]\n        s1[S1]\n        s2[S2]\n        s3[S3]\n        s1 -->|a| s2\n        s2 -->|a| s3\n        s1 -->|b| s3\n    end\n"
       },
