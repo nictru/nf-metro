@@ -100,6 +100,8 @@ from nf_metro.layout.phases.canvas import (  # noqa: F401
 from nf_metro.layout.section_placement import (
     apply_section_y_alignments,
     apply_section_y_distributions,
+    apply_section_y_gaps,
+    reconcile_section_y_gaps_for_render,
 )
 from nf_metro.layout.phases.fan_bundles import (  # noqa: F401
     _apply_half_grid_2branch_symfan,
@@ -1851,6 +1853,12 @@ def _finalize_layout(
         _shift_graph_into_canvas(graph, section_y_padding)
         _snap(graph, "6.15c")
 
+    # Stage 6.15d: Fixed visual gaps between paired sections (``section_gap:``).
+    if graph.section_y_gaps:
+        apply_section_y_gaps(graph)
+        _shift_graph_into_canvas(graph, section_y_padding)
+        _snap(graph, "6.15d")
+
     # Stage 6.16: Re-align entry ports and junctions with their now-settled
     # feeders.  A vertical-flow (TB/BT) section's perpendicular entry port is
     # pinned a fixed offset above its first internal station, so the late
@@ -1881,8 +1889,17 @@ def _finalize_layout(
     # Runs after off-track re-anchoring and grid settling so reference
     # stations have their final Y before targets are centred between them.
     if graph.station_y_alignments:
-        apply_station_y_alignments(graph)
+        apply_station_y_alignments(graph, section_y_padding)
+        _shift_graph_into_canvas(graph, section_y_padding)
         _snap(graph, "6.18")
+
+    # Stage 6.19: Re-seat section_gap targets for render-time bbox growth.
+    # place_labels enlarges reference section boxes after layout; without this
+    # pass the drawn boxes can touch even when layout bboxes have the gap.
+    if graph.section_y_gaps:
+        reconcile_section_y_gaps_for_render(graph)
+        _shift_graph_into_canvas(graph, section_y_padding)
+        _snap(graph, "6.19")
 
     if validate:
         run_validate_guards(

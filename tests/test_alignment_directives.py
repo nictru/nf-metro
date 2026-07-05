@@ -1,4 +1,4 @@
-"""Tests for alignment directives: equal_width, hidden_section, align_y, align_section_y, distribute_y, route_channel_y."""
+"""Tests for alignment directives: equal_width, hidden_section, align_y, align_section_y, distribute_y, route_channel_y, section_gap."""
 
 from __future__ import annotations
 
@@ -48,6 +48,26 @@ def _gaps_between_sections(section_ids: list[str], graph) -> list[float]:
     for left, right in zip(sections, sections[1:], strict=False):
         gaps.append(_section_visual_top(right) - _section_visual_bottom(left))
     return gaps
+
+
+def _section_box_rect(svg: str, section_id: str) -> tuple[float, float, float, float]:
+    match = re.search(
+        rf'<rect\b[^>]*data-section-id="{re.escape(section_id)}"[^>]*/?>',
+        svg,
+    )
+    assert match, f"missing section box for {section_id!r}"
+    tag = match.group(0)
+    x = float(re.search(r'\bx="([0-9.]+)"', tag).group(1))
+    y = float(re.search(r'\by="([0-9.]+)"', tag).group(1))
+    w = float(re.search(r'\bwidth="([0-9.]+)"', tag).group(1))
+    h = float(re.search(r'\bheight="([0-9.]+)"', tag).group(1))
+    return x, y, w, h
+
+
+def _rendered_section_gap(svg: str, upper_id: str, lower_id: str) -> float:
+    _, uy, _, uh = _section_box_rect(svg, upper_id)
+    _, ly, _, _ = _section_box_rect(svg, lower_id)
+    return ly - (uy + uh)
 
 
 class TestAlignmentDirectiveParsing:
@@ -204,6 +224,32 @@ graph LR
         with pytest.warns(UserWarning, match="align_section_y"):
             graph = parse_metro_mermaid(text)
         assert graph.section_y_alignments == []
+
+    def test_section_gap_parsed(self):
+        text = """%%metro line: a | A | #000
+%%metro section_gap: reporting | postprocessing | 50
+graph LR
+    subgraph postprocessing [Post]
+        p1[P]
+    end
+    subgraph reporting [Report]
+        r1[R]
+    end
+"""
+        graph = parse_metro_mermaid(text)
+        assert graph.section_y_gaps == [("reporting", "postprocessing", 50.0)]
+
+    def test_section_gap_rejects_missing_fields(self):
+        text = "%%metro section_gap: only\ngraph LR\n"
+        with pytest.warns(UserWarning, match="section_gap"):
+            graph = parse_metro_mermaid(text)
+        assert graph.section_y_gaps == []
+
+    def test_section_gap_rejects_non_numeric_gap(self):
+        text = "%%metro section_gap: a | b | wide\ngraph LR\n"
+        with pytest.warns(UserWarning, match="section_gap"):
+            graph = parse_metro_mermaid(text)
+        assert graph.section_y_gaps == []
 
 
 class TestHiddenSection:
@@ -670,3 +716,153 @@ class TestAlignSectionY:
         horiz_ys = _horizontal_segment_ys(points)
         assert horiz_ys
         assert any(abs(y - expected) < 2.0 for y in horiz_ys)
+
+
+class TestSectionGap:
+    BASE_MAP = """%%metro line: a | A | #4CAF50
+%%metro grid: prep | 0,2
+%%metro grid: top | 1,0
+%%metro grid: mid | 1,2
+%%metro grid: bot | 1,4
+%%metro grid: convergence | 2,4
+%%metro grid: post | 3,4
+%%metro grid: report | 3,5
+%%metro distribute_y: top, mid, bot | even | 50
+%%metro hidden_section: convergence
+%%metro align_section_y: post | section_midpoint | top, mid, bot | _merge
+{directives}graph LR
+    subgraph prep [Prep]
+        %%metro exit: right | a
+        in[In] -->|a| _done
+    end
+    subgraph top [Top]
+        %%metro entry: left | a
+        %%metro exit: right | a
+        top_a[A] -->|a| top_b[B]
+    end
+    subgraph mid [Mid]
+        %%metro entry: left | a
+        %%metro exit: right | a
+        mid_a[C] -->|a| mid_b[D]
+    end
+    subgraph bot [Bot]
+        %%metro entry: left | a
+        %%metro exit: right | a
+        bot_a[E] -->|a| bot_b[F]
+    end
+    subgraph convergence [ ]
+        %%metro entry: left | a
+        _merge
+    end
+    subgraph post [Post]
+        %%metro entry: left | a
+        fin[Fin]
+    end
+    subgraph report [Report]
+        %%metro entry: left | a
+        rep[Rep]
+    end
+    _done -->|a| top_a
+    _done -->|a| mid_a
+    _done -->|a| bot_a
+    top_b -->|a| _merge
+    mid_b -->|a| _merge
+    bot_b -->|a| _merge
+    _merge -->|a| fin
+    _merge -->|a| rep
+"""
+
+    DIRECTIVES = "%%metro section_gap: report | post | 50\n"
+
+    def _map(self, *, with_directives: bool) -> str:
+        directives = self.DIRECTIVES if with_directives else ""
+        return self.BASE_MAP.format(directives=directives)
+
+    def test_section_gap_matches_aligner_spacing(self):
+        graph = _layout(self._map(with_directives=True))
+        gap = _gaps_between_sections(["post", "report"], graph)[0]
+        assert gap == pytest.approx(50.0)
+
+    def test_section_gap_runs_after_align_section_y(self):
+        without = _layout(self._map(with_directives=False))
+        with_gap = _layout(self._map(with_directives=True))
+        without_gap = _gaps_between_sections(["post", "report"], without)[0]
+        with_fixed = _gaps_between_sections(["post", "report"], with_gap)[0]
+        assert without_gap > with_fixed
+        assert with_fixed == pytest.approx(50.0)
+
+    def test_section_gap_matches_rendered_section_boxes(self):
+        graph = _layout(self._map(with_directives=True))
+        svg = render_svg(graph, NFCORE_THEME)
+        gap = _rendered_section_gap(svg, "post", "report")
+        assert gap == pytest.approx(50.0, abs=1.0)
+
+
+class TestAlignStationToSection:
+    MAP = """%%metro line: a | A | #4CAF50
+%%metro off_track: barcode_in
+%%metro grid: aligner | 1,2
+%%metro align_y: barcode_in | midpoint | first_step, last_step
+graph LR
+    subgraph aligner [Aligner]
+        %%metro entry: left | a
+        first_step[First] -->|a| middle[Middle]
+        middle -->|a| last_step[Last]
+    end
+    barcode_in[ ]
+    barcode_in -->|a| first_step
+"""
+
+    def test_off_track_input_aligns_to_section_midline(self):
+        graph = _layout(self.MAP)
+        first = graph.stations["first_step"]
+        last = graph.stations["last_step"]
+        barcode = graph.stations["barcode_in"]
+        expected = (first.y + last.y) / 2
+        assert barcode.y == pytest.approx(expected)
+        section = graph.sections["aligner"]
+        section_mid = section.bbox_y + section.bbox_h / 2
+        assert barcode.y == pytest.approx(section_mid, abs=1.0)
+
+
+class TestAlignYInterSectionRoute:
+    MAP = """%%metro line: a | A | #4CAF50
+%%metro off_track: barcode_in
+%%metro grid: aligner | 1,2
+%%metro align_y: barcode_in | midpoint | first_step, last_step
+graph LR
+    subgraph aligner [Aligner]
+        %%metro entry: left | a
+        first_step[First] -->|a| middle[Middle]
+        middle -->|a| last_step[Last]
+    end
+    barcode_in[ ]
+    barcode_in -->|a| first_step
+"""
+
+    def test_off_track_exit_port_matches_aligned_station_y(self):
+        graph = _layout(self.MAP)
+        barcode = graph.stations["barcode_in"]
+        exit_ports = [
+            graph.ports[pid]
+            for pid in graph.sections["__implicit__"].exit_ports
+            if pid in graph.ports
+        ]
+        assert exit_ports, "expected an implicit-section exit port"
+        assert all(abs(port.y - barcode.y) < 1.0 for port in exit_ports)
+
+    def test_off_track_to_section_entry_is_horizontal(self):
+        graph, routes = _layout_and_routes(self.MAP)
+        barcode_y = graph.stations["barcode_in"].y
+        inter_routes = [
+            route
+            for route in routes
+            if route.is_inter_section
+            and route.edge.source.startswith("__implicit__")
+            and "aligner" in route.edge.target
+        ]
+        assert inter_routes, "expected inter-section route into aligner"
+        for route in inter_routes:
+            horiz = _horizontal_segment_ys(route.points)
+            assert horiz, f"expected horizontal run, got {route.points}"
+            assert all(abs(y - barcode_y) < 1.0 for y in horiz)

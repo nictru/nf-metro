@@ -171,6 +171,33 @@ def _parse_route_channel_y_directive(value: str, graph: MetroGraph) -> None:
     graph.route_channel_y_rules.append((side, station_id, mode, section_ids))
 
 
+def _parse_section_gap_directive(value: str, graph: MetroGraph) -> None:
+    """Parse ``%%metro section_gap: target | reference | gap_px``."""
+    parts = _split_fields(value)
+    if len(parts) < 3:
+        _warn_malformed(
+            "section_gap",
+            value,
+            "'target_section | reference_section | gap_px'",
+        )
+        return
+    target_id = parts[0].strip()
+    reference_id = parts[1].strip()
+    if not target_id or not reference_id:
+        _warn_malformed(
+            "section_gap",
+            value,
+            "'target_section | reference_section | gap_px'",
+        )
+        return
+    try:
+        gap = float(parts[2])
+    except ValueError:
+        _warn_malformed("section_gap", parts[2], "numeric gap in pixels")
+        return
+    graph.section_y_gaps.append((target_id, reference_id, gap))
+
+
 def _parse_align_section_y_directive(value: str, graph: MetroGraph) -> None:
     """Parse ``%%metro align_section_y: sections | mode | ref_sections [| anchor]``."""
     parts = _split_fields(value)
@@ -661,6 +688,7 @@ _GLOBAL_DIRECTIVE_HANDLERS.update(
         "hidden_section": _parse_hidden_section_directive,
         "align_y": _parse_align_y_directive,
         "align_section_y": _parse_align_section_y_directive,
+        "section_gap": _parse_section_gap_directive,
         "route_channel_y": _parse_route_channel_y_directive,
         "process": _dir_process,
         "grid": _parse_grid_directive,

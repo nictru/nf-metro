@@ -519,6 +519,10 @@ class MetroGraph:
     section_y_alignments: list[tuple[list[str], str, list[str], str | None]] = field(
         default_factory=list
     )
+    # Fixed visual gap between two sections after alignment passes settle.
+    # Each entry is (target_section_id, reference_section_id, gap_px): the
+    # target's top edge is placed ``gap_px`` below the reference's bottom edge.
+    section_y_gaps: list[tuple[str, str, float]] = field(default_factory=list)
     # Pending per-station marker styles: station_id -> MarkerStyle, applied
     # after parse so directives may precede or follow the node definition.
     _pending_markers: dict[str, MarkerStyle] = field(default_factory=dict)

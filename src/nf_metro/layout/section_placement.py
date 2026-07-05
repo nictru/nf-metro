@@ -316,6 +316,106 @@ def apply_section_y_distributions(graph: MetroGraph) -> None:
                     _shift_section_y(graph, section, delta)
 
 
+def apply_section_y_gaps(graph: MetroGraph) -> None:
+    """Place target sections a fixed distance below a reference section.
+
+    Used by ``%%metro section_gap:`` after ``align_section_y`` and
+    ``distribute_y`` have settled the reference section's position.
+    """
+    for target_id, reference_id, gap in graph.section_y_gaps:
+        target = graph.sections.get(target_id)
+        reference = graph.sections.get(reference_id)
+        if target is None or reference is None:
+            continue
+        if target.bbox_h <= 0 or reference.bbox_h <= 0:
+            continue
+        desired_top = _section_visual_bottom(reference) + gap
+        _shift_section_y(graph, target, desired_top - _section_visual_top(target))
+
+
+def _probe_label_induced_bottom_growth(graph: MetroGraph) -> dict[str, float]:
+    """Per-section downward bbox growth from render-time label placement.
+
+    ``place_labels`` can grow a section's bbox after layout settles; that
+    extra height is not visible to the layout-time ``section_gap`` pass.
+    Mirrors the render pipeline's label and group-band reservations.
+    """
+    from nf_metro.layout.labels import place_labels
+    from nf_metro.layout.phases._common import _restoring_layout_geometry
+    from nf_metro.layout.routing import compute_station_offsets
+    from nf_metro.render.svg import (
+        _compute_icon_obstacles,
+        _group_bands,
+        _label_bbox,
+        _reserve_section_space_for_groups,
+        route_edges_centred,
+    )
+    from nf_metro.themes import NFCORE_THEME
+
+    before = {
+        sid: section.bbox_y + section.bbox_h
+        for sid, section in graph.sections.items()
+        if section.bbox_h > 0
+    }
+    growth: dict[str, float] = {}
+    with _restoring_layout_geometry(graph):
+        try:
+            offsets = compute_station_offsets(graph)
+            routes = route_edges_centred(graph, station_offsets=offsets)
+            icon_obstacles = _compute_icon_obstacles(graph, NFCORE_THEME, offsets)
+            labels = place_labels(
+                graph,
+                station_offsets=offsets,
+                icon_obstacles=icon_obstacles,
+                routes=routes,
+                allow_hyphenation=True,
+                label_angle=graph.label_angle or 0.0,
+                lift_wrapped_off_trunks=False,
+            )
+            label_extents: dict[str, tuple[float, float]] = {}
+            for placement in labels:
+                if placement.station_id:
+                    _, ly0, _, ly1 = _label_bbox(placement)
+                    label_extents[placement.station_id] = (ly0, ly1)
+            if graph.groups:
+                bands = _group_bands(
+                    graph, NFCORE_THEME, offsets, label_extents
+                )
+                _reserve_section_space_for_groups(graph, bands)
+            for sid, bottom_before in before.items():
+                section = graph.sections.get(sid)
+                if section is None:
+                    continue
+                bottom_after = section.bbox_y + section.bbox_h
+                delta = bottom_after - bottom_before
+                if delta > 1e-6:
+                    growth[sid] = delta
+        except Exception:
+            return {}
+    return growth
+
+
+def reconcile_section_y_gaps_for_render(graph: MetroGraph) -> None:
+    """Re-seat ``section_gap`` targets after render-time bbox growth.
+
+    Runs at the end of layout so the gap between drawn section boxes matches
+    the authored pixel gap once ``place_labels`` has enlarged reference boxes.
+    """
+    if not graph.section_y_gaps:
+        return
+    growth = _probe_label_induced_bottom_growth(graph)
+    if not growth:
+        return
+    for target_id, reference_id, _gap in graph.section_y_gaps:
+        extra = growth.get(reference_id, 0.0)
+        if extra <= 1e-6:
+            continue
+        target = graph.sections.get(target_id)
+        if target is None or target.bbox_h <= 0:
+            continue
+        _shift_section_y(graph, target, extra)
+
+
 def apply_section_y_alignments(graph: MetroGraph) -> None:
     """Shift target sections so they align to a reference section band.
 
